@@ -6,3 +6,4 @@ garcom_check_column_names<-function(temp_data,col_names){
 return(col_names %in% colnames(temp_data))
 
 }
+##function ends
