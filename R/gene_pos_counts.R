@@ -30,7 +30,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
 #' @author Sanjeev Sariya
 #'
 
-dt_gen<-data.table::as.data.table(dt_gen)
+dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
 dt_gene<-data.table::as.data.table(dt_gene)
 dt_snp<-data.table::as.data.table(dt_snp)
 
@@ -45,11 +45,10 @@ if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
 }else{
 stop("column names don't match for snp data")
 }
-
 ####Check ends 
 
-##Remove _ from recode format
-    colnames(dt_gen) <- colnames(dt_gen)  %>% gsub("_.*","",.)
+    colnames(dt_gen) <- colnames(dt_gen)  %>% gsub("_.*","",.) ##Remove _ from recode format
+
 
 ##https://stackoverflow.com/a/23840399/2740831 dot is an operator in mysql. Use single quotes with table names
 
