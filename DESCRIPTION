@@ -1,0 +1,18 @@
+Package: GARCOM
+Type: Package
+Title: Gene And Region Counting of Mutations(GARCOM)
+Version: 0.0.0.9000
+Authors@R: c(person("Sanjeev","Sariya",
+           role = c("aut", "cre","cph"),email = "ss5505@cumc.columbia.edu"),person("Giuseppe","Tosto",  role =c("aut","cph")) )
+Description: The package computes SNP (Single Nucleotide Polymorpshims) counts per gene per individuals based on gene annotation or genomic BP (base pair) boundaries. The package allows user to provide data in various formats of gene and SNP annotation. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat
+Depends: 
+    dplyr (>= 1.0.0),
+    data.table (>= 1.12.8),
+    R (>= 2.10)

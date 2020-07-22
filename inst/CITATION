@@ -1,0 +1,16 @@
+citHeader("To cite GARCOM in publications use:")
+
+citEntry(
+  entry    = "GARCOM",
+  title    = "",
+  author   = "Sanjeev Sariya",
+  journal  = "",
+  year     = 2020,
+  volume   = "",
+  number   = "",
+  pages    = "",
+  url      = "",
+  textVersion = paste("wow"
+
+  )
+)
