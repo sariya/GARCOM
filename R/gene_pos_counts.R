@@ -58,8 +58,9 @@ stop("column names don't match for snp data")
     snp_withingenes<-dt_snp[dt_gene, c("SNP","BP","GENE","START","END"), on=.(BP>=START , BP<=END), nomatch=0] # inner join
 
     if(nrow(snp_withingenes) == 0){
-        stop("No snps within any gene boundaries provided")
+        stop("No snps within any gene boundaries provided")	
     }
+## if gene sum is zero. Stop and return
 
     dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
  
@@ -72,7 +73,7 @@ stop("column names don't match for snp data")
         return(matrix_withallelecount_withinGene)
     }
     else{
-        return(NULL)
+        return(NULL) # if nothing is left after gene >0 
     }
 
 } ## function ends
