@@ -4,8 +4,6 @@
 gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){ 
 
 ##07 20 2020
-##Prepare input files
-##
 
 #' @export
 #' @param dt_gen recoded genetic data from PLINK 
