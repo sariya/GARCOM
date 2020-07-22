@@ -26,7 +26,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
 #' @author Sanjeev Sariya
 #'
 
-dt_gen<-data.table::as.data.table(dt_gen)
+dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
 dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
 if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
@@ -34,6 +34,7 @@ if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
 }else{
 stop("column names don't match for snp-gene data")
 }
+## check ends
 
     colnames(dt_gen) <- colnames(dt_gen) %>% gsub("_.*","",.) ## remove underscore genearte from plink
 
