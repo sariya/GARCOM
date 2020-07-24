@@ -3,7 +3,7 @@ citHeader("To cite GARCOM in publications use:")
 citEntry(
   entry    = "Article",
   title    = "{GARCOM}: A user friendly R package for mutation counts",
-author = c(person(given="Giuseppe",family="Tosto"),person(given="Sanjeev",family="Sariya")),
+author = c(person(given="Sanjeev",family="Sariya"),person(given="Giuseppe",family="Tosto")),
   journal  = "OSS",
   year     = 2020,
   volume   = "1",
@@ -12,5 +12,5 @@ author = c(person(given="Giuseppe",family="Tosto"),person(given="Sanjeev",family
   url      = "www.google.com",
   textVersion =  paste("Sariya, Tosto(2020). ",
                "GARCOM: ",
-               "A User friendly R package for mutation counts ",sep="")
+               "A user friendly R package for mutation counts ",sep="")
 )
