@@ -62,10 +62,13 @@ stop("column names don't match for snp data")
 
     dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
  
-    subsetsnps_genes_lefted_join <- dt_gen_subset[snp_withingenes, on="SNP"] %>% .[, c("START","END","BP"):=NULL]  %>% data.table::setcolorder(.,c("SNP","GENE"))
+## do left join on raw data.table
+    subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP"] %>% 
+	.[, c("START","END","BP","SNP"):=NULL]  %>% 
+	data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
 
     ##https://stackoverflow.com/a/32277135/2740831
-    matrix_withallelecount_withinGene  <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE, .SDcols = !"SNP"] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
+	matrix_withallelecount_withinGene  <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
 
     if(nrow(matrix_withallelecount_withinGene)>0){
         return(matrix_withallelecount_withinGene)
