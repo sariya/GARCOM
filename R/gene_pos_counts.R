@@ -50,8 +50,6 @@ stop("column names don't match for snp data")
     colnames(dt_gen) <- colnames(dt_gen)  %>% gsub("_.*","",.) ##Remove _ from recode format
 
 
-##https://stackoverflow.com/a/23840399/2740831 dot is an operator in mysql. Use single quotes with table names
-
 ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
 
 
