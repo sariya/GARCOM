@@ -45,7 +45,7 @@ stop("column names don't match for snp-gene data")
     dt_gen_filtered<- data.table::transpose(dt_gen) %>% .[,.SD[-1:-6]] %>% data.table::setnames(.,IID_samples$IID) %>% .[, c("SNP") := SNP_names ]
 
 ##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
-    jointed_genesSNP<-dt_gen_filtered[dt_snpgene, on="SNP"] %>% .[,SNP:=NULL]   ## do a left join and remove SNP column
+    jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP"] %>% .[,SNP:=NULL]   ## do a left join on the data.table RAW and remove SNP column
 
     jointed_genesSNP<-jointed_genesSNP[, lapply(.SD, as.numeric), by="GENE"] ## convert into numeric
 ##https://stackoverflow.com/a/62959318/2740831
