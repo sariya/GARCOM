@@ -10,5 +10,6 @@ test_that("function testing",{
 	expect_is(gene_annot_counts(recodedgen, snpgene),'data.table')
 expect_null(gene_annot_counts(recodedgen, testexp_snpgene))
 expect_null(gene_annot_counts(recodedgen, testexp_snpgene_noSNP))
-expect_null(gene_annot_counts(recodedgen, testexp_snpgene_pass))
+
+ expect_equal(nrow(gene_annot_counts(recodedgen, testexp_snpgene_pass)), 1)
 })
