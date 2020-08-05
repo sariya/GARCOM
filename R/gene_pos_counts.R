@@ -63,7 +63,7 @@ stop("column names don't match for snp data")
     dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
  
 ## do left join on raw data.table
-    subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP"] %>% 
+    subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% 
 	.[, c("START","END","BP","SNP"):=NULL]  %>% 
 	data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
 
