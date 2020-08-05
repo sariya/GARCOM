@@ -48,7 +48,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] %>% .[,SNP:=NULL]   ## do a left join on the data.table RAW and remove SNP column
 
     if(nrow(jointed_genesSNP)==0){
-        print("No SNPs match with the annotation")
+        message("No SNPs match with the annotation")
         return(NULL)
     }
     ##check if join gives any rows. If not return NULL
@@ -59,7 +59,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,] 
 
     if(nrow(jointed_genesSNP_filtered) ==0){
-        print("All genes with zero count")
+        message("All genes with zero count")
         return(NULL)
     }
     else{
