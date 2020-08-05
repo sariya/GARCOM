@@ -43,7 +43,7 @@ stop("column names don't match for gene data")
 if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
 # all good with SNP data
 }else{
-stop("column names don't match for snp data")
+    stop("column names don't match for snp data")
 }
 ####Check ends 
 
@@ -58,18 +58,19 @@ stop("column names don't match for snp data")
     if(nrow(snp_withingenes) == 0){
         stop("No snps within any gene boundaries provided")	
     }
-## if gene sum is zero. Stop and return
+    ##if gene sum is zero. Stop and return
 
-    dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
+    dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>%
+        data.table::transpose(keep.names = "SNP", make.names="rowid")
  
-## do left join on raw data.table
+    ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
     subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% 
 	.[, c("START","END","BP","SNP"):=NULL]  %>% 
 	data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
 
     ##https://stackoverflow.com/a/32277135/2740831
-	matrix_withallelecount_withinGene  <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
-
+    matrix_withallelecount_withinGene  <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
+    
     if(nrow(matrix_withallelecount_withinGene)>0){
         return(matrix_withallelecount_withinGene)
     }
