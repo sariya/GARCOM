@@ -60,6 +60,11 @@ if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
     }
     ##if gene sum is zero. Stop and return
 
+
+if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP)) )) ){
+stop("SNPs in the SNP-BP data are missing from genetic data")
+}
+
     dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>%
         data.table::transpose(keep.names = "SNP", make.names="rowid")
  
