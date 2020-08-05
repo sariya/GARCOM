@@ -25,16 +25,16 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
 #'
 #' @author Sanjeev Sariya
 #'
+    
+    dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
+    dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
-dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
-dt_snpgene<-data.table::as.data.table(dt_snpgene)
-
-if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
-# all good with SNP data
-}else{
-stop("column names don't match for snp-gene data")
-}
-## check ends
+    if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
+        ## all good with SNP data
+    }else{
+        stop("column names don't match for snp-gene data")
+    }
+    ## check ends
 
     colnames(dt_gen) <- colnames(dt_gen) %>% gsub("_.*","",.) ## remove underscore genearte from plink
 
@@ -44,11 +44,11 @@ stop("column names don't match for snp-gene data")
 
     dt_gen_filtered<- data.table::transpose(dt_gen) %>% .[,.SD[-1:-6]] %>% data.table::setnames(.,IID_samples$IID) %>% .[, c("SNP") := SNP_names ]
 
-##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
+    ##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
     jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] %>% .[,SNP:=NULL]   ## do a left join on the data.table RAW and remove SNP column
 
     jointed_genesSNP<-jointed_genesSNP[, lapply(.SD, as.numeric), by="GENE"] ## convert into numeric
-##https://stackoverflow.com/a/62959318/2740831
+    ##https://stackoverflow.com/a/62959318/2740831
 
     jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,] 
 
@@ -60,8 +60,9 @@ stop("column names don't match for snp-gene data")
         return(jointed_genesSNP_filtered)
     }
 
-##
-##https://stackoverflow.com/questions/50768717/failure-using-data-table-inside-package-function
-## https://stackoverflow.com/questions/10527072/using-data-table-package-inside-my-own-package
+    ##
+    ##https://stackoverflow.com/questions/50768717/failure-using-data-table-inside-package-function
+    ## https://stackoverflow.com/questions/10527072/using-data-table-package-inside-my-own-package
 
 } ## function ends 
+###
