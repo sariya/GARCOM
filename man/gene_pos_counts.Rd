@@ -17,11 +17,10 @@ gene_pos_counts(dt_gen, dt_snp, dt_gene)
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
-Inputs as recoded genetic data formatted in PLINK format. SNP name with BP (position), and gene name with START and END position are needed in other two input parameters. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
+Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 }
 \examples{
-Package provides sample data that are loaded with package loading. 
-
+#Package provides sample data that are loaded with package loading. 
 #not RUN
 data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
 
