@@ -77,10 +77,10 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
     dt_gen_subset<-data.table::transpose(dt_gen_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
 
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
-#### subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% .[, c("START","END","BP","SNP"):=NULL] %>% data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
+#### subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% .[, c("START","END","SNP"):=NULL] %>% data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
 
     subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] 
-    subsetsnps_genes_lefted_join[, c("START","END","BP","SNP"):=NULL]  
+    subsetsnps_genes_lefted_join[, c("START","END","SNP"):=NULL]  
     
     ##https://stackoverflow.com/a/32277135/2740831
     ##  matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
