@@ -1,8 +1,8 @@
 context("data integrity")
 
-test_gene_coord<-data.table(GENE=c("ABC","XYG","alpha"),"START"=c(10,200,320),"END"=c(101,250,350))
-test_snp_pos<-data.table(SNP=c("SNP1","SNP2","SNP3"),"BP"=c(101,250,350))
-test_snp_gene<-data.table(SNP=c("SNP1","SNP2","SNP3"),"GENE"=c("ABC","BRCA1","gamma"))
+test_gene_coord<-data.table::data.table(GENE=c("ABC","XYG","alpha"),"START"=c(10,200,320),"END"=c(101,250,350))
+test_snp_pos<-data.table::data.table(SNP=c("SNP1","SNP2","SNP3"),"BP"=c(101,250,350))
+test_snp_gene<-data.table::data.table(SNP=c("SNP1","SNP2","SNP3"),"GENE"=c("ABC","BRCA1","gamma"))
 
 test_that("data types correct works", {
 
