@@ -1,5 +1,5 @@
 #'@title gene position counts
-#'@description Inputs as recoded genetic data formatted in PLINK format. SNP name with BP (position), and gene name with START and END position are needed in other two input parameters. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
+#'@description Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
 gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){ 
 
