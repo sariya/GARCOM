@@ -30,7 +30,7 @@ data(genecoord) #gene coordinates with START, END, CHR and GENE names.
 data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
 #10 SNPs with genomic location
 
-small_output<-gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+gene_pos_counts(recodedgen, snppos, genecoord) #run the function
 #end not RUN
 
 }
