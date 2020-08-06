@@ -15,11 +15,11 @@ gene_annot_counts(dt_gen, dt_snpgene)
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
-Inputs as recoded genetic data formatted in PLINK format and SNP-gene annotation data as parameters. The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
+Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 }
 \examples{
 
-Package provides sample data that are loaded with package loading. 
+#Package provides sample data that are loaded with package loading. 
 
 data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
 
