@@ -2,3 +2,8 @@
 
 export(gene_annot_counts)
 export(gene_pos_counts)
+import(data.table)
+importFrom(data.table,":=")
+importFrom(data.table,.SD)
+importFrom(data.table,rowid)
+importFrom(dplyr,"%>%")
