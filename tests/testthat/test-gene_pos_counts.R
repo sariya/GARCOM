@@ -20,16 +20,17 @@ rep("0",4))), "SNP1_A"=c(rep(1,1),rep(0,9)) ,"SNP12_A"=c(rep(0,10))) ## this has
 test_genecoord_noSNP<-data.frame("GENE"=c("GENEX"), "START"=c(180000), "END"=c(190000)) #No snp is present in these boundaries
 
 test_that("function testing",{
-              expect_error(gene_pos_counts(-4, 1,1))
-	expect_is(gene_pos_counts(recodedgen,  snppos, genecoord),'data.table')
-	expect_error(gene_pos_counts(recodedgen, test_noSNP,genecoord))
-expect_null(gene_pos_counts(recodedgen, test_SNP_nosum,genecoord))
-
-expect_error(gene_pos_counts(test_gen_withnoSNP, snppos,genecoord))
-
-expect_equal(nrow(gene_pos_counts(test_gen_with_oneSNP, snppos,genecoord)), 1) ##returns one row 
-expect_error(gene_pos_counts(recodedgen, snppos,test_genecoord_noSNP))
-
+    expect_error(gene_pos_counts(-4, 1,1))
+    expect_is(gene_pos_counts(recodedgen,  snppos, genecoord),'data.table')
+    expect_error(gene_pos_counts(recodedgen, test_noSNP,genecoord))
+    expect_null(gene_pos_counts(recodedgen, test_SNP_nosum,genecoord))
+    
+    expect_error(gene_pos_counts(test_gen_withnoSNP, snppos,genecoord))
+    
+    expect_equal(nrow(gene_pos_counts(test_gen_with_oneSNP, snppos,genecoord)), 1) ##returns one row 
+    expect_error(gene_pos_counts(recodedgen, snppos,test_genecoord_noSNP))
+    
 })
+##testing ends
 
 
