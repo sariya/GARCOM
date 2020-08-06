@@ -20,7 +20,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
 #' #Here 10 SNPs are shown annotated in five genes. 
 #' #A SNP can be annotated in multiple genes. 
 #'
-#' small_output<-gene_annot_counts(recodedgen,snpgene) #run the function
+#' gene_annot_counts(recodedgen,snpgene) #run the function
 #'
 #' #end not RUN
 #'
