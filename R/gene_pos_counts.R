@@ -30,28 +30,26 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
 #' @author Sanjeev Sariya
 #'
 
-dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
-dt_gene<-data.table::as.data.table(dt_gene)
-dt_snp<-data.table::as.data.table(dt_snp)
+    dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
+    dt_gene<-data.table::as.data.table(dt_gene)
+    dt_snp<-data.table::as.data.table(dt_snp)
+    
+    if(all(garcom_check_column_names(dt_gene, c("START","END","GENE")))){
+        ## all good with gene data
+    }else{
+        stop("column names don't match for gene data")
+    }
 
-if(all(garcom_check_column_names(dt_gene, c("START","END","GENE")))){
-# all good with gene data
-}else{
-stop("column names don't match for gene data")
-}
-
-if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
-# all good with SNP data
-}else{
-    stop("column names don't match for snp data")
-}
-####Check ends 
+    if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
+        ## all good with SNP data
+    }else{
+        stop("column names don't match for snp data")
+    }
+    ##Check ends 
 
     colnames(dt_gen) <- colnames(dt_gen)  %>% gsub("_.*","",.) ##Remove _ from recode format
 
-
-## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
-
+    ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
 
     snp_withingenes<-dt_snp[dt_gene, c("SNP","BP","GENE","START","END"), on=.(BP>=START , BP<=END), nomatch=0] # inner join
 
@@ -61,14 +59,14 @@ if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
     ##if gene sum is zero. Stop and return
 
 
-if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP)) )) ){
-stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
-}
+    if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP)) )) ){
+        stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
+    }
+    ##if nothing matches then Stop and error out
 
  ##   dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>%         data.table::transpose(keep.names = "SNP", make.names="rowid")
-dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>% 
-.[, rowid := dt_gen$IID ] %>% 
-data.table::transpose(keep.names = "SNP", make.names="rowid")
+    dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>% 
+        .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
 
 
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
