@@ -21,9 +21,9 @@ Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene an
 
 #Package provides sample data that are loaded with package loading. 
 
-#recodedgen #PLINK raw formatted data of 10 individiduals with 10 SNPs
+data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
 
-#snpgene #SNP and its respective GENE annotated. 
+data(snpgene) #SNP and its respective GENE annotated. 
 #Here 10 SNPs are shown annotated in five genes. 
 #A SNP can be annotated in multiple genes. 
 
