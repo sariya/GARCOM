@@ -56,7 +56,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
 
     ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
 
-    snp_withingenes<-dt_snp[dt_gene, c("SNP","BP","GENE","START","END"), on=.(BP>=START , BP<=END), nomatch=0] # inner join
+    snp_withingenes<-dt_snp[dt_gene, c("SNP","BP","GENE","START","END"), on=list(BP>=START , BP<=END), nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
 
     if(nrow(snp_withingenes) == 0){
         stop("No snps within any gene boundaries provided")	
