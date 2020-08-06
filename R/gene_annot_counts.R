@@ -71,8 +71,9 @@ jointed_genesSNP<- jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
     ##https://stackoverflow.com/a/62959318/2740831
 
 #    jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,] 
+
     jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] # get sum within a gene
-jointed_genesSNP_filtered<-jointed_genesSNP_filtered[ rowSums(.[,-c("GENE")]) > 0,]  # remove gene colum and keep only genes with sum more than 0. test with a test case here
+jointed_genesSNP_filtered<-jointed_genesSNP_filtered[ rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,]  # get count minus gene colum and keep only genes with sum more than 0. test with a test case here
 
     if(nrow(jointed_genesSNP_filtered) ==0){
         message("All genes with zero count")
