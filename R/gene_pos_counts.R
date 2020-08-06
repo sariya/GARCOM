@@ -6,13 +6,16 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
 ##07 20 2020
 
 #' @export
+#' @importFrom dplyr %>%
+#' @importFrom data.table rowid
+#' @importFrom data.table .SD
+#' @importFrom data.table :=
 #' @param dt_gen recoded genetic data from PLINK 
 #' @param dt_gene with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #' @param dt_snp with SNP BP as column names
 #'
 #' @examples
-#' Package provides sample data that are loaded with package loading. 
-#'
+#' #Package provides sample data that are loaded with package loading. 
 #' #not RUN
 #' data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
 #'
@@ -33,7 +36,8 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
     dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
     dt_gene<-data.table::as.data.table(dt_gene)
     dt_snp<-data.table::as.data.table(dt_snp)
-    
+    START<-END<-GENE<-BP<-NULL ## binding the variable locally to the function
+
     if(all(garcom_check_column_names(dt_gene, c("START","END","GENE")))){
         ## all good with gene data
     }else{
@@ -47,7 +51,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
     }
     ##Check ends 
 
-    colnames(dt_gen) <- colnames(dt_gen)  %>% gsub("_.*","",.) ##Remove _ from recode format
+    colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ##Remove _ from recode format
 
     ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
 
@@ -64,7 +68,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
     }
     ##if nothing matches then Stop and error out
 
- ##   dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>%         data.table::transpose(keep.names = "SNP", make.names="rowid")
+ ##   dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
     dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>% 
         .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
 
