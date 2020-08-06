@@ -32,8 +32,9 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
-SNP<-GENE<-NULL ## binding the variable locally to the function
-##https://www.r-bloggers.com/no-visible-binding-for-global-variable/
+    SNP<-GENE<-NULL ## binding the variable locally to the function
+    ##https://www.r-bloggers.com/no-visible-binding-for-global-variable/
+    
     if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
         ## all good with SNP data
     }else{
@@ -47,19 +48,19 @@ SNP<-GENE<-NULL ## binding the variable locally to the function
 
     SNP_names<-colnames(dt_gen)[c(7:length(colnames(dt_gen)))] # use this to assign SNP column when piping
 
-#    dt_gen_filtered<- data.table::transpose(dt_gen) %>% .[,.SD[-1:-6]] %>% data.table::setnames(.,IID_samples$IID) %>% .[, c("SNP") := SNP_names ]
+    ## dt_gen_filtered<- data.table::transpose(dt_gen) %>% .[,.SD[-1:-6]] %>% data.table::setnames(.,IID_samples$IID) %>% .[, c("SNP") := SNP_names ]
 
- dt_gen_transposed<- data.table(data.table::transpose(dt_gen) )
+    dt_gen_transposed<- data.table(data.table::transpose(dt_gen) )
+    
+    dt_gen_transposed<-dt_gen_transposed[,.SD[-1:-6]] ## remove first six rows
 
- dt_gen_transposed<-dt_gen_transposed[,.SD[-1:-6]] ## remove first six rows
-
-data.table::setnames(dt_gen_transposed,IID_samples$IID) ## set column names
-dt_gen_filtered<-dt_gen_transposed[, c("SNP") := SNP_names ]
+    data.table::setnames(dt_gen_transposed,IID_samples$IID) ## set column names
+    dt_gen_filtered<-dt_gen_transposed[, c("SNP") := SNP_names ]
 
     ##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
-#    jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] %>% .[,SNP:=NULL]   ## do a left join on the data.table RAW and remove SNP column
+    ##    jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] %>% .[,SNP:=NULL]   ## do a left join on the data.table RAW and remove SNP column
     jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] ## do a left join on the data.table RAW
-jointed_genesSNP<- jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
+    jointed_genesSNP<- jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
 
     if(nrow(jointed_genesSNP)==0){
         message("No SNPs match with the annotation")
@@ -70,10 +71,10 @@ jointed_genesSNP<- jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
     jointed_genesSNP<-jointed_genesSNP[, lapply(.SD, as.numeric), by="GENE"] ## convert into numeric
     ##https://stackoverflow.com/a/62959318/2740831
 
-#    jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,] 
+    ## jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,] 
 
     jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] # get sum within a gene
-jointed_genesSNP_filtered<-jointed_genesSNP_filtered[ rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,]  # get count minus gene colum and keep only genes with sum more than 0. test with a test case here
+    jointed_genesSNP_filtered<-jointed_genesSNP_filtered[ rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,]  # get count minus gene column and keep only genes with sum more than 0. test with a test case here
 
     if(nrow(jointed_genesSNP_filtered) ==0){
         message("All genes with zero count")
