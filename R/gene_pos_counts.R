@@ -26,7 +26,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
 #' data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
 #' #10 SNPs with genomic location
 #'
-#' small_output<-gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+#' gene_pos_counts(recodedgen, snppos, genecoord) #run the function
 #' #end not RUN
 #'
 #' @return Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
