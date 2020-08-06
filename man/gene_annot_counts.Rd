@@ -21,13 +21,13 @@ Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene an
 
 #Package provides sample data that are loaded with package loading. 
 
-data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
+#recodedgen #PLINK raw formatted data of 10 individiduals with 10 SNPs
 
-data(snpgene) #SNP and its respective GENE annotated. 
+#snpgene #SNP and its respective GENE annotated. 
 #Here 10 SNPs are shown annotated in five genes. 
 #A SNP can be annotated in multiple genes. 
 
-small_output<-gene_annot_counts(recodedgen,snpgene) #run the function
+gene_annot_counts(recodedgen,snpgene) #run the function
 
 #end not RUN
 
