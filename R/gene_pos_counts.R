@@ -62,12 +62,15 @@ if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
 
 
 if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP)) )) ){
-stop("SNPs in the SNP-BP data are missing from genetic data")
+stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
 }
 
-    dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>%
-        data.table::transpose(keep.names = "SNP", make.names="rowid")
- 
+ ##   dt_gen_subset<- dt_gen[,.SD,.SDcols=unique(snp_withingenes$SNP )] %>% .[, rowid := dt_gen$IID ] %>%         data.table::transpose(keep.names = "SNP", make.names="rowid")
+dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>% 
+.[, rowid := dt_gen$IID ] %>% 
+data.table::transpose(keep.names = "SNP", make.names="rowid")
+
+
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
     subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% 
 	.[, c("START","END","BP","SNP"):=NULL]  %>% 
