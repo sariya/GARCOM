@@ -13,13 +13,14 @@ test_gen_with_oneSNP<-data.frame("FID"=c(paste("FID",seq(1:10),sep="")),"IID"=c(
 rep("0",4))), "SNP1_A"=c(rep(1,1),rep(0,9)) ,"SNP12_A"=c(rep(0,10))) ## this has one SNP in the annotation
 
 test_that("function testing",{
-              expect_error(gene_annot_counts(-4, 1))
-              expect_is(gene_annot_counts(recodedgen, snpgene),'data.table')
-              expect_null(gene_annot_counts(recodedgen, testexp_snpgene))
-              expect_null(gene_annot_counts(recodedgen, testexp_snpgene_noSNP))
-              
-              expect_equal(nrow(gene_annot_counts(recodedgen, testexp_snpgene_pass)), 1)
-
-expect_null(gene_annot_counts(test_gen_withnoSNP , snpgene))
-expect_equal(nrow(gene_annot_counts(test_gen_with_oneSNP, snpgene)), 2)
+    expect_error(gene_annot_counts(-4, 1))
+    expect_is(gene_annot_counts(recodedgen, snpgene),'data.table')
+    expect_null(gene_annot_counts(recodedgen, testexp_snpgene))
+    expect_null(gene_annot_counts(recodedgen, testexp_snpgene_noSNP))
+    
+    expect_equal(nrow(gene_annot_counts(recodedgen, testexp_snpgene_pass)), 1)
+    
+    expect_null(gene_annot_counts(test_gen_withnoSNP , snpgene))
+    expect_equal(nrow(gene_annot_counts(test_gen_with_oneSNP, snpgene)), 2)
 })
+##testing ends
