@@ -5,11 +5,13 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
 ##07 10 2020
 
 #' @export
+#' @importFrom dplyr %>%
+#' @importFrom data.table :=
 #' @param dt_gen recoded genetic data from PLINK
 #' @param dt_snpgene with SNP and GENE as column names
 #' @examples
 #'
-#' Package provides sample data that are loaded with package loading. 
+#' #Package provides sample data that are loaded with package loading. 
 #'
 #' data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
 #'
@@ -29,6 +31,8 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
+SNP<-GENE<-NULL ## binding the variable locally to the function
+##https://www.r-bloggers.com/no-visible-binding-for-global-variable/
     if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
         ## all good with SNP data
     }else{
@@ -36,7 +40,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     }
     ## check ends
 
-    colnames(dt_gen) <- colnames(dt_gen) %>% gsub("_.*","",.) ## remove underscore genearte from plink
+    colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore genearte from plink
 
     IID_samples<-as.data.frame(dt_gen[,2]) %>% `colnames<-` (c("IID")) ## use this later
 
