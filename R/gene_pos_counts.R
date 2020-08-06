@@ -70,29 +70,29 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
     ##if nothing matches then Stop and error out
 
 
-##    dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>%  .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
+    ##dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>%  .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
 
-dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] ## get columns that intersect 
-  dt_gen_subset[, rowid := dt_gen$IID ] ## assign row names as IIDs
-   dt_gen_subset<-data.table::transpose(dt_gen_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
+    dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] ## get columns that intersect 
+    dt_gen_subset[, rowid := dt_gen$IID ] ## assign row names as IIDs
+    dt_gen_subset<-data.table::transpose(dt_gen_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
 
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
 #### subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% .[, c("START","END","BP","SNP"):=NULL] %>% data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
 
-subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] 
- 	subsetsnps_genes_lefted_join[, c("START","END","BP","SNP"):=NULL]  
-
+    subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] 
+    subsetsnps_genes_lefted_join[, c("START","END","BP","SNP"):=NULL]  
+    
     ##https://stackoverflow.com/a/32277135/2740831
-##  matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
+    ##  matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
 
     matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] 
- matrix_withallelecount_withinGene<-matrix_withallelecount_withinGene[ rowSums(matrix_withallelecount_withinGene[,-c("GENE")]) > 0,]
-
+    matrix_withallelecount_withinGene<-matrix_withallelecount_withinGene[ rowSums(matrix_withallelecount_withinGene[,-c("GENE")]) > 0,]
+    
     if(nrow(matrix_withallelecount_withinGene)>0){
         return(matrix_withallelecount_withinGene)
     }
     else{
-        return(NULL) # if nothing is left after gene >0 
+        return(NULL) ## if nothing is left after gene >0 
     }
 
 } ## function ends
