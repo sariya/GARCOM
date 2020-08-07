@@ -45,8 +45,8 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 
     #IID_samples<-as.data.frame(dt_gen[,2]) %>% `colnames<-` (c("IID")) ## use this later ## IID_samples<-data.frame("IID"=(dt_gen[,2]))
- IID_samples<-data.frame("IID"=dt_gen[,"IID"])
-IID_samples$IID<-as.character(IID_samples$IID)
+    IID_samples<-data.frame("IID"=dt_gen[,"IID"])
+    IID_samples$IID<-as.character(IID_samples$IID) ##make character we can have IIDs as numbers
 
     SNP_names<-colnames(dt_gen)[c(7:length(colnames(dt_gen)))] # use this to assign SNP column when piping
 
