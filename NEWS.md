@@ -1,3 +1,9 @@
-# GARCOM 0.0.0.9000
 
 * Added a `NEWS.md` file to track changes to the package.
+
+# GARCOM 0.0.0.9001 Date Aug 07 2020
+- CRAN checks and changes in code for Ubuntu Linux 16.04 LTS, R-release, GCC
+- Column assign step was taken care for IIDs in gene_annot_counts function
+
+# GARCOM 0.0.0.9000
+Initial library set up
