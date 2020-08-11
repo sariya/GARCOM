@@ -96,8 +96,6 @@ dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping S
     }
     ##if nothing matches then Stop and error out
 
-    ##dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>%  .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
-
     dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] ## get columns that intersect 
     dt_gen_subset[, rowid := dt_gen$IID ] ## assign row names as IIDs
     dt_gen_subset<-data.table::transpose(dt_gen_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
@@ -109,7 +107,6 @@ dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping S
     subsetsnps_genes_lefted_join[, c("START","END","SNP"):=NULL]  
     
     ##https://stackoverflow.com/a/32277135/2740831
-    ##  matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] %>% .[ rowSums(.[,-c("GENE")]) > 0,]
 
     matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] 
     matrix_withallelecount_withinGene<-matrix_withallelecount_withinGene[ rowSums(matrix_withallelecount_withinGene[,-c("GENE")]) > 0,]
