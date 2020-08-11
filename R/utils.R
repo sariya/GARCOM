@@ -44,10 +44,35 @@ return(TRUE)
 
 garcom_subsetIIDs<-function(tempdata,iids_to_keep){
 ##08/11/2020
+
+if(isTRUE(anyNA(iids_to_keep))){
+
+stop("There are individuals with IIDs as NA in the list provided to extract")
+}
+##if check ends for any NA
+
+if( isTRUE( any("" == iids_to_keep)) | isTRUE( any('' == iids_to_keep)) ){
+stop("There is an IID with length zero. Cannot extract it. Exiting... ")
+
+}
+##check ends for any ids with length as zero
+
+row_index_gendata_subset<-match(iids_to_keep,tempdata[,get("IID")]) ## store indices to return data.table with selected individuals
+intersected_IIDs<-intersect(iids_to_keep,tempdata[,get("IID")]) ## check length later with this
+
+if(length(intersected_IIDs) == 0){
+stop("no iids intersect. Exiting...")
+}
+##if to check length of IIDs intersect is zero ends
+
+return(tempdata[row_index_gendata_subset,])
+
 }
 ##function ends
 
 garcom_subsetSNPs<-function(tempdata,snps_to_keep){
 ##08/11/2020
+print("we are in the subset of SNPs")
+
 }
 ##function ends
