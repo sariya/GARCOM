@@ -1,7 +1,7 @@
 #'@title gene annotation counts
 #'@description Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_annot_counts<-function(dt_gen,dt_snpgene){
+gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL){
 ##07 10 2020
 
 #' @export
@@ -30,6 +30,8 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
 #'
     
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
+dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
+
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
     SNP<-GENE<-NULL ## binding the variable locally to the function
@@ -46,9 +48,21 @@ if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
 stop("Duplicate SNP-Gene annotation values")
 }
 
+if(is.null(keep_indiv) == FALSE ){
+garcom_subsetIIDs(dt_gen,keep_indiv)
+
+}
+###check ends for sub-setting IIDs
+
+if(is.null(extract_SNP) == FALSE){
+garcom_subsetSNPs(dt_gen,extract_SNP)
+
+}
+###check ends for sub-setting SNPs
+
+
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 
-    #IID_samples<-as.data.frame(dt_gen[,2]) %>% `colnames<-` (c("IID")) ## use this later ## IID_samples<-data.frame("IID"=(dt_gen[,2]))
     IID_samples<-data.frame("IID"=dt_gen[,"IID"])
     IID_samples$IID<-as.character(IID_samples$IID) ##make character we can have IIDs as numbers
 
