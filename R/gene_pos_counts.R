@@ -54,10 +54,12 @@ dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are inte
     ##Check ends 
 
 if(FALSE == isTRUE(garcom_check_duplicates(dt_snp,"SNP"))){
+
 stop("duplicate SNP names")
 }
 ##check ends for SNP data.table
 if(FALSE == isTRUE(garcom_check_duplicates(dt_gene,"GENE"))){
+
 stop("duplicate GENE names")
 }
 ##check ends for GENE data.table
