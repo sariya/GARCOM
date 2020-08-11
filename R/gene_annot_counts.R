@@ -42,6 +42,10 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     }
     ## check ends
 
+if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
+stop("Duplicate SNP-Gene annotation values")
+}
+
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 
     #IID_samples<-as.data.frame(dt_gen[,2]) %>% `colnames<-` (c("IID")) ## use this later ## IID_samples<-data.frame("IID"=(dt_gen[,2]))
@@ -49,8 +53,6 @@ gene_annot_counts<-function(dt_gen,dt_snpgene){
     IID_samples$IID<-as.character(IID_samples$IID) ##make character we can have IIDs as numbers
 
     SNP_names<-colnames(dt_gen)[c(7:length(colnames(dt_gen)))] # use this to assign SNP column when piping
-
-    ## dt_gen_filtered<- data.table::transpose(dt_gen) %>% .[,.SD[-1:-6]] %>% data.table::setnames(.,IID_samples$IID) %>% .[, c("SNP") := SNP_names ]
 
     dt_gen_transposed<- data.table(data.table::transpose(dt_gen) )
     
