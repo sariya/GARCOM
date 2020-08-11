@@ -10,13 +10,13 @@ return(col_names %in% colnames(temp_data))
 }
 ##function ends
 
-garcom_check_duplicates<-function(temp_dataframe, column_name){
+garcom_check_duplicates<-function(temp_data, column_name){
 
 ##08/11/2020
 ##two params: dataframe and second is column name for which we
 ##we'd like to ensure no duplicates are present
 ##
-if( length(unique(temp_dataframe[,get(column_name)])) !=length(temp_dataframe[,get(column_name)])){
+if( length(unique(temp_data[,get(column_name)])) !=length(temp_data[,get(column_name)])){
 return(FALSE)
 } else{
 return(TRUE)
@@ -26,13 +26,13 @@ return(TRUE)
 }
 ##function ends
 
-garcom_check_unique<-function(temp_dataframe){
+garcom_check_unique<-function(temp_data){
 
 ##08/11/2020
 ##one param: dataframe 
 ##we'd like to ensure no duplicates are present
 ## This is conducted with all columns. to ensure no row duplicates are present
-if( nrow(unique(temp_dataframe)) !=nrow(temp_dataframe)) {
+if( nrow(unique(temp_data)) !=nrow(temp_data)) {
 return(FALSE)
 } else{
 return(TRUE)
@@ -42,3 +42,12 @@ return(TRUE)
 }
 ##function ends
 
+garcom_subsetIIDs<-function(tempdata,iids_to_keep){
+
+}
+##function ends
+
+garcom_subsetSNPs<-function(tempdata,snps_to_keep){
+
+}
+##function ends
