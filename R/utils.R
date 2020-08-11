@@ -13,6 +13,8 @@ return(col_names %in% colnames(temp_data))
 garcom_check_duplicates<function(temp_dataframe, column_name){
 
 ##08/11/2020
+##two params: dataframe and second is column name for which we
+##we'd like to ensure no duplicates are present
 ##
 print("")
 }
