@@ -56,7 +56,8 @@ dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data wi
 ###check ends for sub-setting IIDs
 
 if(is.null(extract_SNP) == FALSE){
-garcom_subsetSNPs(dt_gen,extract_SNP)
+extract_SNP<-as.character(extract_SNP)
+dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
 
 }
 ###check ends for sub-setting SNPs
