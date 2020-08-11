@@ -1,7 +1,7 @@
 #'@title gene annotation counts
 #'@description Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL){
+gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL){
 ##07 10 2020
 
 #' @export
@@ -62,6 +62,12 @@ dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
 }
 ###check ends for sub-setting SNPs
 
+if(is.null(filter_gene) == FALSE){
+filter_gene<-as.character(filter_gene) ## turn into character
+dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) filter SNP-gene annotation based on Gene list
+
+}
+###check ends for sub-setting Genes
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 

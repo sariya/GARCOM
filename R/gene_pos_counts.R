@@ -96,7 +96,6 @@ dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping S
     }
     ##if nothing matches then Stop and error out
 
-
     ##dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] %>%  .[, rowid := dt_gen$IID ] %>% data.table::transpose(keep.names = "SNP", make.names="rowid")
 
     dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] ## get columns that intersect 
