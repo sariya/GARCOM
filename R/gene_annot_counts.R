@@ -49,7 +49,8 @@ stop("Duplicate SNP-Gene annotation values")
 }
 
 if(is.null(keep_indiv) == FALSE ){
-garcom_subsetIIDs(dt_gen,keep_indiv)
+keep_indiv<-as.character(keep_indiv) ## convert them into character
+dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
 
 }
 ###check ends for sub-setting IIDs
