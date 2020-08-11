@@ -101,9 +101,21 @@ return(tempdata) ## return data that are extracted with list of interest
 }
 ##function ends
 
-garcom_filter_genes<-function(){
+garcom_filter_gene<-function(tempdata, filter_gene){
 
 ##08/11/2020
+
+if(isTRUE(anyNA(filter_gene))){
+
+stop("There are Gene names as NA in the list provided to extract. Exiting...")
+}
+##if check ends for any NA in GENE
+
+if( isTRUE( any("" == filter_gene)) | isTRUE( any('' == filter_gene)) ){
+stop("There is GENE with length zero name. Cannot extract it. Exiting... ")
+
+} ##check ends for any GENE with length as zero
+
 
 
 }
