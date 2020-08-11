@@ -52,6 +52,16 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene){
     }
     ##Check ends 
 
+if(FALSE == isTRUE(garcom_check_duplicates(dt_snp,"SNP"))){
+stop("duplicate SNP names")
+}
+##check ends for SNP data.table
+if(FALSE == isTRUE(garcom_check_duplicates(dt_gene,"GENE"))){
+stop("duplicate GENE names")
+}
+##check ends for GENE data.table
+
+
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ##Remove _ from recode format
 
     ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
