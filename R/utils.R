@@ -25,3 +25,20 @@ return(TRUE)
 
 }
 ##function ends
+
+garcom_check_unique<-function(temp_dataframe){
+
+##08/11/2020
+##one param: dataframe 
+##we'd like to ensure no duplicates are present
+## This is conducted with all columns. to ensure no row duplicates are present
+if( nrow(unique(temp_dataframe)) !=nrow(temp_dataframe)) {
+return(FALSE)
+} else{
+return(TRUE)
+}
+##check ends
+
+}
+##function ends
+
