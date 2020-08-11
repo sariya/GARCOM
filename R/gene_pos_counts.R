@@ -64,6 +64,20 @@ stop("duplicate GENE names")
 }
 ##check ends for GENE data.table
 
+if(is.null(keep_indiv) == FALSE ){
+keep_indiv<-as.character(keep_indiv) ## convert them into character
+dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
+
+}
+## sub-setting complete for individuals interested
+
+if(is.null(extract_SNP) == FALSE){
+extract_SNP<-as.character(extract_SNP)
+dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping SNPs
+
+}
+###check ends for sub-setting SNPs
+
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ##Remove _ from recode format
 
