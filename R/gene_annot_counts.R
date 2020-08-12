@@ -64,7 +64,7 @@ dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
 
 if(is.null(filter_gene) == FALSE){
 filter_gene<-as.character(filter_gene) ## turn into character
-dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) filter SNP-gene annotation based on Gene list
+dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
 
 }
 ###check ends for sub-setting Genes
@@ -84,7 +84,7 @@ dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) filter SNP-gene annotatio
     dt_gen_filtered<-dt_gen_transposed[, c("SNP") := SNP_names ]
 
     ##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
-    ##    jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] %>% .[,SNP:=NULL]   ## do a left join on the data.table RAW and remove SNP column
+  
     jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] ## do a left join on the data.table RAW
     jointed_genesSNP<- jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
 
