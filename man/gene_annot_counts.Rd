@@ -9,7 +9,8 @@ gene_annot_counts(
   dt_snpgene,
   keep_indiv = NULL,
   extract_SNP = NULL,
-  filter_gene = NULL
+  filter_gene = NULL,
+  impute_missing = FALSE
 )
 }
 \arguments{
