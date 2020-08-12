@@ -1,7 +1,7 @@
 #'@title gene position counts
 #'@description Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL){ 
+gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL, impute_missing=FALSE){ 
 
 ##07 20 2020
 
@@ -77,6 +77,14 @@ dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping S
 
 }
 ###check ends for sub-setting SNPs
+
+if(is.null(filter_gene) == FALSE){
+filter_gene<-as.character(filter_gene) ## turn into character
+
+#dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
+
+}
+
 
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ##Remove _ from recode format
