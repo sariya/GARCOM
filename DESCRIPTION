@@ -1,7 +1,7 @@
 Package: GARCOM
 Type: Package
 Title: Gene And Region Counting Of Mutations(GARCOM)
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: c(person("Sanjeev","Sariya",
            role = c("aut", "cre","cph"),email = "ss5505@cumc.columbia.edu"),person("Giuseppe","Tosto",  role =c("aut","cph")) )
 Description: Methods to compute SNP (Single Nucleotide polymorphisms) counts per gene per individuals based on gene annotation or genomic BP (base pair) boundaries are provided. The package allows user to provide data in various formats of gene and SNP annotation. 
