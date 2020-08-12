@@ -101,7 +101,6 @@ dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping S
     dt_gen_subset<-data.table::transpose(dt_gen_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
 
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
-#### subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] %>% .[, c("START","END","SNP"):=NULL] %>% data.table::setcolorder(.,c("GENE")) ## remove START, END, BP and SNP column, and in the put GENE column and then order 
 
     subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] 
     subsetsnps_genes_lefted_join[, c("START","END","SNP"):=NULL]  
