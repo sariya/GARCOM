@@ -10,6 +10,11 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #' @importFrom data.table :=
 #' @param dt_gen recoded genetic data from PLINK
 #' @param dt_snpgene with SNP and GENE as column names
+#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
+#' @param keep_indiv individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
+#' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
+#' @param impute_missing. Default is FALSE
+#'
 #' @examples
 #'
 #' #Package provides sample data that are loaded with package loading. 
@@ -63,11 +68,21 @@ dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
 ###check ends for sub-setting SNPs
 
 if(is.null(filter_gene) == FALSE){
+##
+##Start process to filter genes. The list provided by user is what we'd like to keep
 filter_gene<-as.character(filter_gene) ## turn into character
 dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
 
 }
 ###check ends for sub-setting Genes
+
+if(isTRUE(impute_missing)){
+
+##we pass impute method and genetic data frame
+dt_gen<-garcom_impute(dt_gen,impute_method)
+
+}
+##check ends for imputing genetic data
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 
