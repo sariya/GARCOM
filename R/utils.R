@@ -116,7 +116,16 @@ stop("There is GENE with length zero name. Cannot extract it. Exiting... ")
 
 } ##check ends for any GENE with length as zero
 
+keep_gene_index<- which(tempdata[,get("GENE")]  %in% filter_gene )
+print(keep_gene_index)
 
+if(length(keep_gene_index) ==0){
+
+stop("Genes not found to sub-set. Exiting...")
+}
+
+tempdata<-tempdata[keep_gene_index,]
+return(tempdata)
 
 }
 ##function ends
