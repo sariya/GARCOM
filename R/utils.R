@@ -129,3 +129,24 @@ garcom_filter_gene<-function(tempdata, filter_gene){
     return(tempdata[keep_gene_index,])
 }
 ##function ends
+
+garcom_impute<-function(temp_genetic,temp_impute_method){
+
+##08 17 2020
+##two params: genetic data and method to impute
+
+if( isTRUE( !(temp_impute_method  %in% c("m2ean","median2")))){
+stop("impute method doesn't match mean or median")
+}
+
+if(temp_impute_method =="mean"){
+temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), mean(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
+}
+
+if(temp_impute_method  =="median"){
+temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), median(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
+}
+
+return(temp_genetic) ##return imputed data
+
+}
