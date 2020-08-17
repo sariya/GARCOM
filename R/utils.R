@@ -43,7 +43,11 @@ garcom_check_unique<-function(temp_data){
 ##function ends
 
 garcom_subsetIIDs<-function(tempdata,iids_to_keep){
-##08/11/2020
+    ##08/11/2020
+
+    ##two params: data and individual ids to keep
+    ##we return genetic data with subset IIDs 
+    ##We stop if IIDs in the vector aren't found
 
     if(isTRUE(anyNA(iids_to_keep))){
 
@@ -69,11 +73,12 @@ garcom_subsetIIDs<-function(tempdata,iids_to_keep){
 ##function ends
 
 garcom_subsetSNPs<-function(tempdata,snps_to_keep){
-##08/11/2020
+    ##08/11/2020
 
-##
-##tempdata
-##
+    ##two params: SNP data and second parameter is vector of SNPs that are to be subsetted
+    ##we return subset data
+    ##Stop if SNPs aren't subsetted
+    
     if(isTRUE(anyNA(snps_to_keep))){
 
         stop("There are SNP names as NA in the list provided to extract. Exiting...")
@@ -91,16 +96,18 @@ garcom_subsetSNPs<-function(tempdata,snps_to_keep){
         stop("SNPs not found to sub-set. Exiting...")
     }
 
-    tempdata<-tempdata[index_SNPs_subset,]
-
-    return(tempdata) ## return data that are extracted with list of interest
+    return(tempdata[index_SNPs_subset,]) ## return data that are extracted with list of interest
 
 }
 ##function ends
 
 garcom_filter_gene<-function(tempdata, filter_gene){
 
-##08/11/2020
+    ##08/11/2020
+
+    ##Two parameters: gene data and vector of genes that are to be subsetted
+    ##return if genes are subsetted
+    ##Stop if no genes are found
 
     if(isTRUE(anyNA(filter_gene))){
 
@@ -119,7 +126,6 @@ garcom_filter_gene<-function(tempdata, filter_gene){
         stop("Genes not found to sub-set. Exiting...")
     }
 
-    tempdata<-tempdata[keep_gene_index,]
-    return(tempdata)
+    return(tempdata[keep_gene_index,])
 }
 ##function ends
