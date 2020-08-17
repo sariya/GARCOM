@@ -5,7 +5,7 @@ garcom_check_column_names<-function(temp_data,col_names){
 
 ##two params: dataframe and vector of columns we are looking for.
 ##return TRUE or FALSE
-return(col_names %in% colnames(temp_data))
+    return(col_names %in% colnames(temp_data))
 
 }
 ##function ends
@@ -16,12 +16,12 @@ garcom_check_duplicates<-function(temp_data, column_name){
 ##two params: dataframe and second is column name for which we
 ##we'd like to ensure no duplicates are present
 ##
-if( length(unique(temp_data[,get(column_name)])) !=length(temp_data[,get(column_name)])){
-return(FALSE)
-} else{
-return(TRUE)
-}
-##check ends
+    if( length(unique(temp_data[,get(column_name)])) !=length(temp_data[,get(column_name)])){
+        return(FALSE)
+    } else{
+        return(TRUE)
+    }
+    ##check ends
 
 }
 ##function ends
@@ -32,11 +32,11 @@ garcom_check_unique<-function(temp_data){
 ##one param: dataframe 
 ##we'd like to ensure no duplicates are present
 ## This is conducted with all columns. to ensure no row duplicates are present
-if( nrow(unique(temp_data)) !=nrow(temp_data)) {
-return(FALSE)
-} else{
-return(TRUE)
-}
+    if( nrow(unique(temp_data)) !=nrow(temp_data)) {
+        return(FALSE)
+    } else{
+        return(TRUE)
+    }
 ##check ends
 
 }
@@ -45,28 +45,26 @@ return(TRUE)
 garcom_subsetIIDs<-function(tempdata,iids_to_keep){
 ##08/11/2020
 
-if(isTRUE(anyNA(iids_to_keep))){
+    if(isTRUE(anyNA(iids_to_keep))){
 
-stop("There are individuals with IIDs as NA in the list provided to extract. Exiting...")
-}
-##if check ends for any NA in the IIDs to extract
+        stop("There are individuals with IIDs as NA in the list provided to extract. Exiting...")
+    }
+    ##if check ends for any NA in the IIDs to extract
 
-if( isTRUE( any("" == iids_to_keep)) | isTRUE( any('' == iids_to_keep)) ){
-stop("There is an IID with length zero name. Cannot extract it. Exiting... ")
+    if( isTRUE( any("" == iids_to_keep)) | isTRUE( any('' == iids_to_keep)) ){
+        stop("There is an IID with length zero name. Cannot extract it. Exiting... ")
+    }
+    ##check ends for any ids with length as zero
 
-}
-##check ends for any ids with length as zero
+    row_index_gendata_subset<-match(iids_to_keep,tempdata[,get("IID")]) ## store indices to return data.table with selected individuals
+    intersected_IIDs<-intersect(iids_to_keep,tempdata[,get("IID")]) ## check length later with this
 
-row_index_gendata_subset<-match(iids_to_keep,tempdata[,get("IID")]) ## store indices to return data.table with selected individuals
-intersected_IIDs<-intersect(iids_to_keep,tempdata[,get("IID")]) ## check length later with this
+    if(length(intersected_IIDs) == 0){
+        stop("no iids intersect. Exiting...")
+    }
+    ##if to check length of IIDs intersect is zero ends
 
-if(length(intersected_IIDs) == 0){
-stop("no iids intersect. Exiting...")
-}
-##if to check length of IIDs intersect is zero ends
-
-return(tempdata[row_index_gendata_subset,])
-
+    return(tempdata[row_index_gendata_subset,])
 }
 ##function ends
 
@@ -76,27 +74,26 @@ garcom_subsetSNPs<-function(tempdata,snps_to_keep){
 ##
 ##tempdata
 ##
-if(isTRUE(anyNA(snps_to_keep))){
+    if(isTRUE(anyNA(snps_to_keep))){
 
-stop("There are SNP names as NA in the list provided to extract. Exiting...")
-}
-##if check ends for any NA in SNP
+        stop("There are SNP names as NA in the list provided to extract. Exiting...")
+    }
+    ##if check ends for any NA in SNP
 
-if( isTRUE( any("" == snps_to_keep)) | isTRUE( any('' == snps_to_keep)) ){
-stop("There is SNP with length zero name. Cannot extract it. Exiting... ")
+    if( isTRUE( any("" == snps_to_keep)) | isTRUE( any('' == snps_to_keep)) ){
+        stop("There is SNP with length zero name. Cannot extract it. Exiting... ")
+    }
+    ##check ends for any SNPs with length as zero
 
-}
-##check ends for any SNPs with length as zero
+    index_SNPs_subset<- which(tempdata[,get("SNP")]  %in% snps_to_keep )
+    
+    if(length(index_SNPs_subset) ==0){
+        stop("SNPs not found to sub-set. Exiting...")
+    }
 
-index_SNPs_subset<- which(tempdata[,get("SNP")]  %in% snps_to_keep  )
-if(length(index_SNPs_subset) ==0){
+    tempdata<-tempdata[index_SNPs_subset,]
 
-stop("SNPs not found to sub-set. Exiting...")
-}
-
-tempdata<-tempdata[index_SNPs_subset,]
-
-return(tempdata) ## return data that are extracted with list of interest
+    return(tempdata) ## return data that are extracted with list of interest
 
 }
 ##function ends
@@ -105,27 +102,24 @@ garcom_filter_gene<-function(tempdata, filter_gene){
 
 ##08/11/2020
 
-if(isTRUE(anyNA(filter_gene))){
+    if(isTRUE(anyNA(filter_gene))){
 
-stop("There are Gene names as NA in the list provided to extract. Exiting...")
-}
-##if check ends for any NA in GENE
+        stop("There are Gene names as NA in the list provided to extract. Exiting...")
+    }
+    ##if check ends for any NA in GENE
 
-if( isTRUE( any("" == filter_gene)) | isTRUE( any('' == filter_gene)) ){
-stop("There is GENE with length zero name. Cannot extract it. Exiting... ")
+    if( isTRUE( any("" == filter_gene)) | isTRUE( any('' == filter_gene)) ){
+        stop("There is GENE with length zero name. Cannot extract it. Exiting... ")
 
-} ##check ends for any GENE with length as zero
+    } ##check ends for any GENE with length as zero
 
-keep_gene_index<- which(tempdata[,get("GENE")]  %in% filter_gene )
-print(keep_gene_index)
+    keep_gene_index<- which(tempdata[,get("GENE")]  %in% filter_gene )
+    
+    if(length(keep_gene_index) ==0){
+        stop("Genes not found to sub-set. Exiting...")
+    }
 
-if(length(keep_gene_index) ==0){
-
-stop("Genes not found to sub-set. Exiting...")
-}
-
-tempdata<-tempdata[keep_gene_index,]
-return(tempdata)
-
+    tempdata<-tempdata[keep_gene_index,]
+    return(tempdata)
 }
 ##function ends
