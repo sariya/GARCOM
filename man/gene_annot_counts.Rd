@@ -17,6 +17,14 @@ gene_annot_counts(
 \item{dt_gen}{recoded genetic data from PLINK}
 
 \item{dt_snpgene}{with SNP and GENE as column names}
+
+\item{keep_indiv}{individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
+
+\item{extract_SNP}{SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
+
+\item{filter_gene}{Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.}
+
+\item{impute_missing.}{Default is FALSE}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
