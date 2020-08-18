@@ -14,13 +14,13 @@ rep("0",4))), "SNP1_A"=c(rep(1,1),rep(0,9)) ,"SNP12_A"=c(rep(0,10))) ## this has
 
 test_that("function testing",{
     expect_error(gene_annot_counts(-4, 1))
-    expect_is(gene_annot_counts(recodedgen,snpgene),'data.table')
-    expect_null(gene_annot_counts(recodedgen,testexp_snpgene))
-    expect_null(gene_annot_counts(recodedgen,testexp_snpgene_noSNP))
+    expect_is(gene_annot_counts(recodedgen,snpgene),'data.table') ## recieve data.table 
+    expect_null(gene_annot_counts(recodedgen,testexp_snpgene)) #testexp_snpgene NULL returned for this data set
+    expect_null(gene_annot_counts(recodedgen,testexp_snpgene_noSNP)) 
     
-    expect_equal(nrow(gene_annot_counts(recodedgen,testexp_snpgene_pass)), 1)
+    expect_equal(nrow(gene_annot_counts(recodedgen,testexp_snpgene_pass)), 1) #check nrow
     
-    expect_null(gene_annot_counts(test_gen_withnoSNP,snpgene))
+    expect_null(gene_annot_counts(test_gen_withnoSNP,snpgene)) #genetic data have no SNP in the SNP-gene set
     expect_equal(nrow(gene_annot_counts(test_gen_with_oneSNP,snpgene)), 2)
 })
 
