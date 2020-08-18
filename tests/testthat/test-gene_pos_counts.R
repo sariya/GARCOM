@@ -42,6 +42,10 @@ test_that("function testing for subsetting",{
     
     expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121","IID_sample1")),'data.table')  ## subset IIDs, with one valid IIDs
 
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID_sample1","IID_sample4"),filter_gene=c("GENE1")),'data.table') ##subset and further subset: IIDs and gene filters
+expect_equal(nrow(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID_sample1","IID_sample4"),filter_gene=c("GENE1"))),1) ## we check row counts
+
+expect_null(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("SNP1","SNP3","SNP5","SNP6"),keep_indiv=c("IID_sample2"))) ## sample2 has zero allele for these SNPs
 })
 
 ##testing ends
