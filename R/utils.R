@@ -1,5 +1,7 @@
 #07 21 2020
 
+#' @importFrom stats median 
+
 garcom_check_column_names<-function(temp_data,col_names){
 ## 07 21 2020
 
