@@ -1,7 +1,7 @@
 #'@title gene annotation counts
 #'@description Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){
+gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){
 ##07 10 2020
 
 #' @export
@@ -14,7 +14,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
 #' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
 #' @param impute_missing default is FALSE. 
-#' @param impute_method default method used to impute missing values is mean. mean and median two methods are supported.
+#' @param impute_method default method used to impute missing values is mean. mean and median two methods are supported. Function accepts method in quotes: "mean" or "median"
 #'
 #' @examples
 #'
@@ -37,6 +37,15 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #' #subset with genes and samples
 #' gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"),
 #' keep_indiv=c("IID_sample1","IID_sample8"))
+#'
+#' #impute missing using default method. Data are rounded to the two deimal places. 0.1234 will become 0.12.
+#' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE)
+#'
+#' #Subset on individuals and impute for missing values. Default as mean
+#' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,keep_indiv=c("IID_sample1","IID_sample2","IID_sample10"))
+#'
+#' #impute using median method
+#' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,impute_method="median")
 #'
 #' #end not RUN
 #'
