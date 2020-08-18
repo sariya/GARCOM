@@ -27,7 +27,7 @@ gene_annot_counts(
 
 \item{impute_missing}{default is FALSE.}
 
-\item{impute_method}{default method used to impute missing values is mean. mean and median two methods are supported.}
+\item{impute_method}{default method used to impute missing values is mean. mean and median two methods are supported. Function accepts method in quotes: "mean" or "median"}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
@@ -56,6 +56,15 @@ gene_annot_counts(recodedgen, snpgene,keep_indiv=c("IID_sample1","IID_sample8"))
 #subset with genes and samples
 gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"),
 keep_indiv=c("IID_sample1","IID_sample8"))
+
+#impute missing using default method. Data are rounded to the two deimal places. 0.1234 will become 0.12.
+gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE)
+
+#Subset on individuals and impute for missing values. Default as mean
+gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,keep_indiv=c("IID_sample1","IID_sample2","IID_sample10"))
+
+#impute using median method
+gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,impute_method="median")
 
 #end not RUN
 
