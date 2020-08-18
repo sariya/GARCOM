@@ -21,12 +21,11 @@ test_genecoord_noSNP<-data.frame("GENE"=c("GENEX"), "START"=c(180000), "END"=c(1
 
 test_that("function testing",{
     expect_error(gene_pos_counts(-4, 1,1))
-    expect_is(gene_pos_counts(recodedgen,snppos, genecoord),'data.table')
+    expect_is(gene_pos_counts(recodedgen,snppos,genecoord),'data.table')
     expect_error(gene_pos_counts(recodedgen,test_noSNP,genecoord))
     expect_null(gene_pos_counts(recodedgen,test_SNP_nosum,genecoord))
     
     expect_error(gene_pos_counts(test_gen_withnoSNP,snppos,genecoord))
-    
     expect_equal(nrow(gene_pos_counts(test_gen_with_oneSNP, snppos,genecoord)), 1) ##returns one row 
     expect_error(gene_pos_counts(recodedgen, snppos,test_genecoord_noSNP))    
 })
@@ -37,15 +36,15 @@ test_that("function testing for subsetting",{
     expect_error(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111"))) ## subset genes
     expect_is(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111","GENE1")),'data.table')  ## subset genes, with one valid gene
     expect_error(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111"))) ## subset snps
-    expect_null(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP10"))) ## subset snps. SNP10 has zero counts
-    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP1")),'data.table') ## subset snps. SNP1 has various counts
+    expect_null(gene_pos_counts(recodedgen, snppos,genecoord,extract_SNP=c("snps111","SNP10"))) ## subset snps. SNP10 has zero counts
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord,extract_SNP=c("snps111","SNP1")),'data.table') ## subset snps. SNP1 has various counts
     
-    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121","IID_sample1")),'data.table')  ## subset IIDs, with one valid IIDs
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord,keep_indiv=c("IID121","IID_sample1")),'data.table')  ## subset IIDs, with one valid IIDs
 
-    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID_sample1","IID_sample4"),filter_gene=c("GENE1")),'data.table') ##subset and further subset: IIDs and gene filters
-    expect_equal(nrow(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID_sample1","IID_sample4"),filter_gene=c("GENE1"))),1) ## we check row counts
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord,keep_indiv=c("IID_sample1","IID_sample4"),filter_gene=c("GENE1")),'data.table') ##subset and further subset: IIDs and gene filters
+    expect_equal(nrow(gene_pos_counts(recodedgen, snppos,genecoord,keep_indiv=c("IID_sample1","IID_sample4"),filter_gene=c("GENE1"))),1) ## we check row counts
 
-    expect_null(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("SNP1","SNP3","SNP5","SNP6"),keep_indiv=c("IID_sample2"))) ## sample2 has zero allele for these SNPs
+    expect_null(gene_pos_counts(recodedgen, snppos,genecoord,extract_SNP=c("SNP1","SNP3","SNP5","SNP6"),keep_indiv=c("IID_sample2"))) ## sample2 has zero allele for these SNPs
 })
 
 ##testing ends

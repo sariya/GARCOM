@@ -14,28 +14,28 @@ rep("0",4))), "SNP1_A"=c(rep(1,1),rep(0,9)) ,"SNP12_A"=c(rep(0,10))) ## this has
 
 test_that("function testing",{
     expect_error(gene_annot_counts(-4, 1))
-    expect_is(gene_annot_counts(recodedgen, snpgene),'data.table')
-    expect_null(gene_annot_counts(recodedgen, testexp_snpgene))
-    expect_null(gene_annot_counts(recodedgen, testexp_snpgene_noSNP))
+    expect_is(gene_annot_counts(recodedgen,snpgene),'data.table')
+    expect_null(gene_annot_counts(recodedgen,testexp_snpgene))
+    expect_null(gene_annot_counts(recodedgen,testexp_snpgene_noSNP))
     
-    expect_equal(nrow(gene_annot_counts(recodedgen, testexp_snpgene_pass)), 1)
+    expect_equal(nrow(gene_annot_counts(recodedgen,testexp_snpgene_pass)), 1)
     
-    expect_null(gene_annot_counts(test_gen_withnoSNP , snpgene))
-    expect_equal(nrow(gene_annot_counts(test_gen_with_oneSNP, snpgene)), 2)
+    expect_null(gene_annot_counts(test_gen_withnoSNP,snpgene))
+    expect_equal(nrow(gene_annot_counts(test_gen_with_oneSNP,snpgene)), 2)
 })
 
 test_that("function testing for subsetting",{
 
-    expect_error(gene_annot_counts(recodedgen, snpgene,extract_SNP=c(""))) ##empty SNP names
-    expect_error(gene_annot_counts(recodedgen, snpgene,extract_SNP=c("snp1"))) ##empty SNP names
+    expect_error(gene_annot_counts(recodedgen,snpgene,extract_SNP=c(""))) ##empty SNP names
+    expect_error(gene_annot_counts(recodedgen,snpgene,extract_SNP=c("snp1"))) ##empty SNP names
 
-    expect_error(gene_annot_counts(recodedgen, snpgene,keep_indiv=c(""))) ##empty iid
-    expect_error(gene_annot_counts(recodedgen, snpgene,keep_indiv=c("snp1"))) ##wrong iid
-    expect_error(gene_annot_counts(recodedgen, snpgene,filter_gene=c("snp1"))) ##wrong gene name
+    expect_error(gene_annot_counts(recodedgen,snpgene,keep_indiv=c(""))) ##empty iid
+    expect_error(gene_annot_counts(recodedgen,snpgene,keep_indiv=c("snp1"))) ##wrong iid
+    expect_error(gene_annot_counts(recodedgen,snpgene,filter_gene=c("snp1"))) ##wrong gene name
 
     expect_is(gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1")),'data.table')
-    expect_is(gene_annot_counts(recodedgen, snpgene,keep_indiv=c("IID_sample8")),'data.table') ##just one sample id
+    expect_is(gene_annot_counts(recodedgen,snpgene,keep_indiv=c("IID_sample8")),'data.table') ##just one sample id
     
-    expect_null(gene_annot_counts(recodedgen, snpgene,keep_indiv=c("IID_sample8"), filter_gene=c("GENE5"))) ## we provide IIDs, gene and subset. Return is null for this dataset
+    expect_null(gene_annot_counts(recodedgen,snpgene,keep_indiv=c("IID_sample8"),filter_gene=c("GENE5"))) ## we provide IIDs, gene and subset. Return is null for this dataset
 })
 ##testing ends
