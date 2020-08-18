@@ -151,7 +151,7 @@ garcom_impute<-function(temp_genetic,temp_impute_method){
     ## end for mean imputation
     
     if(temp_impute_method=="median"){
-        temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), median(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
+        temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), stats::median(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
     }
     
     ## end for median imputation
