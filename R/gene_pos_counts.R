@@ -43,6 +43,9 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2"),
 #' keep_indiv=c("IID_sample10","IID_sample4")) 
 #'
+#' ##impute by mean
+#' gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="mean")
+#'
 #' #end not RUN
 #'
 #' @return Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
@@ -110,13 +113,12 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 
     ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
 
-    snp_withingenes<-dt_snp[dt_gene, c("SNP","GENE","START","END"), on=list(BP>=START , BP<=END), nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
+    snp_withingenes<-dt_snp[dt_gene, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
 
     if(nrow(snp_withingenes) == 0){
         stop("No snps within any gene boundaries provided")	
     }
     ##if gene sum is zero. Stop and return
-
 
     if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP)) )) ){
         stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
@@ -129,12 +131,12 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
 
-    subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset, on="SNP", nomatch=0] 
+    subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset,on="SNP",nomatch=0] 
     subsetsnps_genes_lefted_join[, c("START","END","SNP"):=NULL]  
     
     ##https://stackoverflow.com/a/32277135/2740831
-
     matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] 
+
     matrix_withallelecount_withinGene<-matrix_withallelecount_withinGene[ rowSums(matrix_withallelecount_withinGene[,-c("GENE")]) > 0,]
     
     if(nrow(matrix_withallelecount_withinGene)>0){
