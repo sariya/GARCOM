@@ -34,13 +34,13 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #'
 #' @author Sanjeev Sariya
 #'
-    
+
+    IID<-SNP<-GENE<-NULL ## binding the variable locally to the function    
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
     dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
 
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
-    SNP<-GENE<-NULL ## binding the variable locally to the function
     ##https://www.r-bloggers.com/no-visible-binding-for-global-variable/
     
     if(all(garcom_check_column_names(dt_snpgene,c("SNP","GENE")))){
