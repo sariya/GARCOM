@@ -61,6 +61,9 @@ gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2"))
 gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2"),
 keep_indiv=c("IID_sample10","IID_sample4")) 
 
+##impute by mean
+gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="mean")
+
 #end not RUN
 
 }
