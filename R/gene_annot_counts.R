@@ -1,7 +1,7 @@
 #'@title gene annotation counts
 #'@description Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE){
+gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){
 ##07 10 2020
 
 #' @export
