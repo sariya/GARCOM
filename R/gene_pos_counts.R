@@ -1,7 +1,7 @@
 #'@title gene position counts
 #'@description Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){ 
+gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){ 
 
 ##07 20 2020
 
@@ -32,6 +32,16 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NU
 #' #10 SNPs with genomic location
 #'
 #' gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+#'
+#' #subset individuals
+#' gene_pos_counts(recodedgen, snppos, genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
+#'
+#' #subset genes
+#' gene_pos_counts(recodedgen, snppos, genecoord,filter_gene=c("GENE1","GENE2")) 
+#'
+#' #subset genes and individual iids
+#' gene_pos_counts(recodedgen, snppos, genecoord,filter_gene=c("GENE1","GENE2"),keep_indiv=c("IID_sample10","IID_sample4")) 
+#'
 #' #end not RUN
 #'
 #' @return Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
