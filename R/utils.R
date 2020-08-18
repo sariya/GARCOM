@@ -101,11 +101,10 @@ garcom_subsetSNPs<-function(tempdata,snps_to_keep){
     }
 
     return(tempdata[index_SNPs_subset,]) ## return data that are extracted with list of interest
-
 }
 ##function ends
 
-garcom_filter_gene<-function(tempdata, filter_gene){
+garcom_filter_gene<-function(tempdata,filter_gene){
 
     ##08/11/2020
 
