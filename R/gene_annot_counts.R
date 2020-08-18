@@ -35,7 +35,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #'
     
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
-dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
+    dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
 
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
@@ -49,40 +49,37 @@ dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are inte
     }
     ## check ends
 
-if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
-stop("Duplicate SNP-Gene annotation values")
-}
+    if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
+        stop("Duplicate SNP-Gene annotation values")
+    }
 
-if(is.null(keep_indiv) == FALSE ){
-keep_indiv<-as.character(keep_indiv) ## convert them into character
-dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
+    if(is.null(keep_indiv) == FALSE ){
+        keep_indiv<-as.character(keep_indiv) ## convert them into character
+        dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
+    }
+    ##check ends for sub-setting IIDs
 
-}
-###check ends for sub-setting IIDs
+    if(is.null(extract_SNP) == FALSE){
+        extract_SNP<-as.character(extract_SNP)
+        dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
+    }
+    ##check ends for sub-setting SNPs
 
-if(is.null(extract_SNP) == FALSE){
-extract_SNP<-as.character(extract_SNP)
-dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
+    if(is.null(filter_gene) == FALSE){
+        ##
+        ##Start process to filter genes. The list provided by user is what we'd like to keep
+        filter_gene<-as.character(filter_gene) ## turn into character
+        dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
 
-}
-###check ends for sub-setting SNPs
+    }
+    ##check ends for sub-setting Genes
 
-if(is.null(filter_gene) == FALSE){
-##
-##Start process to filter genes. The list provided by user is what we'd like to keep
-filter_gene<-as.character(filter_gene) ## turn into character
-dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
+    if(isTRUE(impute_missing)){
 
-}
-###check ends for sub-setting Genes
-
-if(isTRUE(impute_missing)){
-
-##we pass impute method and genetic data frame
-dt_gen<-garcom_impute(dt_gen,impute_method)
-
-}
-##check ends for imputing genetic data
+        ##we pass impute method and genetic data frame
+        dt_gen<-garcom_impute(dt_gen,impute_method)
+    }
+    ##check ends for imputing genetic data
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 
