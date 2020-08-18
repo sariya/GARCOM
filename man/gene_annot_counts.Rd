@@ -47,6 +47,16 @@ data(snpgene) #SNP and its respective GENE annotated.
 
 gene_annot_counts(recodedgen,snpgene) #run the function
 
+#subset Genes
+gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"))
+
+#Subset individuals
+gene_annot_counts(recodedgen, snpgene,keep_indiv=c("IID_sample1","IID_sample8"))
+
+#subset with genes and samples
+gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"),
+keep_indiv=c("IID_sample1","IID_sample8"))
+
 #end not RUN
 
 }
