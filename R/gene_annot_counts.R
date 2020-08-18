@@ -10,10 +10,10 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #' @importFrom data.table :=
 #' @param dt_gen recoded genetic data from PLINK
 #' @param dt_snpgene with SNP and GENE as column names
-#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
 #' @param keep_indiv individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
 #' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
-#' @param impute_missing. Default is FALSE
+#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
+#' @param impute_missing. Default is FALSE. Default method used to impute missing values is mean. mean and median two methods are supported.
 #'
 #' @examples
 #'
@@ -35,7 +35,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #'
     
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
-    dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
+dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
 
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
@@ -49,37 +49,40 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
     }
     ## check ends
 
-    if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
-        stop("Duplicate SNP-Gene annotation values")
-    }
+if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
+stop("Duplicate SNP-Gene annotation values")
+}
 
-    if(is.null(keep_indiv) == FALSE ){
-        keep_indiv<-as.character(keep_indiv) ## convert them into character
-        dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
-    }
-    ##check ends for sub-setting IIDs
+if(is.null(keep_indiv) == FALSE ){
+keep_indiv<-as.character(keep_indiv) ## convert them into character
+dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
 
-    if(is.null(extract_SNP) == FALSE){
-        extract_SNP<-as.character(extract_SNP)
-        dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
-    }
-    ##check ends for sub-setting SNPs
+}
+###check ends for sub-setting IIDs
 
-    if(is.null(filter_gene) == FALSE){
-        ##
-        ##Start process to filter genes. The list provided by user is what we'd like to keep
-        filter_gene<-as.character(filter_gene) ## turn into character
-        dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
+if(is.null(extract_SNP) == FALSE){
+extract_SNP<-as.character(extract_SNP)
+dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
 
-    }
-    ##check ends for sub-setting Genes
+}
+###check ends for sub-setting SNPs
 
-    if(isTRUE(impute_missing)){
+if(is.null(filter_gene) == FALSE){
+##
+##Start process to filter genes. The list provided by user is what we'd like to keep
+filter_gene<-as.character(filter_gene) ## turn into character
+dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
 
-        ##we pass impute method and genetic data frame
-        dt_gen<-garcom_impute(dt_gen,impute_method)
-    }
-    ##check ends for imputing genetic data
+}
+###check ends for sub-setting Genes
+
+if(isTRUE(impute_missing)){
+
+##we pass impute method and genetic data frame
+dt_gen<-garcom_impute(dt_gen,impute_method)
+
+}
+##check ends for imputing genetic data
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 

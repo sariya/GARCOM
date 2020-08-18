@@ -1,7 +1,7 @@
 #'@title gene position counts
 #'@description Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL, impute_missing=FALSE,impute_method="mean"){ 
+gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){ 
 
 ##07 20 2020
 
@@ -14,10 +14,10 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NU
 #' @param dt_gen recoded genetic data from PLINK 
 #' @param dt_gene with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #' @param dt_snp with SNP BP as column names
-#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
 #' @param keep_indiv individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
 #' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
-#' @param impute_missing. Default is FALSE
+#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
+#' @param impute_missing. Impute missing values. Default is FALSE. Default method used to impute missing values is mean. mean and median two methods are supported.
 #'
 #' @examples
 #' #Package provides sample data that are loaded with package loading. 
