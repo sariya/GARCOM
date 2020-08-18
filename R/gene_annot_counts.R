@@ -28,6 +28,15 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #'
 #' gene_annot_counts(recodedgen,snpgene) #run the function
 #'
+#' #subset Genes
+#' gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"))
+#'
+#' #Subset individuals
+#' gene_annot_counts(recodedgen, snpgene,keep_indiv=c("IID_sample1","IID_sample8"))
+#'
+#' #subset with genes and samples
+#' gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"),keep_indiv=c("IID_sample1","IID_sample8"))
+#'
 #' #end not RUN
 #'
 #' @return Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.

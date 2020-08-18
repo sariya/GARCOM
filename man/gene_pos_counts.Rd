@@ -55,10 +55,11 @@ gene_pos_counts(recodedgen, snppos, genecoord) #run the function
 gene_pos_counts(recodedgen, snppos, genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
 
 #subset genes
-gene_pos_counts(recodedgen, snppos, genecoord,filter_gene=c("GENE1","GENE2")) 
+gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2")) 
 
 #subset genes and individual iids
-gene_pos_counts(recodedgen, snppos, genecoord,filter_gene=c("GENE1","GENE2"),keep_indiv=c("IID_sample10","IID_sample4")) 
+gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2"),
+keep_indiv=c("IID_sample10","IID_sample4")) 
 
 #end not RUN
 
