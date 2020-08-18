@@ -38,11 +38,13 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 #' gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"),
 #' keep_indiv=c("IID_sample1","IID_sample8"))
 #'
-#' #impute missing using default method. Data are rounded to the two deimal places. 0.1234 will become 0.12.
+#' #impute missing using default method. 
+#' #Data are rounded to the two deimal places. 0.1234 will become 0.12.
 #' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE)
 #'
 #' #Subset on individuals and impute for missing values. Default as mean
-#' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,keep_indiv=c("IID_sample1","IID_sample2","IID_sample10"))
+#' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,
+#' keep_indiv=c("IID_sample1","IID_sample2","IID_sample10"))
 #'
 #' #impute using median method
 #' gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,impute_method="median")
