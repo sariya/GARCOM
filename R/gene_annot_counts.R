@@ -13,7 +13,8 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #' @param keep_indiv individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
 #' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
 #' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
-#' @param impute_missing. Default is FALSE. Default method used to impute missing values is mean. mean and median two methods are supported.
+#' @param impute_missing default is FALSE. 
+#' @param impute_method default method used to impute missing values is mean. mean and median two methods are supported.
 #'
 #' @examples
 #'

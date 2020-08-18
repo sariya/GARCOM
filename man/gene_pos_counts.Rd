@@ -28,7 +28,9 @@ gene_pos_counts(
 
 \item{filter_gene}{Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.}
 
-\item{impute_missing.}{Impute missing values. Default is FALSE. Default method used to impute missing values is mean. mean and median two methods are supported.}
+\item{impute_missing}{Impute missing values. Default is FALSE.}
+
+\item{impute_method}{method to impute. Default method is mean. imputation for missing values can be done by median instead of mean.}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
