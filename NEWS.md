@@ -1,6 +1,9 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 
+# GARCOM 0.0.0.9003 Date Aug 18 2020
+- Added impute feature to the functions for missingness. We allow mean and median 
+
 # GARCOM 0.0.0.9002 Date Aug 12 2020
 
 - New features to subset individuals and SNPs
