@@ -21,16 +21,30 @@ test_genecoord_noSNP<-data.frame("GENE"=c("GENEX"), "START"=c(180000), "END"=c(1
 
 test_that("function testing",{
     expect_error(gene_pos_counts(-4, 1,1))
-    expect_is(gene_pos_counts(recodedgen,  snppos, genecoord),'data.table')
-    expect_error(gene_pos_counts(recodedgen, test_noSNP,genecoord))
-    expect_null(gene_pos_counts(recodedgen, test_SNP_nosum,genecoord))
+    expect_is(gene_pos_counts(recodedgen,snppos, genecoord),'data.table')
+    expect_error(gene_pos_counts(recodedgen,test_noSNP,genecoord))
+    expect_null(gene_pos_counts(recodedgen,test_SNP_nosum,genecoord))
     
-    expect_error(gene_pos_counts(test_gen_withnoSNP, snppos,genecoord))
+    expect_error(gene_pos_counts(test_gen_withnoSNP,snppos,genecoord))
     
     expect_equal(nrow(gene_pos_counts(test_gen_with_oneSNP, snppos,genecoord)), 1) ##returns one row 
     expect_error(gene_pos_counts(recodedgen, snppos,test_genecoord_noSNP))
     
 })
+
+test_that("function testing for subsetting",{
+
+    expect_error(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121"))) ## subset IIDs
+expect_error(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111"))) ## subset genes
+ expect_is(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111","GENE1")),'data.table')  ## subset genes, with one valid gene
+expect_error(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111"))) ## subset snps
+expect_null(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP10"))) ## subset snps. SNP10 has zero counts
+ expect_is(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP1")),'data.table') ## subset snps. SNP1 has various counts
+
+ expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121","IID_sample1")),'data.table')  ## subset IIDs, with one valid IIDs
+
+})
+
 ##testing ends
 
 
