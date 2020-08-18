@@ -3,8 +3,10 @@
 garcom_check_column_names<-function(temp_data,col_names){
 ## 07 21 2020
 
-##two params: dataframe and vector of columns we are looking for.
-##return TRUE or FALSE
+    ##function check column names for any dataframe and supplied vector of column names
+    ##two params: dataframe and vector of columns we are looking for.
+    ##return TRUE or FALSE
+    
     return(col_names %in% colnames(temp_data))
 
 }
@@ -12,10 +14,10 @@ garcom_check_column_names<-function(temp_data,col_names){
 
 garcom_check_duplicates<-function(temp_data, column_name){
 
-##08/11/2020
-##two params: dataframe and second is column name for which we
-##we'd like to ensure no duplicates are present
-##
+    ##08/11/2020
+    ##two params: dataframe and second is column name for which we
+    ##we'd like to ensure no duplicates are present
+
     if( length(unique(temp_data[,get(column_name)])) !=length(temp_data[,get(column_name)])){
         return(FALSE)
     } else{
@@ -28,10 +30,10 @@ garcom_check_duplicates<-function(temp_data, column_name){
 
 garcom_check_unique<-function(temp_data){
 
-##08/11/2020
-##one param: dataframe 
-##we'd like to ensure no duplicates are present
-## This is conducted with all columns. to ensure no row duplicates are present
+    ##08/11/2020
+    ##one param: dataframe 
+    ##we'd like to ensure no duplicates are present
+    ## This is conducted with all columns. to ensure no row duplicates are present
     if( nrow(unique(temp_data)) !=nrow(temp_data)) {
         return(FALSE)
     } else{
@@ -48,6 +50,7 @@ garcom_subsetIIDs<-function(tempdata,iids_to_keep){
     ##two params: data and individual ids to keep
     ##we return genetic data with subset IIDs 
     ##We stop if IIDs in the vector aren't found
+    ##we subset provided dataframe with vector of IIDs supplied  
 
     if(isTRUE(anyNA(iids_to_keep))){
 
@@ -78,6 +81,7 @@ garcom_subsetSNPs<-function(tempdata,snps_to_keep){
     ##two params: SNP data and second parameter is vector of SNPs that are to be subsetted
     ##we return subset data
     ##Stop if SNPs aren't subsetted
+    ##we subset provided dataframe with vector of SNPs supplied
     
     if(isTRUE(anyNA(snps_to_keep))){
 
@@ -108,7 +112,8 @@ garcom_filter_gene<-function(tempdata, filter_gene){
     ##Two parameters: gene data and vector of genes that are to be subsetted
     ##return if genes are subsetted
     ##Stop if no genes are found
-
+    ##we subset provided dataframe with vector of genes supplied
+    
     if(isTRUE(anyNA(filter_gene))){
 
         stop("There are Gene names as NA in the list provided to extract. Exiting...")
@@ -132,21 +137,27 @@ garcom_filter_gene<-function(tempdata, filter_gene){
 
 garcom_impute<-function(temp_genetic,temp_impute_method){
 
-##08 17 2020
-##two params: genetic data and method to impute
+    ##08 17 2020
+    ##two params: genetic data and method to impute
+    ##we exit if mean and median isn't provided.
+    ##we impute data and then return imputed genetic data
 
-if( isTRUE( !(temp_impute_method  %in% c("m2ean","median2")))){
-stop("impute method doesn't match mean or median")
+    if( isTRUE( !(temp_impute_method  %in% c("m2ean","median2")))){
+        stop("impute method doesn't match mean or median")
+    }
+
+    if(temp_impute_method =="mean"){
+        temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), mean(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
+    }
+    ## end for mean imputation
+    
+    if(temp_impute_method  =="median"){
+        temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), median(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
+    }
+    
+    ## end for median imputation
+
+    return(temp_genetic) ##return imputed data
+
 }
-
-if(temp_impute_method =="mean"){
-temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), mean(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
-}
-
-if(temp_impute_method  =="median"){
-temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), median(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
-}
-
-return(temp_genetic) ##return imputed data
-
-}
+##function ends
