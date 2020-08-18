@@ -142,22 +142,21 @@ garcom_impute<-function(temp_genetic,temp_impute_method){
     ##we exit if mean and median isn't provided.
     ##we impute data and then return imputed genetic data
 
-    if( isTRUE( !(temp_impute_method  %in% c("m2ean","median2")))){
+    if(isTRUE(!(temp_impute_method %in% c("m2ean","median2")))){
         stop("impute method doesn't match mean or median")
     }
 
-    if(temp_impute_method =="mean"){
+    if(temp_impute_method=="mean"){
         temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), mean(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
     }
     ## end for mean imputation
     
-    if(temp_impute_method  =="median"){
+    if(temp_impute_method=="median"){
         temp_genetic[]<-temp_genetic[, c(7:ncol(temp_genetic)):= lapply(.SD, function(x) ifelse(is.na(x), median(x, na.rm = TRUE),x)),.SDcols = c(7:ncol(temp_genetic))]
     }
     
     ## end for median imputation
 
     return(temp_genetic) ##return imputed data
-
 }
 ##function ends
