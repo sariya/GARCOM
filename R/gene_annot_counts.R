@@ -35,54 +35,51 @@ gene_annot_counts<-function(dt_gen,dt_snpgene, keep_indiv=NULL, extract_SNP=NULL
 #'
     
     dt_gen<-data.table::as.data.table(dt_gen) ## make data.table format for higher speed
-dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
+    dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
 
     dt_snpgene<-data.table::as.data.table(dt_snpgene)
 
     SNP<-GENE<-NULL ## binding the variable locally to the function
     ##https://www.r-bloggers.com/no-visible-binding-for-global-variable/
     
-    if(all(garcom_check_column_names(dt_snpgene, c("SNP","GENE")))){
+    if(all(garcom_check_column_names(dt_snpgene,c("SNP","GENE")))){
         ## all good with SNP data
     }else{
         stop("column names don't match for snp-gene data")
     }
     ## check ends
 
-if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
-stop("Duplicate SNP-Gene annotation values")
-}
+    if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
+        stop("Duplicate SNP-Gene annotation values")
+    }
 
-if(is.null(keep_indiv) == FALSE ){
-keep_indiv<-as.character(keep_indiv) ## convert them into character
-dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
+    if(is.null(keep_indiv) == FALSE ){
+        keep_indiv<-as.character(keep_indiv) ## convert them into character
+        dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
 
-}
-###check ends for sub-setting IIDs
+    }
+    ##check ends for sub-setting IIDs
 
-if(is.null(extract_SNP) == FALSE){
-extract_SNP<-as.character(extract_SNP)
-dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
+    if(is.null(extract_SNP) == FALSE){
+        extract_SNP<-as.character(extract_SNP)
+        dt_snpgene<-garcom_subsetSNPs(dt_snpgene,extract_SNP)
+    }
+    ##check ends for sub-setting SNPs
 
-}
-###check ends for sub-setting SNPs
+    if(is.null(filter_gene) == FALSE){
+        ##
+        ##Start process to filter genes. The list provided by user is what we'd like to keep
+        filter_gene<-as.character(filter_gene) ## turn into character
+        dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
+    }
+    ##check ends for sub-setting Genes
 
-if(is.null(filter_gene) == FALSE){
-##
-##Start process to filter genes. The list provided by user is what we'd like to keep
-filter_gene<-as.character(filter_gene) ## turn into character
-dt_snpgene<-garcom_filter_gene(dt_snpgene,filter_gene) ##filter SNP-gene annotation based on Gene list
+    if(isTRUE(impute_missing)){
 
-}
-###check ends for sub-setting Genes
-
-if(isTRUE(impute_missing)){
-
-##we pass impute method and genetic data frame
-dt_gen<-garcom_impute(dt_gen,impute_method)
-
-}
-##check ends for imputing genetic data
+        ##we pass impute method and genetic data frame
+        dt_gen<-garcom_impute(dt_gen,impute_method)
+    }
+    ##check ends for imputing genetic data
 
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ## remove underscore generate from plink
 
@@ -91,17 +88,17 @@ dt_gen<-garcom_impute(dt_gen,impute_method)
 
     SNP_names<-colnames(dt_gen)[c(7:length(colnames(dt_gen)))] # use this to assign SNP column when piping
 
-    dt_gen_transposed<- data.table(data.table::transpose(dt_gen) )
+    dt_gen_transposed<-data.table(data.table::transpose(dt_gen) )
     
     dt_gen_transposed<-dt_gen_transposed[,.SD[-1:-6]] ## remove first six rows
 
     data.table::setnames(dt_gen_transposed,IID_samples$IID) ## set column names
-    dt_gen_filtered<-dt_gen_transposed[, c("SNP") := SNP_names ]
+    dt_gen_filtered<-dt_gen_transposed[,c("SNP") := SNP_names]
 
     ##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
   
     jointed_genesSNP<-dt_snpgene[dt_gen_filtered , on="SNP", nomatch=0] ## do a left join on the data.table RAW
-    jointed_genesSNP<- jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
+    jointed_genesSNP<-jointed_genesSNP[,SNP:=NULL]   ## remove SNP column
 
     if(nrow(jointed_genesSNP)==0){
         message("No SNPs match with the annotation")
@@ -113,7 +110,7 @@ dt_gen<-garcom_impute(dt_gen,impute_method)
     ##https://stackoverflow.com/a/62959318/2740831
 
     jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] # get sum within a gene
-    jointed_genesSNP_filtered<-jointed_genesSNP_filtered[ rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,]  # get count minus gene column and keep only genes with sum more than 0. test with a test case here
+    jointed_genesSNP_filtered<-jointed_genesSNP_filtered[rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,] ##get count minus gene column and keep only genes with sum more than 0. test with a test case here
 
     if(nrow(jointed_genesSNP_filtered) ==0){
         message("All genes with zero count")
