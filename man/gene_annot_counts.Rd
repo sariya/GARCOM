@@ -10,7 +10,8 @@ gene_annot_counts(
   keep_indiv = NULL,
   extract_SNP = NULL,
   filter_gene = NULL,
-  impute_missing = FALSE
+  impute_missing = FALSE,
+  impute_method = "mean"
 )
 }
 \arguments{
