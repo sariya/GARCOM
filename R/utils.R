@@ -142,7 +142,8 @@ garcom_impute<-function(temp_genetic,temp_impute_method){
     ##two params: genetic data and method to impute
     ##we exit if mean and median isn't provided.
     ##we impute data and then return imputed genetic data
-
+    ## return rounded to two decimal places
+    
     if(isTRUE(!(temp_impute_method %in% c("mean","median")))){
         stop("impute method doesn't match mean or median")
     }
@@ -157,9 +158,10 @@ garcom_impute<-function(temp_genetic,temp_impute_method){
     }
     
     ## end for median imputation
-
-##round to two decimal places: 0.1234 will become 0.12 only. 0.00 will be 0.00
-temp_genetic[]<-temp_genetic[,(7:ncol(temp_genetic)):=lapply(.SD,function(x) format(round(x,2),nsmall=2) ), .SDcols=(7:ncol(temp_genetic))]
+    
+    ##round to two decimal places: 0.1234 will become 0.12 only. 0.00 will be 0.00
+    ## https://stackoverflow.com/a/12135122/2740831
+    temp_genetic[]<-temp_genetic[,(7:ncol(temp_genetic)):=lapply(.SD,function(x) format(round(x,2),nsmall=2) ), .SDcols=(7:ncol(temp_genetic))]
     return(temp_genetic) ##return imputed data
 }
 ##function ends
