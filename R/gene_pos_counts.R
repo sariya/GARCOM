@@ -1,7 +1,7 @@
 #'@title gene position counts
 #'@description Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
-gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL, impute_missing=FALSE, impute_method="mean"){ 
+gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NULL,filter_gene=NULL, impute_missing=FALSE,impute_method="mean"){ 
 
 ##07 20 2020
 
@@ -39,7 +39,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL, extract_SNP=NU
 #'
 
     dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
-dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
+    dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
     dt_gene<-data.table::as.data.table(dt_gene)
     dt_snp<-data.table::as.data.table(dt_snp)
     START<-END<-GENE<-BP<-NULL ## binding the variable locally to the function
@@ -57,47 +57,43 @@ dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are inte
     }
     ##Check ends 
 
-if(FALSE == isTRUE(garcom_check_duplicates(dt_snp,"SNP"))){
+    if(FALSE == isTRUE(garcom_check_duplicates(dt_snp,"SNP"))){
 
-stop("duplicate SNP names")
-}
-##check ends for SNP data.table
-if(FALSE == isTRUE(garcom_check_duplicates(dt_gene,"GENE"))){
+        stop("duplicate SNP names")
+    }
+    ##check ends for SNP data.table
+    if(FALSE == isTRUE(garcom_check_duplicates(dt_gene,"GENE"))){
 
-stop("duplicate GENE names")
-}
-##check ends for GENE data.table
+        stop("duplicate GENE names")
+    }
+    ##check ends for GENE data.table
 
-if(is.null(keep_indiv) == FALSE ){
-keep_indiv<-as.character(keep_indiv) ## convert them into character
-dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
+    if(is.null(keep_indiv) == FALSE ){
+        keep_indiv<-as.character(keep_indiv) ## convert them into character
+        dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
 
-}
-## sub-setting complete for individuals interested
+    }
+    ## sub-setting complete for individuals interested
 
-if(is.null(extract_SNP) == FALSE){
-extract_SNP<-as.character(extract_SNP)
-dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping SNPs
+    if(is.null(extract_SNP) == FALSE){
+        extract_SNP<-as.character(extract_SNP)
+        dt_snp<-garcom_subsetSNPs(dt_snp,extract_SNP) ## returns data with overlapping SNPs
+    }
+    ##check ends for sub-setting SNPs
 
-}
-###check ends for sub-setting SNPs
+    if(is.null(filter_gene) == FALSE){
+        filter_gene<-as.character(filter_gene) ## turn into character
+        dt_gene<-garcom_filter_gene(dt_gene,filter_gene) ##filter SNP-gene annotation based on Gene list
+    }
+    ##check ends for filtering Genes
 
-if(is.null(filter_gene) == FALSE){
-filter_gene<-as.character(filter_gene) ## turn into character
+    if(isTRUE(impute_missing)){
 
-dt_gene<-garcom_filter_gene(dt_gene,filter_gene) ##filter SNP-gene annotation based on Gene list
+        ##we pass impute method and genetic data frame
+        dt_gen<-garcom_impute(dt_gen,impute_method)
+    }
 
-}
-##check ends for filtering Genes
-
-if(isTRUE(impute_missing)){
-
-##we pass impute method and genetic data frame
-dt_gen<-garcom_impute(dt_gen,impute_method)
-
-}
-
-##impute check ends
+    ##impute check ends
     colnames(dt_gen) <- gsub("_.*","",colnames(dt_gen)) ##Remove _ from recode format
 
     ## https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
