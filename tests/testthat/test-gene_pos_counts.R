@@ -28,20 +28,19 @@ test_that("function testing",{
     expect_error(gene_pos_counts(test_gen_withnoSNP,snppos,genecoord))
     
     expect_equal(nrow(gene_pos_counts(test_gen_with_oneSNP, snppos,genecoord)), 1) ##returns one row 
-    expect_error(gene_pos_counts(recodedgen, snppos,test_genecoord_noSNP))
-    
+    expect_error(gene_pos_counts(recodedgen, snppos,test_genecoord_noSNP))    
 })
-
+##
 test_that("function testing for subsetting",{
 
     expect_error(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121"))) ## subset IIDs
-expect_error(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111"))) ## subset genes
- expect_is(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111","GENE1")),'data.table')  ## subset genes, with one valid gene
-expect_error(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111"))) ## subset snps
-expect_null(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP10"))) ## subset snps. SNP10 has zero counts
- expect_is(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP1")),'data.table') ## subset snps. SNP1 has various counts
-
- expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121","IID_sample1")),'data.table')  ## subset IIDs, with one valid IIDs
+    expect_error(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111"))) ## subset genes
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, filter_gene=c("gene111","GENE1")),'data.table')  ## subset genes, with one valid gene
+    expect_error(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111"))) ## subset snps
+    expect_null(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP10"))) ## subset snps. SNP10 has zero counts
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, extract_SNP=c("snps111","SNP1")),'data.table') ## subset snps. SNP1 has various counts
+    
+    expect_is(gene_pos_counts(recodedgen, snppos,genecoord, keep_indiv=c("IID121","IID_sample1")),'data.table')  ## subset IIDs, with one valid IIDs
 
 })
 
