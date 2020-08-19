@@ -27,13 +27,13 @@ gene_annot_counts(
 
 \item{impute_missing}{option to impute missing values. Default is FALSE.}
 
-\item{impute_method}{option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"}
+\item{impute_method}{option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median". Data are rounded to the two decimal places. 0.1234 will become 0.12.}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
-Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw formt. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
+Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 }
 \examples{
 
@@ -58,7 +58,7 @@ gene_annot_counts(recodedgen,snpgene,filter_gene=c("GENE1","GENE2"),
 keep_indiv=c("IID_sample1","IID_sample8"))
 
 #impute missing using default method. 
-#Data are rounded to the two deimal places. 0.1234 will become 0.12.
+
 gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE)
 
 #Subset on individuals and impute for missing values. Default as mean

@@ -19,7 +19,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' @param extract_SNP option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
 #' @param filter_gene option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.
 #' @param impute_missing option to impute missing values. Default is FALSE. 
-#' @param impute_method option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"
+#' @param impute_method option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median". Data are rounded to the two decimal places. 0.1234 will become 0.12.
 #'
 #' @examples
 #' #Package provides sample data that are loaded with package loading. 
