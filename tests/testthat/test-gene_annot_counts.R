@@ -39,3 +39,11 @@ test_that("function testing for subsetting",{
     expect_null(gene_annot_counts(recodedgen,snpgene,keep_indiv=c("IID_sample8"),filter_gene=c("GENE5"))) ## we provide IIDs, gene and subset. Return is null for this dataset
 })
 ##testing ends
+
+test_that("function testing for impute",{
+
+    expect_is(gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,impute_method="median"),'data.table') ##test for median
+    expect_equal( nrow(gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,filter_gene=c("GENE2","GENE1"),impute_method="median")),2) #subset genes and impute using median
+ 
+})
+##testing ends

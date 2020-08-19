@@ -47,6 +47,11 @@ test_that("function testing for subsetting",{
     expect_null(gene_pos_counts(recodedgen, snppos,genecoord,extract_SNP=c("SNP1","SNP3","SNP5","SNP6"),keep_indiv=c("IID_sample2"))) ## sample2 has zero allele for these SNPs
 })
 
+test_that("function testing for impute",{
+
+    expect_is(gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="median"),'data.table') ##test for median
+expect_error(gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="Mean")) #make sure that spellings are OK
+})
 ##testing ends
 
 
