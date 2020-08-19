@@ -4,7 +4,7 @@
 \name{recodedgen}
 \alias{recodedgen}
 \title{data set prepared for the package
-recodedgen is genetic data with 10 rows and 16 columns provided with the GARCOM package.
+recodedgen is genetic data with 10 rows and 16 columns is sample data provided with the GARCOM package.
 Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the
 PLINK output. Columns followed by PHENOTYPE are SNP names followed by _A, or _C
 or _T or _G that is allele. Each SNP column may have 0, 1, 2 or NA value}
@@ -16,7 +16,7 @@ recodedgen
 }
 \description{
 data set prepared for the package
-recodedgen is genetic data with 10 rows and 16 columns provided with the GARCOM package.
+recodedgen is genetic data with 10 rows and 16 columns is sample data provided with the GARCOM package.
 Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the
 PLINK output. Columns followed by PHENOTYPE are SNP names followed by _A, or _C
 or _T or _G that is allele. Each SNP column may have 0, 1, 2 or NA value
