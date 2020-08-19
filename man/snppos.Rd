@@ -3,7 +3,7 @@
 \docType{data}
 \name{snppos}
 \alias{snppos}
-\title{snppos SNP-BP data with 2 columns and 10 rows. Column names are SNP and BP.
+\title{snppos SNP-BP data with 2 columns and 10 rows provided with the GARCOM package. Column names are SNP and BP.
 where SNP columns contains SNP names BP column contains position of the SNP}
 \format{
 An object of class \code{data.frame} with 10 rows and 2 columns.
@@ -12,7 +12,7 @@ An object of class \code{data.frame} with 10 rows and 2 columns.
 snppos
 }
 \description{
-snppos SNP-BP data with 2 columns and 10 rows. Column names are SNP and BP.
+snppos SNP-BP data with 2 columns and 10 rows provided with the GARCOM package. Column names are SNP and BP.
 where SNP columns contains SNP names BP column contains position of the SNP
 }
 \keyword{datasets}

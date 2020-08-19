@@ -3,7 +3,7 @@
 \docType{data}
 \name{genecoord}
 \alias{genecoord}
-\title{genecoord is Gene coordinate data with 3 columns and 5 rows. Column names are GENE, START and END
+\title{genecoord is Gene coordinate data with 3 columns and 5 rows provided with the GARCOM package. Column names are GENE, START and END
 where GENE column contains GENE name, START and END have information
 for gene start and end coordinates respectively.}
 \format{
@@ -13,7 +13,7 @@ An object of class \code{data.frame} with 5 rows and 3 columns.
 genecoord
 }
 \description{
-genecoord is Gene coordinate data with 3 columns and 5 rows. Column names are GENE, START and END
+genecoord is Gene coordinate data with 3 columns and 5 rows provided with the GARCOM package. Column names are GENE, START and END
 where GENE column contains GENE name, START and END have information
 for gene start and end coordinates respectively.
 }
