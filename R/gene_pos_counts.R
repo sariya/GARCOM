@@ -125,14 +125,14 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
     }
     ##if nothing matches then Stop and error out
 
-    dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP ))] ## get columns that intersect 
+    dt_gen_subset<- dt_gen[,.SD,.SDcols=intersect(colnames(dt_gen),unique(snp_withingenes$SNP))] ## get columns that intersect 
     dt_gen_subset[, rowid := dt_gen$IID ] ## assign row names as IIDs
     dt_gen_subset<-data.table::transpose(dt_gen_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
 
     ## we perform inner join. SNPs that are found in input boundaries-annotation as well as .raw data
 
     subsetsnps_genes_lefted_join <- snp_withingenes[dt_gen_subset,on="SNP",nomatch=0] 
-    subsetsnps_genes_lefted_join[, c("START","END","SNP"):=NULL]  
+    subsetsnps_genes_lefted_join[,c("START","END","SNP"):=NULL]  
     
     ##https://stackoverflow.com/a/32277135/2740831
     matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] 

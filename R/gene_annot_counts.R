@@ -119,8 +119,8 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 
     ##https://gist.github.com/nacnudus/ef3b22b79164bbf9c0ebafbf558f22a0
   
-    jointed_genesSNP<-dt_snpgene[dt_gen_filtered, on="SNP", nomatch=0] ## do a left join on the data.table RAW
-    jointed_genesSNP<-jointed_genesSNP[,SNP:=NULL]  ## remove SNP column
+    jointed_genesSNP<-dt_snpgene[dt_gen_filtered,on="SNP", nomatch=0] ## do a left join on the data.table RAW
+    jointed_genesSNP<-jointed_genesSNP[,SNP:=NULL] ## remove SNP column
 
     if(nrow(jointed_genesSNP)==0){
         message("No SNPs match with the annotation")
