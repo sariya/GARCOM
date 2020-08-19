@@ -17,17 +17,17 @@ gene_annot_counts(
 \arguments{
 \item{dt_gen}{recoded genetic data from PLINK}
 
-\item{dt_snpgene}{with SNP and GENE as column names}
+\item{dt_snpgene}{data with SNP and GENE as column names}
 
-\item{keep_indiv}{individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
+\item{keep_indiv}{option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
 
-\item{extract_SNP}{SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
+\item{extract_SNP}{option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
 
-\item{filter_gene}{Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.}
+\item{filter_gene}{option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.}
 
-\item{impute_missing}{default is FALSE.}
+\item{impute_missing}{option to impute missing values. Default is FALSE.}
 
-\item{impute_method}{default method used to impute missing values is mean. mean and median two methods are supported. Function accepts method in quotes: "mean" or "median"}
+\item{impute_method}{option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.

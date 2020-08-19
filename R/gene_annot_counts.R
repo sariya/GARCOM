@@ -9,12 +9,12 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 #' @importFrom dplyr %>%
 #' @importFrom data.table :=
 #' @param dt_gen recoded genetic data from PLINK
-#' @param dt_snpgene with SNP and GENE as column names
-#' @param keep_indiv individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
-#' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
-#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
-#' @param impute_missing default is FALSE. 
-#' @param impute_method default method used to impute missing values is mean. mean and median two methods are supported. Function accepts method in quotes: "mean" or "median"
+#' @param dt_snpgene data with SNP and GENE as column names
+#' @param keep_indiv option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
+#' @param extract_SNP option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
+#' @param filter_gene option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.
+#' @param impute_missing option to impute missing values. Default is FALSE. 
+#' @param impute_method option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"
 #'
 #' @examples
 #'
