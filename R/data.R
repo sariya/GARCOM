@@ -4,6 +4,7 @@
 #' Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the 
 #' PLINK output. Columns followed by PHENOTYPE are SNP names followed by _A, or _C
 #' or _T or _G that is allele. Each SNP column may have 0, 1, 2 or NA value
+#'
 
 recodedgen<-data.frame("FID"=c(paste("FID",seq(1:10),sep="")),
 "IID"=c(paste("IID_sample",seq=(1:10),sep="")),
@@ -19,23 +20,25 @@ rep("0",4))),"SNP1_A"=c(rep(1,1),rep(0,9)),
 "SNP8_C"=c(rep(0,10)), "SNP9_T"=c(rep(0,10)), "SNP10_A"=c(rep(0,10)))
 
 #'
-#' snpgene is sample SNP-Gene data provided with the GARCOM package with 10 rows and two columns. 
+#' snpgene is sample SNP-Gene data provided with the GARCOM package. It has 10 rows and two columns. 
 #' Column names are GENE and SNP, where GENE column contains GENE names and SNP column
 #' contains SNP name that is annotated with the GENE
+#'
+
 snpgene<-data.frame("GENE"=
 c("GENE1","GENE2","GENE3","GENE4",
 "GENE5","GENE1","GENE1","GENE3","GENE2","GENE4"),
 "SNP"=c("SNP1","SNP2","SNP3",
 "SNP4","SNP5","SNP6","SNP7","SNP8","SNP9","SNP1"))
 
-#' snppos is sample SNP-BP data with 2 columns and 10 rows provided with the GARCOM package. Column names are SNP and BP. 
+#' snppos is sample SNP-BP data provided with the GARCOM package. It has 2 columns and 10 rows. Column names are SNP and BP. 
 #' where SNP columns contains SNP names BP column contains position of the SNP
 
 snppos<-data.frame("SNP"=c(paste("SNP",seq(1:10),sep="")), "BP"=c(1100, 89200, 2500, 33000, 5500, 69500, 12000,8800, 23200, 27000))
 
 #'
-#' genecoord is sample gene coordinate data with 3 columns and 5 rows provided with the GARCOM package. Column names are GENE, START and END
-#' where GENE column contains GENE name, START and END have information 
+#' genecoord is sample gene coordinate data provided with the GARCOM package. It has 3 columns and 5 rows. 
+#' Column names are GENE, START and END where GENE column contains GENE name, START and END have information 
 #' for gene start and end coordinates respectively.
 
 genecoord<-data.frame("GENE"=c("GENE1","GENE2","GENE3","GENE4","GENE5"), 
