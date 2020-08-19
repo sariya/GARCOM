@@ -53,7 +53,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' @author Sanjeev Sariya
 #'
 
-    IID<-START<-END<-GENE<-BP<-NULL ## binding the variable locally to the function
+    IID<-START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
     dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
     dt_gene<-data.table::as.data.table(dt_gene)
