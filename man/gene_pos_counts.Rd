@@ -18,19 +18,19 @@ gene_pos_counts(
 \arguments{
 \item{dt_gen}{recoded genetic data from PLINK}
 
-\item{dt_snp}{with SNP BP as column names}
+\item{dt_snp}{data with SNP BP as column names}
 
-\item{dt_gene}{with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
+\item{dt_gene}{data with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
 
-\item{keep_indiv}{individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
+\item{keep_indiv}{option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
 
-\item{extract_SNP}{SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
+\item{extract_SNP}{option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
 
-\item{filter_gene}{Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.}
+\item{filter_gene}{option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.}
 
-\item{impute_missing}{Impute missing values. Default is FALSE.}
+\item{impute_missing}{option to impute missing values. Default is FALSE.}
 
-\item{impute_method}{method to impute. Default method is mean. imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"}
+\item{impute_method}{option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.

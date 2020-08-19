@@ -11,14 +11,15 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' @importFrom data.table rowid
 #' @importFrom data.table .SD
 #' @importFrom data.table :=
+#'
 #' @param dt_gen recoded genetic data from PLINK 
-#' @param dt_gene with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
-#' @param dt_snp with SNP BP as column names
-#' @param keep_indiv individuals to keep. mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
-#' @param extract_SNP SNPs to extract. mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
-#' @param filter_gene Genes to filter in. mutation counts will be provided for genes provided in the list only. Default all genes are used.
-#' @param impute_missing Impute missing values. Default is FALSE. 
-#' @param impute_method method to impute. Default method is mean. imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"
+#' @param dt_gene data with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
+#' @param dt_snp data with SNP BP as column names
+#' @param keep_indiv option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
+#' @param extract_SNP option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
+#' @param filter_gene option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.
+#' @param impute_missing option to impute missing values. Default is FALSE. 
+#' @param impute_method option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median"
 #'
 #' @examples
 #' #Package provides sample data that are loaded with package loading. 
