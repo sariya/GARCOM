@@ -164,7 +164,7 @@ garcom_impute<-function(temp_genetic,temp_impute_method){
     ## https://stackoverflow.com/a/12135122/2740831
     temp_genetic[]<-temp_genetic[,c(7:ncol(temp_genetic)):=lapply(.SD,function(x) format(round(x,2),nsmall=2)), .SDcols=c(7:ncol(temp_genetic))]
 
-    temp_genetic[,(c(seq(from=7,to=ncol(temp_genetic)))) := lapply(.SD,as.numeric),.SDcols = c(seq(from=7,to=ncol(temp_genetic)))] ## convert into numeric. For some weird reason evertything is turned in character class when rounding up
+    temp_genetic[,(c(seq(from=7,to=ncol(temp_genetic)))) := lapply(.SD,as.numeric),.SDcols = c(seq(from=7,to=ncol(temp_genetic)))] ## convert into numeric. For some weird reason everything is turned in character class when rounding up
 
     return(temp_genetic) ##return imputed data
 }
