@@ -43,7 +43,7 @@ test_that("function testing for subsetting",{
 test_that("function testing for impute",{
 
     expect_is(gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,impute_method="median"),'data.table') ##test for median
-    expect_equal( nrow(gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,filter_gene=c("GENE2","GENE1"),impute_method="median")),2) #subset genes and impute using median
+    expect_equal( nrow(gene_annot_counts(recodedgen,snpgene,impute_missing=TRUE,filter_gene=c("GENE2","GENE1"),impute_method="median")),2) ##subset genes and impute using median. check number of rows as 2
  
 })
 ##testing ends
