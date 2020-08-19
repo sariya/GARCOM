@@ -1,9 +1,8 @@
-#' data set prepared for the package
-
-#' recodedgen is genetic data with 10 rows and 16 columns is sample data provided with the GARCOM package.
+#'
+#' recodedgen is sample genetic data provided with the GARCOM package. It has with 10 rows and 16 columns.
 #' Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the 
-#' PLINK output. Columns followed by PHENOTYPE are SNP names followed by _A, or _C
-#' or _T or _G that is allele. Each SNP column may have 0, 1, 2 or NA value
+#' PLINK (recode) output. Columns followed by PHENOTYPE are SNP names which are suffixed with _A, or _C
+#' or _T or _G. Each SNP column may have 0, 1, 2 or NA value. Where NA represents missingness.
 #'
 
 recodedgen<-data.frame("FID"=c(paste("FID",seq(1:10),sep="")),
