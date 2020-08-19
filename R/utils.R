@@ -162,10 +162,9 @@ garcom_impute<-function(temp_genetic,temp_impute_method){
     
     ##round to two decimal places: 0.1234 will become 0.12 only. 0.00 will be 0.00
     ## https://stackoverflow.com/a/12135122/2740831
-
     temp_genetic[]<-temp_genetic[,c(7:ncol(temp_genetic)):=lapply(.SD,function(x) format(round(x,2),nsmall=2)), .SDcols=c(7:ncol(temp_genetic))]
 
-    temp_genetic[,(c(seq(from=7,to=ncol(temp_genetic)))) := lapply(.SD,as.numeric),.SDcols = c(seq(from=7,to=ncol(temp_genetic)))] ## convert into numeric
+    temp_genetic[,(c(seq(from=7,to=ncol(temp_genetic)))) := lapply(.SD,as.numeric),.SDcols = c(seq(from=7,to=ncol(temp_genetic)))] ## convert into numeric. For some weird reason evertything is turned in character class when rounding up
 
     return(temp_genetic) ##return imputed data
 }
