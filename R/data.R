@@ -19,7 +19,7 @@ rep("0",4))),"SNP1_A"=c(rep(1,1),rep(0,9)),
 "SNP8_C"=c(rep(0,10)), "SNP9_T"=c(rep(0,10)), "SNP10_A"=c(rep(0,10)))
 
 #'
-#' snpgene is sample SNP-Gene data provided with the GARCOM package. It has 10 rows and two columns. 
+#' snpgene is sample SNP-Gene data provided with the GARCOM package. It has 10 rows and 2 columns. 
 #' Column names are GENE and SNP, where GENE column contains GENE names and SNP column
 #' contains SNP name that is annotated with the GENE
 #'
