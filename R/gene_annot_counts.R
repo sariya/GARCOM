@@ -6,7 +6,6 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 
 #' @export
 #' @import data.table
-#' @importFrom dplyr %>%
 #' @importFrom data.table :=
 #' @param dt_gen recoded genetic data from PLINK
 #' @param dt_snpgene data with SNP and GENE as column names

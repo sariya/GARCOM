@@ -7,7 +7,6 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 
 #' @export
 #' @import data.table
-#' @importFrom dplyr %>%
 #' @importFrom data.table rowid
 #' @importFrom data.table .SD
 #' @importFrom data.table :=
@@ -121,7 +120,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
     }
     ##if gene sum is zero. Stop and return
 
-    if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP)) )) ){
+    if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP))))){
         stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
     }
     ##if nothing matches then Stop and error out
