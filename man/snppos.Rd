@@ -3,8 +3,7 @@
 \docType{data}
 \name{snppos}
 \alias{snppos}
-\title{snppos is sample SNP-BP data provided with the GARCOM package. It has 2 columns and 10 rows. Column names are SNP and BP.
-where SNP columns contains SNP names BP column contains position of the SNP}
+\title{snppos}
 \format{
 An object of class \code{data.frame} with 10 rows and 2 columns.
 }
@@ -12,6 +11,9 @@ An object of class \code{data.frame} with 10 rows and 2 columns.
 snppos
 }
 \description{
+sample data for SNP coordinates
+}
+\details{
 snppos is sample SNP-BP data provided with the GARCOM package. It has 2 columns and 10 rows. Column names are SNP and BP.
 where SNP columns contains SNP names BP column contains position of the SNP
 }

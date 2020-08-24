@@ -3,10 +3,7 @@
 \docType{data}
 \name{recodedgen}
 \alias{recodedgen}
-\title{recodedgen is sample genetic data provided with the GARCOM package. It has with 10 rows and 16 columns.
-Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the
-PLINK (recode) output. Columns followed by PHENOTYPE are SNP names which are suffixed with _A, or _C
-or _T or _G. Each SNP column may have 0, 1, 2 or NA value. Where NA represents missingness.}
+\title{recodedgen}
 \format{
 An object of class \code{data.frame} with 10 rows and 16 columns.
 }
@@ -14,6 +11,9 @@ An object of class \code{data.frame} with 10 rows and 16 columns.
 recodedgen
 }
 \description{
+sample genetic data
+}
+\details{
 recodedgen is sample genetic data provided with the GARCOM package. It has with 10 rows and 16 columns.
 Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the
 PLINK (recode) output. Columns followed by PHENOTYPE are SNP names which are suffixed with _A, or _C

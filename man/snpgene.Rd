@@ -3,9 +3,7 @@
 \docType{data}
 \name{snpgene}
 \alias{snpgene}
-\title{snpgene is sample SNP-Gene data provided with the GARCOM package. It has 10 rows and 2 columns.
-Column names are GENE and SNP, where GENE column contains GENE names and SNP column
-contains SNP name that is annotated with the GENE}
+\title{snpgene}
 \format{
 An object of class \code{data.frame} with 10 rows and 2 columns.
 }
@@ -13,7 +11,10 @@ An object of class \code{data.frame} with 10 rows and 2 columns.
 snpgene
 }
 \description{
-snpgene is sample SNP-Gene data provided with the GARCOM package. It has 10 rows and 2 columns.
+sample SNP-gene annotation data
+}
+\details{
+snpgene is sample SNP-Gene annotation data provided with the GARCOM package. It has 10 rows and 2 columns.
 Column names are GENE and SNP, where GENE column contains GENE names and SNP column
 contains SNP name that is annotated with the GENE
 }

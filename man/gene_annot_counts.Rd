@@ -4,15 +4,7 @@
 \alias{gene_annot_counts}
 \title{gene annotation counts}
 \usage{
-gene_annot_counts(
-  dt_gen,
-  dt_snpgene,
-  keep_indiv = NULL,
-  extract_SNP = NULL,
-  filter_gene = NULL,
-  impute_missing = FALSE,
-  impute_method = "mean"
-)
+gene_annot_counts(data_genetic,snp_gene)
 }
 \arguments{
 \item{dt_gen}{recoded genetic data from PLINK}
@@ -33,6 +25,9 @@ gene_annot_counts(
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
+Function returns 2D-matrix with allelic counts within gene per individual for annotated SNPs
+}
+\details{
 Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 }
 \examples{
