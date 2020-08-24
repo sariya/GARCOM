@@ -32,3 +32,8 @@ library(GARCOM)
 citation("GARCOM")
 ```
 
+## Dependancies
+```
+data.table
+```
+
