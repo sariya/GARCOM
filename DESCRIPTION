@@ -4,7 +4,7 @@ Title: Gene And Region Counting Of Mutations(GARCOM)
 Version: 0.0.0.9003
 Authors@R: c(person("Sanjeev","Sariya",
            role = c("aut", "cre","cph"),email = "ss5505@cumc.columbia.edu"),person("Giuseppe","Tosto",  role =c("aut","cph")) )
-Description: Methods to compute SNP (Single Nucleotide Polymorphisms) counts per gene per individuals based on gene annotation or genomic BP (base pair) boundaries are provided. The package allows user to provide data in various formats of gene and SNP annotation. 
+Description: Package to compute mutation (or alleles) count per gene per individuals based on gene annotation or genomic base pair boundaries. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
