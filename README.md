@@ -49,3 +49,8 @@ testthat
 ```
 GARCOM welcomes suggestions and improvements. For issues please open on the github
 ```
+
+## Origin
+```
+GARCOM is derived from French word garçom (/ɡaʁ.sɔ̃/); here garcom is ready to serve to obtain desired results for the genetics data 
+```
