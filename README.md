@@ -4,7 +4,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of GARCOM is to provide mutation counts per individual within genetic boundaries (genes). It accepts different data formats
+The goal of GARCOM is to provide mutation counts per individual within genetic boundaries (genes). It accepts different data formats with input file from plink (.raw), 
+gene boundaries, SNP location. 
 
 
 ## Installation
