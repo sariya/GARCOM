@@ -28,6 +28,10 @@ library(GARCOM)
 ## Input data requires output from PLINK --recode flag. plink --bfile input --recode A --out sample_output 
 
 gene_annot_counts(recodedgen,snpgene) #input data: .raw formatted and SNP-gene (two columns)
+
+gene_pos_counts(recodedgen, snppos, genecoord) #input data: .raw formatted, SNP location (two columns) and Gene boundaries (three columns)
+
+##For more examples refer manual
 ```
 ## Citation
 
