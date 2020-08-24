@@ -10,7 +10,6 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' @importFrom data.table rowid
 #' @importFrom data.table .SD
 #' @importFrom data.table :=
-#'
 #' @param dt_gen recoded genetic data from PLINK 
 #' @param dt_gene data with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #' @param dt_snp data with SNP BP as column names
