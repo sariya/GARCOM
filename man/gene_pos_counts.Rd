@@ -4,7 +4,8 @@
 \alias{gene_pos_counts}
 \title{gene position counts}
 \usage{
-gene_pos_counts(data_genetic,SNP_positions,gene_coords)
+gene_pos_counts(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,
+extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
 }
 \arguments{
 \item{dt_gen}{recoded genetic data from PLINK}

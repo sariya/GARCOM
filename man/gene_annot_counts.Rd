@@ -4,7 +4,8 @@
 \alias{gene_annot_counts}
 \title{gene annotation counts}
 \usage{
-gene_annot_counts(data_genetic,snp_gene)
+gene_annot_counts(dt_gen,dt_snpgene,keep_indiv=NULL,
+extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
 }
 \arguments{
 \item{dt_gen}{recoded genetic data from PLINK}
