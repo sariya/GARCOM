@@ -25,7 +25,10 @@ library(GARCOM)
 
 ## Input data requires output from PLINK --recode flag. plink --bfile input --recode A --out sample_output 
 
+```
+## Citation
 
-
+``` r
+citation("GARCOM")
 ```
 
