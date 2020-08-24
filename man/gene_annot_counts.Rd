@@ -5,31 +5,32 @@
 \title{gene annotation counts}
 \usage{
 gene_annot_counts(dt_gen,dt_snpgene,keep_indiv=NULL,
-extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
+extract_SNP=NULL,filter_gene=NULL,
+impute_missing=FALSE,impute_method="mean")
 }
 \arguments{
-\item{dt_gen}{recoded genetic data from PLINK}
+\item{dt_gen}{input genetic data in PLINK format (.raw)}
 
-\item{dt_snpgene}{data with SNP and GENE as column names}
+\item{dt_snpgene}{a dataframe that contains SNP and annotated gene}
 
-\item{keep_indiv}{option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
+\item{keep_indiv}{option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals.}
 
 \item{extract_SNP}{option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
 
-\item{filter_gene}{option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.}
+\item{filter_gene}{option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all}
 
-\item{impute_missing}{option to impute missing values. Default is FALSE.}
+\item{impute_missing}{option to impute missing genotypes. Default is FALSE.}
 
-\item{impute_method}{option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median". Data are rounded to the two decimal places. 0.1234 will become 0.12.}
+\item{impute_method}{option to specify imptuation method. Default method is imputation to the mean. Alternatively Imputation can be carried out by median. Function accepts method in quotes: "mean" or "median". Data are rounded to the second decimal places (e.g. 0.1234 will become 0.12).}
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
-Function returns 2D-matrix with allelic counts within gene per individual for annotated SNPs
+The function returns a matrix with allelic counts per gene per individual for annotated SNPs
 }
 \details{
-Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
+Inputs needed are recoded genetic data formatted in PLINK format (.raw) and SNP-gene annotation data. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 }
 \examples{
 

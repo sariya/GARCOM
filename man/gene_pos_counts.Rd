@@ -4,8 +4,9 @@
 \alias{gene_pos_counts}
 \title{gene position counts}
 \usage{
-gene_pos_counts(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,
-extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
+gene_pos_counts(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,
+extract_SNP=NULL,filter_gene=NULL,
+impute_missing=FALSE,impute_method="mean")
 }
 \arguments{
 \item{dt_gen}{recoded genetic data from PLINK}
@@ -16,9 +17,9 @@ extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
 
 \item{keep_indiv}{option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.}
 
-\item{extract_SNP}{option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
+\item{extract_SNP}{option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default all SNPs are used.}
 
-\item{filter_gene}{option to filter in Genes. Mutation counts will be provided for genes provided in the list only. Default all genes are used.}
+\item{filter_gene}{option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default all genes are used.}
 
 \item{impute_missing}{option to impute missing values. Default is FALSE.}
 
@@ -28,7 +29,7 @@ extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
-Function returns 2D-matrix with allelic counts within gene per individual for SNP and gene coordinates as inputs
+Function returns 2D-matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
 }
 \details{
 Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
