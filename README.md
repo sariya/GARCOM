@@ -18,7 +18,7 @@ install.packages("GARCOM")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a small example which shows you how to use GARCOM:
 
 ``` r
 library(GARCOM)
@@ -27,6 +27,7 @@ library(GARCOM)
 
 ## Input data requires output from PLINK --recode flag. plink --bfile input --recode A --out sample_output 
 
+gene_annot_counts(recodedgen,snpgene) #input data: .raw formatted and SNP-gene (two columns)
 ```
 ## Citation
 
