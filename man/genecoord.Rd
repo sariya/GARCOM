@@ -11,11 +11,11 @@ An object of class \code{data.frame} with 5 rows and 3 columns.
 genecoord
 }
 \description{
-sample data for gene coordinates
+sample data for gene base pair boundaries
 }
 \details{
-genecoord is sample gene coordinate data provided with the GARCOM package. It has 3 columns and 5 rows.
-Column names are GENE, START and END where GENE column contains GENE name, START and END have information
-for gene start and end coordinates respectively.
+genecoord is example data provided with the GARCOM package. It has 3 columns and 5 rows.
+Column names are GENE, START and END where GENE column contains gene name, START and END indicate
+start BP and end BP respectively.
 }
 \keyword{datasets}

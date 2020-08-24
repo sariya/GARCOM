@@ -46,11 +46,11 @@ snppos<-data.frame("SNP"=c(paste("SNP",seq(1:10),sep="")), "BP"=c(1100, 89200, 2
 
 #' @title genecoord 
 #'
-#' @description sample data for gene coordinates
+#' @description sample data for gene base pair boundaries
 #'
-#' @details genecoord is sample gene coordinate data provided with the GARCOM package. It has 3 columns and 5 rows. 
-#' Column names are GENE, START and END where GENE column contains GENE name, START and END have information 
-#' for gene start and end coordinates respectively.
+#' @details genecoord is example data provided with the GARCOM package. It has 3 columns and 5 rows. 
+#' Column names are GENE, START and END where GENE column contains gene name, START and END indicate 
+#' start BP and end BP respectively.
 
 genecoord<-data.frame("GENE"=c("GENE1","GENE2","GENE3","GENE4","GENE5"), 
 "START"=c(1000,2100,5000,40000,23000), 
