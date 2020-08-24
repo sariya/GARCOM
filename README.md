@@ -37,3 +37,12 @@ citation("GARCOM")
 data.table
 ```
 
+## suggests
+```
+testthat
+```
+
+## Issues and suggestions
+```
+GARCOM welcomes suggestions and improvements. For issues please open on the github
+```
