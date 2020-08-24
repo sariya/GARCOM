@@ -1,5 +1,8 @@
+#' @title recodedgen
 #'
-#' recodedgen is sample genetic data provided with the GARCOM package. It has with 10 rows and 16 columns.
+#' @description sample genetic data
+#'
+#' @details recodedgen is sample genetic data provided with the GARCOM package. It has with 10 rows and 16 columns.
 #' Where the first 6 columns are FID, IID, PAT, MAT, SEX and PHENOTYPE which are inherent from the 
 #' PLINK (recode) output. Columns followed by PHENOTYPE are SNP names which are suffixed with _A, or _C
 #' or _T or _G. Each SNP column may have 0, 1, 2 or NA value. Where NA represents missingness.
@@ -18,8 +21,10 @@ rep("0",4))),"SNP1_A"=c(rep(1,1),rep(0,9)),
 "SNP6_G"=c(rep(1,10)),"SNP7_G"=c(rep(0,10)),
 "SNP8_C"=c(rep(0,10)), "SNP9_T"=c(rep(0,10)), "SNP10_A"=c(rep(0,10)))
 
+#' @title snpgene
+#' @description sample SNP-gene annotation data
 #'
-#' snpgene is sample SNP-Gene data provided with the GARCOM package. It has 10 rows and 2 columns. 
+#' @details snpgene is sample SNP-Gene annotation data provided with the GARCOM package. It has 10 rows and 2 columns. 
 #' Column names are GENE and SNP, where GENE column contains GENE names and SNP column
 #' contains SNP name that is annotated with the GENE
 #'
@@ -30,13 +35,20 @@ c("GENE1","GENE2","GENE3","GENE4",
 "SNP"=c("SNP1","SNP2","SNP3",
 "SNP4","SNP5","SNP6","SNP7","SNP8","SNP9","SNP1"))
 
-#' snppos is sample SNP-BP data provided with the GARCOM package. It has 2 columns and 10 rows. Column names are SNP and BP. 
+#' @title snppos
+#'
+#' @description sample data for SNP coordinates
+#'
+#' @details snppos is sample SNP-BP data provided with the GARCOM package. It has 2 columns and 10 rows. Column names are SNP and BP. 
 #' where SNP columns contains SNP names BP column contains position of the SNP
 
 snppos<-data.frame("SNP"=c(paste("SNP",seq(1:10),sep="")), "BP"=c(1100, 89200, 2500, 33000, 5500, 69500, 12000,8800, 23200, 27000))
 
+#' @title genecoord 
 #'
-#' genecoord is sample gene coordinate data provided with the GARCOM package. It has 3 columns and 5 rows. 
+#' @description sample data for gene coordinates
+#'
+#' @details genecoord is sample gene coordinate data provided with the GARCOM package. It has 3 columns and 5 rows. 
 #' Column names are GENE, START and END where GENE column contains GENE name, START and END have information 
 #' for gene start and end coordinates respectively.
 
