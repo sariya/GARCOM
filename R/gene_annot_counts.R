@@ -1,5 +1,8 @@
 #'@title gene annotation counts
 #'@description Function returns 2D-matrix with allelic counts within gene per individual for annotated SNPs
+#'
+#' @usage gene_annot_counts(dt_gen,dt_snpgene,keep_indiv=NULL,
+#' extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean")
 
 gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){
 ##07 10 2020
@@ -15,7 +18,6 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 #' @param impute_missing option to impute missing values. Default is FALSE. 
 #' @param impute_method option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median". Data are rounded to the two decimal places. 0.1234 will become 0.12.
 #'
-#' @usage gene_annot_counts(data_genetic,snp_gene)
 #'
 #' @details Inputs needed are recoded genetic data formatted in PLINK format and SNP-gene annotation data . The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. SNP-gene data has two columns: GENE and SNP names. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 #'
