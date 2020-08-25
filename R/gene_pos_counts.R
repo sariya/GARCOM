@@ -1,5 +1,5 @@
 #'@title gene position counts
-#'@description Function returns 2D-matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
+#'@description Function returns matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
 #'
 #'@details Inputs needed are: recoded genetic data formatted in PLINK format, SNP name with BP (position) and gene name with START and END position. The first six columns of the input genetic data follow standard PLINK .raw format. Column names as FID, IID, PAT, MAT, SEX and PHENOTYPE followed by SNP information as recoded by the PLINK software. The function returns allelic counts per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information). 
 
@@ -17,14 +17,15 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' @importFrom data.table rowid
 #' @importFrom data.table .SD
 #' @importFrom data.table :=
-#' @param dt_gen recoded genetic data from PLINK 
-#' @param dt_gene data with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
-#' @param dt_snp data with SNP BP as column names
-#' @param keep_indiv option to specify individuals to keep. Mutation counts will be provided for individuals provided in the list only. Default all individuals are used.
-#' @param extract_SNP option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default all SNPs are used.
-#' @param filter_gene option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default all genes are used.
-#' @param impute_missing option to impute missing values. Default is FALSE. 
-#' @param impute_method option to specify method to impute. Default method is mean. Imputation for missing values can be done by median instead of mean. Function accepts method in quotes: "mean" or "median". Data are rounded to the two decimal places. 0.1234 will become 0.12.
+#' @param dt_gen a dataframe for genetic data in PLINK foramt (.raw)
+#' @param dt_gene a dataframe for gene boudnaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
+#' @param dt_snp a dataframe for SNP information with SNP BP as column names.
+#' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals provided in the list only. Default is all individuals. 
+#' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.
+#' @param filter_gene an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.
+#' @param impute_missing an option to impute missing genotypes. Default is FALSE. 
+#' @param impute_method an option to specify method to specify imptuation method. Default method is impute to the mean. Alternatively imputation can be carried out by median. Function accepts method in quotes: "mean" or "median". Data are rounded to the second decimal places (e.g. 0.1234 will become 0.12.).
+#'
 #'
 #' @examples
 #' #Package provides sample data that are loaded with package loading. 
