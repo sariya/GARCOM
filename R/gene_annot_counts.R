@@ -1,7 +1,9 @@
 #'@title gene annotation counts
 #'@description The function returns a matrix with allelic counts per gene per individual for annotated SNPs
 #'
-#' @usage null
+#' @usage gene_annot_counts(dt_gen,dt_snpgene,keep_indiv=NULL,
+#' extract_SNP=NULL,filter_gene=NULL,
+#' impute_missing=FALSE,impute_method="mean")
 
 gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){
 ##07 10 2020
@@ -9,12 +11,16 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 #' @export
 #' @import data.table
 #' @importFrom data.table :=
-#' @param dt_gen a dataframe for genetic data in PLINK format (.raw) 
+#' @param dt_gen a dataframe for genetic data that follows PLINK format (.raw) 
 #' @param dt_snpgene a dataframe that contains SNP and annotated gene with SNP and gene as column name
-#' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals.
-#' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.
-#' @param filter_gene an option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all 
+#'
+#' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.
+#'
+#' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used. Provide list of SNPs in a vector.
+#' @param filter_gene an option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all genes. Provide list of genes in a vector.
+#'
 #' @param impute_missing an option to impute missing genotypes. Default is FALSE. 
+#'
 #' @param impute_method an option to specify imptuation method. Default method is imputation to the mean. Alternatively imputation can be carried out by median. Function accepts method in quotes: "mean" or "median". Data are rounded to the second decimal places (e.g. 0.1234 will become 0.12).
 #'
 #'

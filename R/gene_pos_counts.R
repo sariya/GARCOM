@@ -17,13 +17,17 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
 #' @importFrom data.table rowid
 #' @importFrom data.table .SD
 #' @importFrom data.table :=
-#' @param dt_gen a dataframe for genetic data in PLINK foramt (.raw)
-#' @param dt_gene a dataframe for gene boudnaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
+#' @param dt_gen a dataframe for genetic data that follows PLINK format (.raw)
+#'
+#' @param dt_gene a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #' @param dt_snp a dataframe for SNP information with SNP BP as column names.
+#'
 #' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals provided in the list only. Default is all individuals. 
 #' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.
 #' @param filter_gene an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.
+#'
 #' @param impute_missing an option to impute missing genotypes. Default is FALSE. 
+#'
 #' @param impute_method an option to specify method to specify imptuation method. Default method is impute to the mean. Alternatively imputation can be carried out by median. Function accepts method in quotes: "mean" or "median". Data are rounded to the second decimal places (e.g. 0.1234 will become 0.12.).
 #'
 #'

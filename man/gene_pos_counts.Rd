@@ -9,11 +9,11 @@ extract_SNP=NULL,filter_gene=NULL,
 impute_missing=FALSE,impute_method="mean")
 }
 \arguments{
-\item{dt_gen}{a dataframe for genetic data in PLINK foramt (.raw)}
+\item{dt_gen}{a dataframe for genetic data that follows PLINK format (.raw)}
 
 \item{dt_snp}{a dataframe for SNP information with SNP BP as column names.}
 
-\item{dt_gene}{a dataframe for gene boudnaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
+\item{dt_gene}{a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
 
 \item{keep_indiv}{an option to specify individuals to retain. Mutation counts will be provided for individuals provided in the list only. Default is all individuals.}
 

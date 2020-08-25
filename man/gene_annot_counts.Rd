@@ -4,18 +4,20 @@
 \alias{gene_annot_counts}
 \title{gene annotation counts}
 \usage{
-null
+gene_annot_counts(dt_gen,dt_snpgene,keep_indiv=NULL,
+extract_SNP=NULL,filter_gene=NULL,
+impute_missing=FALSE,impute_method="mean")
 }
 \arguments{
-\item{dt_gen}{a dataframe for genetic data in PLINK format (.raw)}
+\item{dt_gen}{a dataframe for genetic data that follows PLINK format (.raw)}
 
 \item{dt_snpgene}{a dataframe that contains SNP and annotated gene with SNP and gene as column name}
 
-\item{keep_indiv}{an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals.}
+\item{keep_indiv}{an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.}
 
-\item{extract_SNP}{an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used.}
+\item{extract_SNP}{an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs provided in the list only. Default all SNPs are used. Provide list of SNPs in a vector.}
 
-\item{filter_gene}{an option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all}
+\item{filter_gene}{an option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all genes. Provide list of genes in a vector.}
 
 \item{impute_missing}{an option to impute missing genotypes. Default is FALSE.}
 
