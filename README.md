@@ -53,7 +53,7 @@ testthat
 
 ## Issues and suggestions
 ```
-GARCOM welcomes suggestions and improvements. For issues please open on the github
+GARCOM welcomes suggestions and improvements. Please open isues on the github for bugs/suggestions.
 ```
 
 ## Origin
