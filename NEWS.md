@@ -11,5 +11,5 @@
 - CRAN checks and changes in code for Ubuntu Linux 16.04 LTS, R-release, GCC
 - Column assign step was taken care for IIDs in gene_annot_counts function
 
-# GARCOM 0.0.0.9000
-Initial library set up
+`GARCOM 0.0.0.9000`
+- Initial library set up
