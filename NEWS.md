@@ -1,5 +1,4 @@
-
-* Added a `NEWS.md` file to track changes to the package.
+* `NEWS.md` file tracks changes made to the package.
 
 `GARCOM 0.0.0.9003 Date Aug 18 2020`
 - Added impute feature to the functions for missingness. We allow mean and median 
