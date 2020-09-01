@@ -1,12 +1,6 @@
-
-##
-##SNP gene annotation based
-##
-##
-
 #' @title gene annotation counts using VCF data
 #' @description Function returns a matrix with allelic (reference) counts per gene per individual for SNP-gene annotation
-#' @details Inputs needed are a vcf data and a data frame of SNP-gene anotation. The function returns allelic counts (reference) per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
+#' @details Inputs needed are a vcf data and a data frame of SNP-gene annotation. The function returns a matrix of allelic counts (reference) per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 #' 
 
 vcf_counts_annot<-function(vcf_data,df_snpgene){
@@ -18,7 +12,11 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     #' @param vcf_data an object of vcfR class
     #' @param df_snpgene a data frame that contains SNP and annotated gene with SNP and gene as column name
     #'
-    #' @return Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
+#'@examples 
+#'\dontrun{
+#' vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene)
+#' }
+    #' @return Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
     #' @author Sanjeev Sariya
     
     
@@ -49,14 +47,14 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
 }
 ## function ends
 
-vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene)
+#vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene)
 
 ##.libPaths(c( "/home/ss5505/libraries_R/R_LIB4.0",.libPaths()))
 
 #Loading required namespace: adegenet
 
-library(vcfR)
-library(data.table)
+#library(vcfR)
+#library(data.table)
 
 
 ##df_snpgene<- data.table(read.table("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/CHR22_snp.gene",header=TRUE))
