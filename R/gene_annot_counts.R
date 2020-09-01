@@ -139,7 +139,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
     }
     ##check if join gives any rows. If not return NULL
 
-    jointed_genesSNP<-jointed_genesSNP[, lapply(.SD, as.numeric), by="GENE"] ## convert into numeric
+    jointed_genesSNP<-jointed_genesSNP[, lapply(.SD,as.numeric), by="GENE"] ## convert into numeric
     ##https://stackoverflow.com/a/62959318/2740831
 
     jointed_genesSNP_filtered<-jointed_genesSNP[,lapply(.SD,sum,na.rm=TRUE),by=GENE] # get sum within a gene
