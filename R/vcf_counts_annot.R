@@ -47,21 +47,6 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
 }
 ## function ends
 
-#vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene)
-
-##.libPaths(c( "/home/ss5505/libraries_R/R_LIB4.0",.libPaths()))
-
-#Loading required namespace: adegenet
-
-#library(vcfR)
-#library(data.table)
-
-
-##df_snpgene<- data.table(read.table("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/CHR22_snp.gene",header=TRUE))
-
-##pubvcf <- vcfR::read.vcfR("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",verbose =TRUE)
-
-##vcf <- vcfR::read.vcfR("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/CHR22_ADC.vcf.gz", verbose=TRUE)
 
 
 
