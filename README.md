@@ -41,9 +41,11 @@ gene_pos_counts(recodedgen, snppos, genecoord)
 citation("GARCOM")
 ```
 
-## Dependencies
+## Dependencies (Imports)
 ```
-data.table
+data.table(>=v1.12.8)
+stats
+vcfR(>=v1.12.0)
 ```
 
 ## suggests
