@@ -2,7 +2,13 @@
 
 export(gene_annot_counts)
 export(gene_pos_counts)
+<<<<<<< HEAD
+export(vcf_counts_annot)
+=======
+export(vcf_counts_SNP_genecoords)
+>>>>>>> feature/vcfcounts_position
 import(data.table)
+import(vcfR)
 importFrom(data.table,":=")
 importFrom(data.table,.SD)
 importFrom(data.table,rowid)
