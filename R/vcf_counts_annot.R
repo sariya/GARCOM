@@ -5,17 +5,17 @@
 
 vcf_counts_annot<-function(vcf_data,df_snpgene){
     ## added on 08 28 2020
-#' @export
+    #' @export
     #' @import vcfR
     #' @import data.table
     #'
     #' @param vcf_data an object of vcfR class
     #' @param df_snpgene a data frame that contains SNP and annotated gene with SNP and gene as column name
     #'
-#'@examples 
-#'\dontrun{
-#' vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene_test)
-#' }
+    #'@examples 
+    #'\dontrun{
+    #' vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene_test)
+    #' }
     #' @return Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
     #' @author Sanjeev Sariya
     
@@ -23,8 +23,8 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     if( class(vcf_data)[1] !="vcfR" ){
         print("VCF annot: vcfR class not found")
     }
-
-df_snpgene<-data.table::as.data.table(df_snpgene)
+    
+    df_snpgene<-data.table::as.data.table(df_snpgene)
     if(all(garcom_check_column_names(df_snpgene,c("SNP","GENE")))){
         ## all good with SNP data
     }else{
@@ -34,9 +34,9 @@ df_snpgene<-data.table::as.data.table(df_snpgene)
     if(FALSE == isTRUE(garcom_check_unique(df_snpgene) )){
         stop("VCF annot: Duplicate SNP-Gene annotation values")
     }
-
+    
     genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
-
+    
     df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE)
     jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted,on=c(SNP="rn"),nomatch=0L]
     jointed_gene_VCFGT<-jointed_gene_VCFGT[,SNP:=NULL] ### remove SNP cols
@@ -57,8 +57,3 @@ df_snpgene<-data.table::as.data.table(df_snpgene)
     
 }
 ## function ends
-
-
-
-
-
