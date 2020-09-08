@@ -28,13 +28,12 @@ df_snpgene<-data.table::as.data.table(df_snpgene)
     if(all(garcom_check_column_names(df_snpgene,c("SNP","GENE")))){
         ## all good with SNP data
     }else{
-        stop("column names don't match for snp-gene data")
+        stop("VCF annot: column names don't match for snp-gene data")
     }
     ## check ends
     if(FALSE == isTRUE(garcom_check_unique(df_snpgene) )){
-        stop("Duplicate SNP-Gene annotation values")
+        stop("VCF annot: Duplicate SNP-Gene annotation values")
     }
-
 
     genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
 
