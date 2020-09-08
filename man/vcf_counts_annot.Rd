@@ -9,7 +9,7 @@ vcf_counts_annot(vcf_data, df_snpgene)
 \arguments{
 \item{vcf_data}{an object of vcfR class}
 
-\item{df_snpgene}{a data frame that contains SNP and annotated gene with SNP and gene as column name}
+\item{df_snpgene}{a data frame that contains SNP and annotated gene with SNP and GENE as column name}
 }
 \value{
 Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
