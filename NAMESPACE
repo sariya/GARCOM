@@ -2,8 +2,8 @@
 
 export(gene_annot_counts)
 export(gene_pos_counts)
-export(vcf_counts_annot)
 export(vcf_counts_SNP_genecoords)
+export(vcf_counts_annot)
 import(data.table)
 import(vcfR)
 importFrom(data.table,":=")
