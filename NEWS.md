@@ -1,4 +1,6 @@
 * `NEWS.md` file tracks changes made to the package.
+`GARCOM 0.0.0.9005 Date Sept 08 2020`
+- Added features for VCF: two new functions vcf_counts_SNP_genecoords 2) vcf_counts_annot
 
 `GARCOM 0.0.0.9003 Date Aug 18 2020`
 - Added impute feature to the functions for missingness. We allow mean and median 
