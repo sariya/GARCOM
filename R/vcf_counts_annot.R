@@ -21,7 +21,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     
     
     if( class(vcf_data)[1] !="vcfR" ){
-        print("vcfR class not found")
+        print("VCF annot: vcfR class not found")
     }
 
     genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
@@ -31,7 +31,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     jointed_gene_VCFGT<-jointed_gene_VCFGT[,SNP:=NULL] ### remove SNP cols
 
     if(nrow(jointed_gene_VCFGT)==0){
-        message("No SNPs match with the annotation")
+        message("VCF annot: No SNPs match with the annotation")
         return(NULL)
     }
 
@@ -40,7 +40,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     jointed_genesSNP_filtered<-jointed_genesSNP_filtered[rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,]
     
     if(nrow(jointed_genesSNP_filtered) == 0){
-        stop("No genes with any reference genotyped in the VCF with supplied SNP gene annotation")
+        stop("VCF annot: No genes with any reference genotyped in the VCF with supplied SNP gene annotation")
     }
     return(jointed_genesSNP_filtered)
     
