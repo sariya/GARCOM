@@ -1,4 +1,4 @@
-
+## added on 09 08 2020
 
 
 ##df_snpgene<- data.table(read.table("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/CHR22_snp.gene",header=TRUE))
@@ -7,6 +7,6 @@
 
 #dt_snp <-
 #dt_gene<-
-##vcf <- vcfR::read.vcfR("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/CHR22_ADC.vcf.gz", verbose=TRUE)
+vcf <- vcfR::read.vcfR("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/CHR22_ADC.vcf.gz", verbose=TRUE)
 
 
