@@ -78,12 +78,12 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
     if(all(garcom_check_column_names(dt_snpgene,c("SNP","GENE")))){
         ## all good with SNP data
     }else{
-        stop("column names don't match for snp-gene data")
+        stop("gene annot: column names don't match for snp-gene data")
     }
     ## check ends
 
     if(FALSE == isTRUE(garcom_check_unique(dt_snpgene) )){
-        stop("Duplicate SNP-Gene annotation values")
+        stop("gene annot: Duplicate SNP-Gene annotation values")
     }
 
     if(is.null(keep_indiv) == FALSE ){
@@ -134,7 +134,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
     jointed_genesSNP<-jointed_genesSNP[,SNP:=NULL] ## remove SNP column
 
     if(nrow(jointed_genesSNP)==0){
-        message("No SNPs match with the annotation")
+        message("gene annot: No SNPs match with the annotation")
         return(NULL)
     }
     ##check if join gives any rows. If not return NULL
@@ -146,7 +146,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
     jointed_genesSNP_filtered<-jointed_genesSNP_filtered[rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,] ##get count minus gene column and keep only genes with sum more than 0. test with a test case here
 
     if(nrow(jointed_genesSNP_filtered)==0){
-        message("All genes with zero count")
+        message("gene annot: All genes with zero count")
         return(NULL)
     }
     else{
