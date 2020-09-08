@@ -1,7 +1,7 @@
 Package: GARCOM
 Type: Package
 Title: Gene And Region Counting Of Mutations(GARCOM)
-Version: 0.0.0.9005
+Version: 1.0.0
 Authors@R: c(person("Sanjeev","Sariya",
            role = c("aut", "cre","cph"),email = "ss5505@cumc.columbia.edu"),person("Giuseppe","Tosto",  role =c("aut","cph")) )
 Description: Package to compute mutation (or alleles) count per gene per individuals based on gene annotation or genomic base pair boundaries. 

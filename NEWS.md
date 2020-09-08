@@ -1,4 +1,7 @@
 * `NEWS.md` file tracks changes made to the package.
+`GARCOM 1.0.0 Date Sept 08 2020`
+- Prepare for major release one
+
 `GARCOM 0.0.0.9005 Date Sept 08 2020`
 - Added features for VCF: two new functions vcf_counts_SNP_genecoords 2) vcf_counts_annot
 
