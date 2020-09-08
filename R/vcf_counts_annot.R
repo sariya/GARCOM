@@ -14,7 +14,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     #'
 #'@examples 
 #'\dontrun{
-#' vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene)
+#' vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene_test)
 #' }
     #' @return Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
     #' @author Sanjeev Sariya
