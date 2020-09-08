@@ -4,7 +4,7 @@
 \alias{vcf_counts_SNP_genecoords}
 \title{VCF gene position counts}
 \usage{
-vcf_counts_SNP_genecoords(vcf_data, df_snppos, df_gene_coords)
+vcf_counts_SNP_genecoords(vcf_data, df_snppos, df_genecoords)
 }
 \arguments{
 \item{vcf_data}{an object of vcfR class}
@@ -18,6 +18,12 @@ Returns an matrix of data.table class as an output with allelic (reference) gene
 }
 \description{
 Function returns a matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
+}
+\examples{
+\dontrun{
+vcf_counts_SNP_genecoords(vcf_data_test,df_snppos_test,df_genecoords_test)
+}
+
 }
 \author{
 Sanjeev Sariya
