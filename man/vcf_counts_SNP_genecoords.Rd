@@ -11,7 +11,7 @@ vcf_counts_SNP_genecoords(vcf_data, df_snppos, df_genecoords)
 
 \item{df_snppos}{a dataframe for SNP information with SNP BP as column names.}
 
-\item{df_gene_coords}{a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
+\item{df_genecoords}{a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
 }
 \value{
 Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
