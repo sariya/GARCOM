@@ -22,7 +22,7 @@ Inputs needed are a vcf data and a data frame of SNP-gene annotation. The functi
 }
 \examples{
 \dontrun{
-vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene)
+vcf_outputannotated<-vcf_counts_annot(vcf,df_snpgene_test)
 }
 }
 \author{
