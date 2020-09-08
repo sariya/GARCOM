@@ -38,7 +38,7 @@ df_snpgene<-data.table::as.data.table(df_snpgene)
     genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
 
     df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE)
-    jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted, on=c(SNP="rn"), nomatch=0L]
+    jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted,on=c(SNP="rn"),nomatch=0L]
     jointed_gene_VCFGT<-jointed_gene_VCFGT[,SNP:=NULL] ### remove SNP cols
 
     if(nrow(jointed_gene_VCFGT)==0){
@@ -46,7 +46,7 @@ df_snpgene<-data.table::as.data.table(df_snpgene)
         return(NULL)
     }
 
-    jointed_gene_VCFGT<-jointed_gene_VCFGT[, lapply(.SD,as.numeric), by="GENE"] ## convert into numeric
+    jointed_gene_VCFGT<-jointed_gene_VCFGT[, lapply(.SD,as.numeric),by="GENE"] ## convert into numeric
     jointed_genesSNP_filtered<-jointed_gene_VCFGT[,lapply(.SD,sum,na.rm=TRUE),by=GENE] # get sum within a gene
     jointed_genesSNP_filtered<-jointed_genesSNP_filtered[rowSums(jointed_genesSNP_filtered[,-c("GENE")]) > 0,]
     
