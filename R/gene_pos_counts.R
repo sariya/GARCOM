@@ -73,24 +73,24 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
     if(all(garcom_check_column_names(dt_gene, c("START","END","GENE")))){
         ## all good with gene data
     }else{
-        stop("column names don't match for gene data")
+        stop("gene pos: column names don't match for gene data")
     }
 
     if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
         ## all good with SNP data
     }else{
-        stop("column names don't match for snp data")
+        stop("gene pos: column names don't match for snp data")
     }
     ##Check ends 
 
     if(FALSE == isTRUE(garcom_check_duplicates(dt_snp,"SNP"))){
 
-        stop("duplicate SNP names")
+        stop("gene pos: duplicate SNP names")
     }
     ##check ends for SNP data.table
     if(FALSE == isTRUE(garcom_check_duplicates(dt_gene,"GENE"))){
 
-        stop("duplicate GENE names")
+        stop("gene pos: duplicate GENE names")
     }
     ##check ends for GENE data.table
 
@@ -127,12 +127,12 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NUL
     snp_withingenes<-dt_snp[dt_gene, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
 
     if(nrow(snp_withingenes) == 0){
-        stop("No snps within any gene boundaries provided")	
+        stop("gene pos: No snps within any gene boundaries provided")	
     }
     ##if gene sum is zero. Stop and return
 
     if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP))))){
-        stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
+        stop("gene pos: No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
     }
     ##if nothing matches then Stop and error out
 
