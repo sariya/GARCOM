@@ -13,7 +13,7 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords){
     #' @param vcf_data an object of vcfR class
     
     #' @param df_snppos a dataframe for SNP information with SNP BP as column names.
-    #' @param df_gene_coords a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
+    #' @param df_genecoords a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
     #'
     #'@examples 
     #'\dontrun{
