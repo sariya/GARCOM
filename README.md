@@ -33,6 +33,12 @@ gene_annot_counts(recodedgen,snpgene)
 #input data: .raw formatted, SNP location (two columns) and Gene boundaries (three columns)
 gene_pos_counts(recodedgen, snppos, genecoord) 
 
+#read VCF file vcf_data <- vcfR::read.vcfR("CHRXX.vcf.gz", verbose=TRUE)
+vcf_counts_annot(vcf_data,df_snpgene) # pass vcf data read and data frame with SNP-gene annotation
+
+#read VCF file vcf_data <- vcfR::read.vcfR("CHRXX.vcf.gz", verbose=TRUE)
+vcf_counts_SNP_genecoords(vcf_data,df_snppos,df_genecoords) # pass vcf data read and data frame SNP position and third with gene coordinates
+
 ##For more examples refer manual
 ```
 ## Citation
