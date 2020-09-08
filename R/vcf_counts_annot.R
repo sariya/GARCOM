@@ -10,7 +10,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     #' @import data.table
     #'
     #' @param vcf_data an object of vcfR class
-    #' @param df_snpgene a data frame that contains SNP and annotated gene with SNP and gene as column name
+    #' @param df_snpgene a data frame that contains SNP and annotated gene with SNP and GENE as column name
     #'
     #'@examples 
     #'\dontrun{

@@ -12,7 +12,7 @@ gene_annot_counts<-function(dt_gen,dt_snpgene,keep_indiv=NULL,extract_SNP=NULL,f
 #' @import data.table
 #' @importFrom data.table :=
 #' @param dt_gen a dataframe for genetic data that follows PLINK format (.raw) 
-#' @param dt_snpgene a dataframe that contains SNP and annotated gene with SNP and gene as column name
+#' @param dt_snpgene a dataframe that contains SNP and annotated gene with SNP and GENE as column name
 #'
 #' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.
 #'
