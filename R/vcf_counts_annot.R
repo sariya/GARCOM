@@ -19,7 +19,6 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     #' @return Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
     #' @author Sanjeev Sariya
     
-    
     if( class(vcf_data)[1] !="vcfR" ){
         print("VCF annot: vcfR class not found")
     }
