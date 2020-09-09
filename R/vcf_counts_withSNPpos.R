@@ -4,7 +4,7 @@
 #'@description Function returns a matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
 #'
 
-vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=NULL){
+vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=NULL,extract_SNP=NULL){
     
     #' @export
     #' @import data.table
@@ -16,6 +16,7 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     #' @param df_snppos a dataframe for SNP information with SNP BP as column names.
     #' @param df_genecoords a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
     #'
+    #' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.
     #'@examples 
     #'\dontrun{
     #' vcf_counts_SNP_genecoords(vcf_data_test,df_snppos_test,df_genecoords_test)
@@ -48,8 +49,26 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
         
     } ## else ends for checking individual sub-setting 
     
-    df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE) #3 use rn later while merging
+    df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE) ## use rn later while merging
+    if(is.null(extract_SNP) == FALSE){
+        
+        extract_SNP<-as.character(extract_SNP)
+        
+        df_genotyped_extracted<-tryCatch({
+            df_genotyped_extracted[rn %in% extract_SNP,]
+            
+        }, warning = function(w) {
+            message(paste("warning vcfcounts SNPgenecoords in subsetting SNPs", w))
+            
+        }, error =function(e) {
+            message(paste("vcf countsSNP genecoords: error subseting SNPs ", e))
+            stop("Exiting vcf counts annot ")
+            
+        } ) 
+    } ## else ends for subseting SNPs 
     
+    ## subsetting based on SNPs ends
+
     snp_withingenes<-df_snppos[df_genecoords, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0]
     
     if(nrow(snp_withingenes) == 0){
