@@ -3,7 +3,7 @@
 #' @details Inputs needed are a vcf data and a data frame of SNP-gene annotation. The function returns a matrix of allelic counts (reference) per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 #' 
 
-vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL){
+vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL,extract_SNP=NULL){
     ## added on 08 28 2020
     #' @export
     #' @import vcfR
@@ -13,7 +13,9 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL){
     #' @param df_snpgene a data frame that contains SNP and annotated gene with SNP and GENE as column name
     #'
     #' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.
-#'
+    #'
+    #' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.
+
     #'@examples 
     #'\dontrun{
     #' vcf_counts_annot(vcf,df_snpgene_test)
@@ -45,7 +47,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL){
             vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE)[,keep_indiv]
             
         }, warning = function(w) {
-            message(paste("warning vcf counts annot ", w))
+            message(paste("warning vcf counts annot in subsetting individuals", w))
             
         }, error =function(e) {
             message(paste(" vcf counts annot: error subsetting individuals ", e))
@@ -55,6 +57,26 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL){
     } ## else ends for subsetting individuals 
     
     df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE)
+    
+    if(is.null(extract_SNP) == FALSE){
+        
+        extract_SNP<-as.character(extract_SNP)
+        
+        df_genotyped_extracted<-tryCatch({
+            df_genotyped_extracted[rn %in% extract_SNP,]
+            
+        }, warning = function(w) {
+            message(paste("warning vcf counts annot in subsetting SNPs", w))
+            
+        }, error =function(e) {
+            message(paste(" vcf counts annot: error subseting SNPs ", e))
+            stop("Exiting vcf counts annot ")
+            
+        } ) 
+    } ## else ends for subseting SNPs 
+    
+    ## subsetting based on SNPs ends
+
     jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted,on=c(SNP="rn"),nomatch=0L]
     jointed_gene_VCFGT<-jointed_gene_VCFGT[,SNP:=NULL] ### remove SNP cols
     

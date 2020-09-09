@@ -4,7 +4,7 @@
 \alias{vcf_counts_annot}
 \title{gene annotation counts using VCF data}
 \usage{
-vcf_counts_annot(vcf_data, df_snpgene, keep_indiv = NULL)
+vcf_counts_annot(vcf_data, df_snpgene, keep_indiv = NULL, extract_SNP = NULL)
 }
 \arguments{
 \item{vcf_data}{an object of vcfR class}
@@ -12,6 +12,8 @@ vcf_counts_annot(vcf_data, df_snpgene, keep_indiv = NULL)
 \item{df_snpgene}{a data frame that contains SNP and annotated gene with SNP and GENE as column name}
 
 \item{keep_indiv}{an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.}
+
+\item{extract_SNP}{an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.}
 }
 \value{
 Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
