@@ -39,6 +39,12 @@ vcf_counts_annot(vcf_data,df_snpgene) # pass vcf data read and data frame with S
 #read VCF file vcf_data <- vcfR::read.vcfR("CHRXX.vcf.gz", verbose=TRUE)
 vcf_counts_SNP_genecoords(vcf_data,df_snppos,df_genecoords) # pass vcf data read and data frame SNP position and third with gene coordinates
 
+#subset individuals 
+vcf_counts_SNP_genecoords(vcf_data,df_snptestpos, df_genecoordstestpos,keep_indiv=c("IID1","IID2"))
+
+ind_select<-c("IID1","IID2") ## store in a vector
+vcf_counts_SNP_genecoords(vcf_data,df_snptestpos, df_genecoordstestpos,keep_indiv=ind_select)
+
 ##For more examples refer manual
 ```
 ## Citation
