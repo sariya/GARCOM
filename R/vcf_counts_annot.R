@@ -3,7 +3,7 @@
 #' @details Inputs needed are a vcf data and a data frame of SNP-gene annotation. The function returns a matrix of allelic counts (reference) per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).
 #' 
 
-vcf_counts_annot<-function(vcf_data,df_snpgene){
+vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL){
     ## added on 08 28 2020
     #' @export
     #' @import vcfR
@@ -12,6 +12,8 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
     #' @param vcf_data an object of vcfR class
     #' @param df_snpgene a data frame that contains SNP and annotated gene with SNP and GENE as column name
     #'
+    #' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.
+#'
     #'@examples 
     #'\dontrun{
     #' vcf_counts_annot(vcf,df_snpgene_test)
@@ -35,12 +37,27 @@ vcf_counts_annot<-function(vcf_data,df_snpgene){
         stop("VCF annot: Duplicate SNP-Gene annotation values")
     }
     
-    genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
+    if(is.null(keep_indiv)==TRUE){
+        
+        genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
+    } else{
+        genotyped_extracted <- tryCatch({
+            vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE)[,keep_indiv]
+            
+        }, warning = function(w) {
+            message(paste("warning vcf counts annot ", w))
+            
+        }, error =function(e) {
+            message(paste(" vcf counts annot: error subsetting individuals ", e))
+            stop("Exiting vcf counts annot ")
+            
+        }) 
+    } ## else ends for subsetting individuals 
     
     df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE)
     jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted,on=c(SNP="rn"),nomatch=0L]
     jointed_gene_VCFGT<-jointed_gene_VCFGT[,SNP:=NULL] ### remove SNP cols
-
+    
     if(nrow(jointed_gene_VCFGT)==0){
         message("VCF annot: No SNPs match with the annotation")
         return(NULL)
