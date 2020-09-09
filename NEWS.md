@@ -1,4 +1,7 @@
 * `NEWS.md` file tracks changes made to the package.
+`GARCOM 1.1.0 Date Sept 09 2020`
+- Minor addition of features with VCF counts: keep_indiv and extract SNPs
+
 `GARCOM 1.0.0 Date Sept 08 2020`
 - Prepare for major release one
 
