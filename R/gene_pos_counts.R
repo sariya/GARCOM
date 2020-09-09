@@ -8,7 +8,7 @@
 #' impute_missing=FALSE,impute_method="mean")
 #'
 
-gene_pos_counts<-function(dt_gen,dt_snp,dt_gene, keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){ 
+gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL,impute_missing=FALSE,impute_method="mean"){ 
 
 ##07 20 2020
 
