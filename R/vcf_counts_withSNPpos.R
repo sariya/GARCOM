@@ -12,7 +12,7 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     
     #' @param vcf_data an object of vcfR class
     #' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.
-
+    
     #' @param df_snppos a dataframe for SNP information with SNP BP as column names.
     #' @param df_genecoords a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
     #'
@@ -27,9 +27,9 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     #'
     
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
-        df_genecoords<-data.table::as.data.table(df_genecoords)
+    df_genecoords<-data.table::as.data.table(df_genecoords)
     df_snppos<-data.table::as.data.table(df_snppos)
-
+    
     if(is.null(keep_indiv)==TRUE){
         genotyped_extracted<-vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE) 
     }else{
@@ -41,17 +41,17 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
             message(paste("warning vcf_counts_SNP_genecoords ", w))
             
         }, error =function(e) {
-            message(paste(" vcf_counts_SNP_genecoords: error subsetting individuals ", e))
-            stop("Exiting vcf_counts_SNP_genecoords ")
+            message(paste(" vcf counts SNP genecoords: error subsetting individuals ", e))
+            stop("Exiting vcf counts SNP genecoords ")
             
         }) 
-           
+        
     } ## else ends for checking individual sub-setting 
-
     
     df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE) #3 use rn later while merging
     
-    snp_withingenes<-df_snppos[df_genecoords, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0] 
+    snp_withingenes<-df_snppos[df_genecoords, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0]
+    
     if(nrow(snp_withingenes) == 0){
         stop("VCF counts SNP pos: No snps within any gene boundaries provided")	
     }
