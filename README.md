@@ -75,11 +75,11 @@ GARCOM welcomes suggestions and improvements. Please open issues on the github f
 
 ## Origin
 ```
-GARCOM is derived from French word garçom (/ɡaʁ.sɔ̃/); 
-here garcom is ready to serve to obtain desired results for the genetics data 
+GARCOM's derived from French word garçom (/ɡaʁ.sɔ̃/) 
+GARCOM is ready to serve and obtain desired results for the genetics data. We hope you enjoy it! 
 ```
-## To-Dos
 
+## To-Dos
 ```
 - Add support for Bgen format
 ```
