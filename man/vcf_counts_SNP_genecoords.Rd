@@ -9,7 +9,8 @@ vcf_counts_SNP_genecoords(
   df_snppos,
   df_genecoords,
   keep_indiv = NULL,
-  extract_SNP = NULL
+  extract_SNP = NULL,
+  filter_gene = NULL
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ vcf_counts_SNP_genecoords(
 \item{keep_indiv}{an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.}
 
 \item{extract_SNP}{an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.}
+
+\item{filter_gene}{an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.}
 }
 \value{
 Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
