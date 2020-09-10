@@ -45,6 +45,9 @@ vcf_counts_SNP_genecoords(vcf_data,df_snptestpos, df_genecoordstestpos,keep_indi
 ind_select<-c("IID1","IID2") ## store in a vector
 vcf_counts_SNP_genecoords(vcf_data,df_snptestpos, df_genecoordstestpos,keep_indiv=ind_select)
 
+## Filter individuals and filter genes for a VCF data
+vcf_counts_SNP_genecoords(vcf_data,df_snptestpos,df_genecoordstestpos,keep_indiv=c("IID1","IID2"),filter_gene="GENE_1") #returns a matrix of data.table class
+
 ##For more examples refer manual
 ```
 ## Citation
