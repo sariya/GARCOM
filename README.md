@@ -78,6 +78,12 @@ GARCOM welcomes suggestions and improvements. Please open issues on the github f
 GARCOM is derived from French word garçom (/ɡaʁ.sɔ̃/); 
 here garcom is ready to serve to obtain desired results for the genetics data 
 ```
+## To-Dos
+
+```
+- Add support for Bgen format
+```
+
 ## Version
 ```
 Currently v1.2.0
