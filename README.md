@@ -82,6 +82,7 @@ GARCOM is ready to serve and obtain desired results for the genetics data. We ho
 ## To-Dos
 ```
 - Add support for Bgen format
+- Add support for functional annotation (synonymous, non synonymous, etc.) in the VCF data
 ```
 
 ## Version
