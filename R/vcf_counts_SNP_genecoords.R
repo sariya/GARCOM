@@ -4,7 +4,7 @@
 #'@description Function returns a matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
 #'
 
-vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=NULL,extract_SNP=NULL){
+vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=NULL,extract_SNP=NULL,filter_gene=NULL){
     
     #' @export
     #' @import data.table
@@ -22,6 +22,8 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     #' vcf_counts_SNP_genecoords(vcf_data_test,df_snppos_test,df_genecoords_test)
     #' }
     #'
+#' @param filter_gene an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.
+
     #' @return Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
     #'
     #' @author Sanjeev Sariya
