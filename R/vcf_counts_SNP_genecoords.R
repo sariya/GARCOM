@@ -29,7 +29,7 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     #' @author Sanjeev Sariya
     #'
     
-    START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
+    SNP<-START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     df_genecoords<-data.table::as.data.table(df_genecoords)
     df_snppos<-data.table::as.data.table(df_snppos)
     
@@ -51,13 +51,13 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
         
     } ## else ends for checking individual sub-setting 
     
-    df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE) ## use rn later while merging
+    df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames="SNP") ## assign row names as SNP to perform a join
     if(is.null(extract_SNP) == FALSE){
         
         extract_SNP<-as.character(extract_SNP)
         
         df_genotyped_extracted<-tryCatch({
-            df_genotyped_extracted[rn %in% extract_SNP,]
+            df_genotyped_extracted[SNP %in% extract_SNP,]
             
         }, warning = function(w) {
             message(paste("warning vcfcounts SNPgenecoords in subsetting SNPs", w))
@@ -72,7 +72,7 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
 
     if(is.null(filter_gene) == FALSE){
         filter_gene<-as.character(filter_gene) ## turn into character
-        df_genecoords<-garcom_filter_gene(df_genecoords,filter_gene) ##filter SNP-gene annotation based on Gene list
+        df_genecoords<-garcom_filter_gene(df_genecoords,filter_gene) ##filter genes based on Gene list vector
     }
     ##subsetting ends for gene filtering
     
@@ -82,12 +82,12 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
         stop("VCF counts SNP pos: No snps within any gene boundaries provided")	
     }
     
-    if(isFALSE( (any( (df_genotyped_extracted$rn) %in% unique(snp_withingenes$SNP))))){
+    if(isFALSE( (any( (df_genotyped_extracted$SNP) %in% unique(snp_withingenes$SNP))))){
         stop("VCF counts SNP pos: No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
     }
     ## initial checks end
     
-    jointed_gene_VCFGT<-snp_withingenes[df_genotyped_extracted, on=c(SNP="rn"), nomatch=0L]
+    jointed_gene_VCFGT<-snp_withingenes[df_genotyped_extracted, on=c(SNP="SNP"),nomatch=0L]
     jointed_gene_VCFGT[,c("START","END","SNP"):=NULL]  
     
     ##https://stackoverflow.com/a/32277135/2740831
