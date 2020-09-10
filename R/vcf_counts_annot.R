@@ -60,14 +60,14 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL,extract_SNP=NULL,
         }) 
     } ## else ends for subsetting individuals 
     
-    df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames=TRUE)
+    df_genotyped_extracted<-data.table::data.table(genotyped_extracted,keep.rownames="SNP") ## assign row names as SNP to perform a join
     
     if(is.null(extract_SNP) == FALSE){
         
         extract_SNP<-as.character(extract_SNP)
         
         df_genotyped_extracted<-tryCatch({
-            df_genotyped_extracted[rn %in% extract_SNP,]
+            df_genotyped_extracted[SNP %in% extract_SNP,]
             
         }, warning = function(w) {
             message(paste("warning vcf counts annot in subsetting SNPs", w))
@@ -87,7 +87,7 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL,extract_SNP=NULL,
     }
     ##sub-setting ends for gene filter
     
-    jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted,on=c(SNP="rn"),nomatch=0L]
+    jointed_gene_VCFGT<-df_snpgene[df_genotyped_extracted,on=c(SNP="SNP"),nomatch=0L]
     jointed_gene_VCFGT<-jointed_gene_VCFGT[,SNP:=NULL] ### remove SNP cols
     
     if(nrow(jointed_gene_VCFGT)==0){
