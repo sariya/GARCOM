@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GARCOM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -115,7 +115,13 @@
     <p>Function returns a matrix with allelic (reference) counts per gene per individual for SNP-gene annotation</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vcf_counts_annot</span>(<span class='no'>vcf_data</span>, <span class='no'>df_snpgene</span>)</pre>
+    <pre class="usage"><span class='fu'>vcf_counts_annot</span>(
+  <span class='no'>vcf_data</span>,
+  <span class='no'>df_snpgene</span>,
+  <span class='kw'>keep_indiv</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>extract_SNP</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>filter_gene</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,7 +132,19 @@
     </tr>
     <tr>
       <th>df_snpgene</th>
-      <td><p>a data frame that contains SNP and annotated gene with SNP and gene as column name</p></td>
+      <td><p>a data frame that contains SNP and annotated gene with SNP and GENE as column name</p></td>
+    </tr>
+    <tr>
+      <th>keep_indiv</th>
+      <td><p>an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.</p></td>
+    </tr>
+    <tr>
+      <th>extract_SNP</th>
+      <td><p>an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.</p></td>
+    </tr>
+    <tr>
+      <th>filter_gene</th>
+      <td><p>an option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all genes. Provide list of genes in a vector.</p></td>
     </tr>
     </table>
 
@@ -139,7 +157,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>vcf_outputannotated</span><span class='kw'>&lt;-</span><span class='fu'>vcf_counts_annot</span>(<span class='no'>vcf</span>,<span class='no'>df_snpgene_test</span>)
+<span class='fu'>vcf_counts_annot</span>(<span class='no'>vcf</span>,<span class='no'>df_snpgene_test</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

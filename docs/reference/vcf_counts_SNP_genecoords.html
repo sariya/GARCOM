@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">GARCOM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -115,7 +115,14 @@
     <p>Function returns a matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vcf_counts_SNP_genecoords</span>(<span class='no'>vcf_data</span>, <span class='no'>df_snppos</span>, <span class='no'>df_genecoords</span>)</pre>
+    <pre class="usage"><span class='fu'>vcf_counts_SNP_genecoords</span>(
+  <span class='no'>vcf_data</span>,
+  <span class='no'>df_snppos</span>,
+  <span class='no'>df_genecoords</span>,
+  <span class='kw'>keep_indiv</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>extract_SNP</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>filter_gene</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,6 +138,18 @@
     <tr>
       <th>df_genecoords</th>
       <td><p>a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names</p></td>
+    </tr>
+    <tr>
+      <th>keep_indiv</th>
+      <td><p>an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.</p></td>
+    </tr>
+    <tr>
+      <th>extract_SNP</th>
+      <td><p>an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.</p></td>
+    </tr>
+    <tr>
+      <th>filter_gene</th>
+      <td><p>an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.</p></td>
     </tr>
     </table>
 

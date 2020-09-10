@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">GARCOM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
 <a href="#garcom" class="anchor"></a>GARCOM</h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The goal of GARCOM is to provide mutation counts per individual within genetic boundaries (genes). It accepts different data formats with input file from <a href="https://www.cog-genomics.org/plink/1.9/index">plink</a> (.raw), gene boundaries, SNP location.</p>
+<p>The goal of GARCOM is to provide mutation counts per individual within genetic boundaries (genes). It accepts different data formats with input file from <a href="https://www.cog-genomics.org/plink/1.9/index">plink</a> (.raw), gene boundaries, SNP location. It also accepts <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file format. The vcf file is assumed to be pVCF, that is where all samples are merged/combined.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -90,6 +90,18 @@
 <span class="co">#input data: .raw formatted, SNP location (two columns) and Gene boundaries (three columns)</span>
 <span class="fu"><a href="reference/gene_pos_counts.html">gene_pos_counts</a></span>(<span class="no">recodedgen</span>, <span class="no">snppos</span>, <span class="no">genecoord</span>)
 
+<span class="co">#read VCF file vcf_data &lt;- vcfR::read.vcfR("CHRXX.vcf.gz", verbose=TRUE)</span>
+<span class="fu"><a href="reference/vcf_counts_annot.html">vcf_counts_annot</a></span>(<span class="no">vcf_data</span>,<span class="no">df_snpgene</span>) <span class="co"># pass vcf data read and data frame with SNP-gene annotation</span>
+
+<span class="co">#read VCF file vcf_data &lt;- vcfR::read.vcfR("CHRXX.vcf.gz", verbose=TRUE)</span>
+<span class="fu"><a href="reference/vcf_counts_SNP_genecoords.html">vcf_counts_SNP_genecoords</a></span>(<span class="no">vcf_data</span>,<span class="no">df_snppos</span>,<span class="no">df_genecoords</span>) <span class="co"># pass vcf data read and data frame SNP position and third with gene coordinates</span>
+
+<span class="co">#subset individuals </span>
+<span class="fu"><a href="reference/vcf_counts_SNP_genecoords.html">vcf_counts_SNP_genecoords</a></span>(<span class="no">vcf_data</span>,<span class="no">df_snptestpos</span>, <span class="no">df_genecoordstestpos</span>,<span class="kw">keep_indiv</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"IID1"</span>,<span class="st">"IID2"</span>))
+
+<span class="no">ind_select</span><span class="kw">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"IID1"</span>,<span class="st">"IID2"</span>) <span class="co">## store in a vector</span>
+<span class="fu"><a href="reference/vcf_counts_SNP_genecoords.html">vcf_counts_SNP_genecoords</a></span>(<span class="no">vcf_data</span>,<span class="no">df_snptestpos</span>, <span class="no">df_genecoordstestpos</span>,<span class="kw">keep_indiv</span><span class="kw">=</span><span class="no">ind_select</span>)
+
 <span class="co">##For more examples refer manual</span></pre></div>
 </div>
 <div id="citation" class="section level2">
@@ -97,10 +109,12 @@
 <a href="#citation" class="anchor"></a>Citation</h2>
 <div class="sourceCode"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"GARCOM"</span>)</pre></div>
 </div>
-<div id="dependencies" class="section level2">
+<div id="dependencies-imports" class="section level2">
 <h2 class="hasAnchor">
-<a href="#dependencies" class="anchor"></a>Dependencies</h2>
-<pre><code>data.table</code></pre>
+<a href="#dependencies-imports" class="anchor"></a>Dependencies (Imports)</h2>
+<pre><code>data.table(&gt;=v1.12.8)
+stats
+vcfR(&gt;=v1.12.0)</code></pre>
 </div>
 <div id="suggests" class="section level2">
 <h2 class="hasAnchor">
@@ -117,6 +131,11 @@
 <a href="#origin" class="anchor"></a>Origin</h2>
 <pre><code>GARCOM is derived from French word garçom (/ɡaʁ.sɔ̃/); 
 here garcom is ready to serve to obtain desired results for the genetics data </code></pre>
+</div>
+<div id="version" class="section level2">
+<h2 class="hasAnchor">
+<a href="#version" class="anchor"></a>Version</h2>
+<pre><code>Currently v1.1.0</code></pre>
 </div>
 </div>
   </div>
