@@ -103,4 +103,3 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     
 } 
 ## function ends
-
