@@ -77,5 +77,5 @@ here garcom is ready to serve to obtain desired results for the genetics data
 ```
 ## Version
 ```
-Currently v1.1.0
+Currently v1.2.0
 ```
