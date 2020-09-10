@@ -1,4 +1,5 @@
 * `NEWS.md` file tracks changes made to the package.
+
 `GARCOM 1.2.0 Date Sept 09 2020`
 - Minor addition of features with VCF counts: filter genes
 
