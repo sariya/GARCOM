@@ -68,9 +68,14 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
             
         } ) 
     } ## else ends for subseting SNPs 
-    
     ## subsetting based on SNPs ends
 
+    if(is.null(filter_gene) == FALSE){
+        filter_gene<-as.character(filter_gene) ## turn into character
+        df_genecoords<-garcom_filter_gene(df_genecoords,filter_gene) ##filter SNP-gene annotation based on Gene list
+    }
+    ##subsetting ends for gene filtering
+    
     snp_withingenes<-df_snppos[df_genecoords, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0]
     
     if(nrow(snp_withingenes) == 0){
