@@ -1,9 +1,13 @@
-#'@title plink gene counts using SNP coords
+#'@title plink gene counts using SNP coords and gene boundaries
 #'
 #'@description Function returns matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs for PLINK (.bed) file format
 #'
 #'@details PLINK (.bed) file will be read
 #'
+#' @usage plink_count_snppos(plink_file,genecoord_dt,
+#' snp_pos_dt,
+#' snp_index,individuals_index)
+
 plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index,individuals_index){
 
 #' @export
@@ -24,6 +28,14 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index,indivi
 #'
 #' @param individuals_index a vector of integer that specifies individuals to select. 
 #'
+    #' @examples 
+    #' \dontrun{
+    #' plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_filter,individuals_select)
+    #' }
+
+#' @author Sanjeev Sariya
+
+START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
 
 plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile = tempfile(), ind.col=snp_index, ind.row=individuals_index)
 
