@@ -2,13 +2,13 @@
 
 export(gene_annot_counts)
 export(gene_pos_counts)
-<<<<<<< HEAD
-export(vcf_counts_annot)
-=======
+export(plink_count_snppos)
 export(vcf_counts_SNP_genecoords)
->>>>>>> feature/vcfcounts_position
+export(vcf_counts_annot)
 import(data.table)
 import(vcfR)
+importFrom(bigsnpr,snp_attach)
+importFrom(bigsnpr,snp_readBed2)
 importFrom(data.table,":=")
 importFrom(data.table,.SD)
 importFrom(data.table,rowid)
