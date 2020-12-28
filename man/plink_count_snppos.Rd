@@ -2,15 +2,11 @@
 % Please edit documentation in R/plink_count_snppos.R
 \name{plink_count_snppos}
 \alias{plink_count_snppos}
-\title{plink gene counts using SNP coords}
+\title{plink gene counts using SNP coords and gene boundaries}
 \usage{
-plink_count_snppos(
-  plink_file,
-  genecoord_dt,
-  snp_pos_dt,
-  snp_index,
-  individuals_index
-)
+plink_count_snppos(plink_file,genecoord_dt,
+snp_pos_dt,
+snp_index,individuals_index)
 }
 \arguments{
 \item{plink_file}{plink .bed file with path}
@@ -28,4 +24,12 @@ Function returns matrix with allelic counts per gene per individual for SNP and 
 }
 \details{
 PLINK (.bed) file will be read
+}
+\examples{
+\dontrun{
+plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_filter,individuals_select)
+}
+}
+\author{
+Sanjeev Sariya
 }
