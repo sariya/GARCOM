@@ -37,7 +37,7 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index,indivi
 
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile = tempfile(), ind.col=snp_index, ind.row=individuals_index)
+    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index, ind.row=individuals_index)
     
     ## Loading the data from backing files
     data_plink <- bigsnpr::snp_attach(plink_rds) ## added on 12 23 2020
