@@ -29,6 +29,7 @@ PLINK (.bed) file will be read
 \dontrun{
 plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_filter,individuals_select)
 }
+
 }
 \author{
 Sanjeev Sariya
