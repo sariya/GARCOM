@@ -17,7 +17,7 @@ snp_index,individuals_index)
 
 \item{snp_index}{a vector of integer that specifies SNPs to read.}
 
-\item{individuals_index}{a vector of integer that specifies individuals to select.}
+\item{individual_index}{a vector of integer that specifies individuals to select.}
 }
 \description{
 Function returns matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs for PLINK (.bed) file format

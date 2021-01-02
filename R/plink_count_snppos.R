@@ -8,7 +8,7 @@
 #' snp_pos_dt,
 #' snp_index,individuals_index)
 
-plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index,individuals_index){
+plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,individual_index=NULL){
 
 #' @export
 #'
@@ -26,7 +26,7 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index,indivi
 #'
 #' @param snp_index a vector of integer that specifies SNPs to read.
 #'
-#' @param individuals_index a vector of integer that specifies individuals to select. 
+#' @param individual_index a vector of integer that specifies individuals to select. 
 #'
 #' @examples 
 #' \dontrun{
@@ -36,16 +36,27 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index,indivi
 #' @author Sanjeev Sariya
 
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
+    plink_rds <-NULL
     
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index, ind.row=individuals_index)
-    
+if(individual_index !=NULL  & snp_index!=NULL ){
+    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
+
+}
+if(individual_index !=NULL  & snp_index==NULL ){
+    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
+
+}    
+if(individual_index ==NULL  & snp_index==NULL ){
+    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile())
+}    
+
     ## Loading the data from backing files
     data_plink <- bigsnpr::snp_attach(plink_rds) ## added on 12 23 2020
     
     plink_snp_information_dt<- as.data.table(data_plink$map)
     plink_fam_information<-as.data.table(data_plink$fam)
     
-    plink_genotype_dt<-  as.data.table(data_plink$genotypes[] )
+    plink_genotype_dt<- as.data.table(data_plink$genotypes[])
     colnames(plink_genotype_dt) <-plink_snp_information_dt$marker.ID
     cat("Genotypes have been loaded from plink file\n")
     
