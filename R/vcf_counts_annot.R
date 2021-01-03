@@ -51,10 +51,10 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL,extract_SNP=NULL,
             vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE)[,keep_indiv]
             
         }, warning = function(w) {
-            message(paste("warning vcf counts annot in subsetting individuals", w))
+            message(paste("warning vcf counts annot in subsetting individuals",w))
             
         }, error =function(e) {
-            message(paste(" vcf counts annot: error subsetting individuals ", e))
+            message(paste(" vcf counts annot: error subsetting individuals ",e))
             stop("Exiting vcf counts annot ")
             
         }) 
@@ -70,10 +70,10 @@ vcf_counts_annot<-function(vcf_data,df_snpgene,keep_indiv=NULL,extract_SNP=NULL,
             df_genotyped_extracted[SNP %in% extract_SNP,]
             
         }, warning = function(w) {
-            message(paste("warning vcf counts annot in subsetting SNPs", w))
+            message(paste("warning vcf counts annot in subsetting SNPs",w))
             
         }, error =function(e) {
-            message(paste(" vcf counts annot: error subseting SNPs ", e))
+            message(paste(" vcf counts annot: error subseting SNPs ",e))
             stop("Exiting vcf counts annot ")
             
         } ) 

@@ -42,10 +42,10 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL
 #' data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
 #' #10 SNPs with genomic location
 #'
-#' gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+#' gene_pos_counts(recodedgen, snppos,genecoord) #run the function
 #'
 #' #subset individuals
-#' gene_pos_counts(recodedgen, snppos, genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
+#' gene_pos_counts(recodedgen,snppos,genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
 #'
 #' #subset genes
 #' gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2")) 
@@ -96,10 +96,10 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL
     #' data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
     #' #10 SNPs with genomic location
     #'
-    #' gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+    #' gene_pos_counts(recodedgen,snppos,genecoord) #run the function
     #'
     #' #subset individuals
-    #' gene_pos_counts(recodedgen, snppos, genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
+    #' gene_pos_counts(recodedgen,snppos,genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
     #'
     #' #subset genes
     #' gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2")) 
@@ -148,7 +148,7 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL
     }
     ##check ends for GENE data.table
 
-    if(is.null(keep_indiv) == FALSE ){
+    if(is.null(keep_indiv) == FALSE){
         keep_indiv<-as.character(keep_indiv) ## convert them into character
         dt_gen<-garcom_subsetIIDs(dt_gen,keep_indiv) ## it returned a sub-setted data with iids of interest
 

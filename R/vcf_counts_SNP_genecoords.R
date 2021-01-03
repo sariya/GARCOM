@@ -41,10 +41,10 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
             vcfR::extract.gt(vcf_data,element = "GT",as.numeric=TRUE,convertNA=TRUE)[,keep_indiv]
             
         }, warning = function(w) {
-            message(paste("warning vcf_counts_SNP_genecoords ", w))
+            message(paste("warning vcf_counts_SNP_genecoords ",w))
             
         }, error =function(e) {
-            message(paste(" vcf counts SNP genecoords: error subsetting individuals ", e))
+            message(paste(" vcf counts SNP genecoords: error subsetting individuals ",e))
             stop("Exiting vcf counts SNP genecoords ")
             
         }) 
@@ -59,11 +59,11 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
         df_genotyped_extracted<-tryCatch({
             df_genotyped_extracted[SNP %in% extract_SNP,]
             
-        }, warning = function(w) {
-            message(paste("warning vcfcounts SNPgenecoords in subsetting SNPs", w))
+        }, warning = function(w){
+            message(paste("warning vcfcounts SNPgenecoords in subsetting SNPs",w))
             
-        }, error =function(e) {
-            message(paste("vcf countsSNP genecoords: error subseting SNPs ", e))
+        }, error =function(e){
+            message(paste("vcf countsSNP genecoords: error subseting SNPs ",e))
             stop("Exiting vcf counts annot ")
             
         } ) 
@@ -76,9 +76,9 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     }
     ##subsetting ends for gene filtering
     
-    snp_withingenes<-df_snppos[df_genecoords, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0]
+    snp_withingenes<-df_snppos[df_genecoords,c("SNP","GENE","START","END"),on=list(BP>=START,BP<=END), nomatch=0]
     
-    if(nrow(snp_withingenes) == 0){
+    if(nrow(snp_withingenes)== 0){
         stop("VCF counts SNP pos: No snps within any gene boundaries provided")	
     }
     
@@ -87,7 +87,7 @@ vcf_counts_SNP_genecoords<-function(vcf_data,df_snppos,df_genecoords,keep_indiv=
     }
     ## initial checks end
     
-    jointed_gene_VCFGT<-snp_withingenes[df_genotyped_extracted, on=c(SNP="SNP"),nomatch=0L]
+    jointed_gene_VCFGT<-snp_withingenes[df_genotyped_extracted,on=c(SNP="SNP"),nomatch=0L]
     jointed_gene_VCFGT[,c("START","END","SNP"):=NULL]  
     
     ##https://stackoverflow.com/a/32277135/2740831
