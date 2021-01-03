@@ -27,6 +27,8 @@ impute_missing=FALSE,impute_method="mean")
 }
 \value{
 Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
+
+Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
 }
 \description{
 Function returns matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs
@@ -45,10 +47,37 @@ data(genecoord) #gene coordinates with START, END, CHR and GENE names.
 data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
 #10 SNPs with genomic location
 
-gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+gene_pos_counts(recodedgen, snppos,genecoord) #run the function
 
 #subset individuals
-gene_pos_counts(recodedgen, snppos, genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
+gene_pos_counts(recodedgen,snppos,genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
+
+#subset genes
+gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2")) 
+
+#subset genes and individual iids
+gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2"),
+keep_indiv=c("IID_sample10","IID_sample4")) 
+
+##impute by mean
+gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="mean")
+
+#end not RUN
+
+#Package provides sample data that are loaded with package loading. 
+#not RUN
+data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
+
+data(genecoord) #gene coordinates with START, END, CHR and GENE names. 
+#Five genes with start and end genomic coordinates
+
+data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
+#10 SNPs with genomic location
+
+gene_pos_counts(recodedgen,snppos,genecoord) #run the function
+
+#subset individuals
+gene_pos_counts(recodedgen,snppos,genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
 
 #subset genes
 gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2")) 
@@ -64,5 +93,7 @@ gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="m
 
 }
 \author{
+Sanjeev Sariya
+
 Sanjeev Sariya
 }
