@@ -15,9 +15,9 @@ snp_index,individuals_index)
 
 \item{snp_pos_dt}{a dataframe for SNP information with SNP BP as column names.}
 
-\item{snp_index}{a vector of integer that specifies SNPs to read.}
+\item{snp_index}{a vector of integer that specifies SNPs to read. Default all SNPs will be read.}
 
-\item{individual_index}{a vector of integer that specifies individuals to select.}
+\item{individual_index}{a vector of integer that specifies individuals to select. Default all individuals will be read.}
 }
 \description{
 Function returns matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs for PLINK (.bed) file format
@@ -27,7 +27,7 @@ PLINK (.bed) file will be read
 }
 \examples{
 \dontrun{
-plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_filter,individuals_select)
+plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_index,individual_select)
 }
 
 }
