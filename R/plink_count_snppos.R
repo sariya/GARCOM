@@ -37,6 +37,32 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
 #'
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     plink_rds <-NULL
+genecoord_dt <- data.table::as.data.table(genecoord_dt)
+snp_pos_dt <-data.table::as.data.table(snp_pos_dt)
+
+    if(all(garcom_check_column_names(genecoord_dt, c("START","END","GENE")))){
+        ## all good with gene data
+    }else{
+        stop("column names don't match for gene data")
+    }
+
+    if(all(garcom_check_column_names(snp_pos_dt, c("SNP","BP")))){
+        ## all good with SNP data
+    }else{
+        stop("column names don't match for snp data")
+    }
+    ##Check ends 
+
+    if(FALSE == isTRUE(garcom_check_duplicates(snp_pos_dt,"SNP"))){
+
+        stop("duplicate SNP names")
+    }
+    ##check ends for SNP data.table
+    if(FALSE == isTRUE(garcom_check_duplicates(genecoord_dt,"GENE"))){
+
+        stop("duplicate GENE names")
+    }
+    ##check ends for GENE data.table
 
 if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE ) ){
 cat("User provided snp and individuals to select\n")
