@@ -40,13 +40,13 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
     genecoord_dt <- data.table::as.data.table(genecoord_dt)
     snp_pos_dt <-data.table::as.data.table(snp_pos_dt)
     
-    if(all(garcom_check_column_names(genecoord_dt, c("START","END","GENE")))){
+    if(all(garcom_check_column_names(genecoord_dt,c("START","END","GENE")))){
         ## all good with gene data
     }else{
         stop("column names don't match for gene data")
     }
     
-    if(all(garcom_check_column_names(snp_pos_dt, c("SNP","BP")))){
+    if(all(garcom_check_column_names(snp_pos_dt,c("SNP","BP")))){
         ## all good with SNP data
     }else{
         stop("column names don't match for snp data")
@@ -64,12 +64,12 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
     }
     ##check ends for GENE data.table
 
-    if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE ) ){
+    if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE) ){
         cat("User provided snp and individuals to select\n")
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
         
     }
-    if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==FALSE ) ){
+    if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==FALSE) ){
         cat("User provided snp  to select\n")
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index)
     }
@@ -125,7 +125,6 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
     else{
         return(NULL) ## if nothing is left after gene >0 
     }
-    
     
 }
 ## function ends
