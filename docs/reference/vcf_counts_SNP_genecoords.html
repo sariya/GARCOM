@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>gene annotation counts using VCF data — vcf_counts_annot • GARCOM</title>
+<title>VCF gene position counts — vcf_counts_SNP_genecoords • GARCOM</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="gene annotation counts using VCF data — vcf_counts_annot" />
-<meta property="og:description" content="Function returns a matrix with allelic (reference) counts per gene per individual for SNP-gene annotation" />
+<meta property="og:title" content="VCF gene position counts — vcf_counts_SNP_genecoords" />
+<meta property="og:description" content="Function returns a matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs" />
 
 
 
@@ -106,18 +106,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>gene annotation counts using VCF data</h1>
+    <h1>VCF gene position counts</h1>
     
-    <div class="hidden name"><code>vcf_counts_annot.Rd</code></div>
+    <div class="hidden name"><code>vcf_counts_SNP_genecoords.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function returns a matrix with allelic (reference) counts per gene per individual for SNP-gene annotation</p>
+    <p>Function returns a matrix with allelic counts per gene per individual for SNP and gene coordinates as inputs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vcf_counts_annot</span>(
+    <pre class="usage"><span class='fu'>vcf_counts_SNP_genecoords</span>(
   <span class='no'>vcf_data</span>,
-  <span class='no'>df_snpgene</span>,
+  <span class='no'>df_snppos</span>,
+  <span class='no'>df_genecoords</span>,
   <span class='kw'>keep_indiv</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>extract_SNP</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>filter_gene</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
@@ -131,8 +132,12 @@
       <td><p>an object of vcfR class</p></td>
     </tr>
     <tr>
-      <th>df_snpgene</th>
-      <td><p>a data frame that contains SNP and annotated gene with SNP and GENE as column name</p></td>
+      <th>df_snppos</th>
+      <td><p>a dataframe for SNP information with SNP BP as column names.</p></td>
+    </tr>
+    <tr>
+      <th>df_genecoords</th>
+      <td><p>a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names</p></td>
     </tr>
     <tr>
       <th>keep_indiv</th>
@@ -144,20 +149,17 @@
     </tr>
     <tr>
       <th>filter_gene</th>
-      <td><p>an option to filter in a list of Genes. Mutation counts will be provided for genes specifed in the list only. Default is all genes. Provide list of genes in a vector.</p></td>
+      <td><p>an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns an matrix of data.table class as an output with allelic (reference) gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Inputs needed are a vcf data and a data frame of SNP-gene annotation. The function returns a matrix of allelic counts (reference) per gene per sample (where each row represents a gene and each column represents an individual starting with the second column where first column contains gene information).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>vcf_counts_annot</span>(<span class='no'>vcf</span>,<span class='no'>df_snpgene_test</span>)
+<span class='fu'>vcf_counts_SNP_genecoords</span>(<span class='no'>vcf_data_test</span>,<span class='no'>df_snppos_test</span>,<span class='no'>df_genecoords_test</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

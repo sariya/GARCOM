@@ -64,6 +64,60 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL
 #' @author Sanjeev Sariya
 #'
 
+    ##07 20 2020
+    
+    #' @export
+    #' @import data.table
+    #' @importFrom data.table rowid
+    #' @importFrom data.table .SD
+    #' @importFrom data.table :=
+    #' @param dt_gen a dataframe for genetic data that follows PLINK format (.raw)
+    #'
+    #' @param dt_gene a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
+    #' @param dt_snp a dataframe for SNP information with SNP BP as column names.
+    #'
+    #' @param keep_indiv an option to specify individuals to retain. Mutation counts will be provided for individuals provided in the list only. Default is all individuals. 
+    #' @param extract_SNP an option to specify SNPs for which mutation counts are needed. Mutation counts will be provided for SNPs included in the list only. Default is all SNPs.
+    #' @param filter_gene an option to filter in Genes. Mutation counts will be provided for genes included in the list only. Default is all genes.
+    #'
+    #' @param impute_missing an option to impute missing genotypes. Default is FALSE. 
+    #'
+    #' @param impute_method an option to specify method to specify imptuation method. Default method is impute to the mean. Alternatively imputation can be carried out by median. Function accepts method in quotes: "mean" or "median". Data are rounded to the second decimal places (e.g. 0.1234 will become 0.12.).
+    #'
+    #'
+    #' @examples
+    #' #Package provides sample data that are loaded with package loading. 
+    #' #not RUN
+    #' data(recodedgen) #PLINK raw formatted data of 10 individiduals with 10 SNPs
+    #'
+    #' data(genecoord) #gene coordinates with START, END, CHR and GENE names. 
+    #' #Five genes with start and end genomic coordinates
+    #'
+    #' data(snppos) #SNP and BP column names with SNP names and SNP genomic location in BP. 
+    #' #10 SNPs with genomic location
+    #'
+    #' gene_pos_counts(recodedgen, snppos, genecoord) #run the function
+    #'
+    #' #subset individuals
+    #' gene_pos_counts(recodedgen, snppos, genecoord,keep_indiv=c("IID_sample2","IID_sample4"))
+    #'
+    #' #subset genes
+    #' gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2")) 
+    #'
+    #' #subset genes and individual iids
+    #' gene_pos_counts(recodedgen,snppos,genecoord,filter_gene=c("GENE1","GENE2"),
+    #' keep_indiv=c("IID_sample10","IID_sample4")) 
+    #'
+    #' ##impute by mean
+    #' gene_pos_counts(recodedgen,snppos,genecoord,impute_missing=TRUE,impute_method="mean")
+    #'
+    #' #end not RUN
+    #'
+    #' @return Returns an object of data.table class as an output with allelic gene counts within each sample where each row corresponds to gene and column to individual IDs from column second. The first column contains gene names.
+    #'
+    #' @author Sanjeev Sariya
+    #'
+    
     IID<-START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     dt_gen<-data.table::as.data.table(dt_gen) # convert into data.table
     dt_gen[, IID:=as.character(IID)] ## convert into character in case IIDs are integer values. 
@@ -73,24 +127,24 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL
     if(all(garcom_check_column_names(dt_gene, c("START","END","GENE")))){
         ## all good with gene data
     }else{
-        stop("column names don't match for gene data")
+        stop("gene pos: column names don't match for gene data")
     }
 
     if(all(garcom_check_column_names(dt_snp, c("SNP","BP")))){
         ## all good with SNP data
     }else{
-        stop("column names don't match for snp data")
+        stop("gene pos: column names don't match for snp data")
     }
     ##Check ends 
 
     if(FALSE == isTRUE(garcom_check_duplicates(dt_snp,"SNP"))){
 
-        stop("duplicate SNP names")
+        stop("gene pos: duplicate SNP names")
     }
     ##check ends for SNP data.table
     if(FALSE == isTRUE(garcom_check_duplicates(dt_gene,"GENE"))){
 
-        stop("duplicate GENE names")
+        stop("gene pos: duplicate GENE names")
     }
     ##check ends for GENE data.table
 
@@ -127,12 +181,12 @@ gene_pos_counts<-function(dt_gen,dt_snp,dt_gene,keep_indiv=NULL,extract_SNP=NULL
     snp_withingenes<-dt_snp[dt_gene, c("SNP","GENE","START","END"), on=list(BP>=START, BP<=END), nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
 
     if(nrow(snp_withingenes) == 0){
-        stop("No snps within any gene boundaries provided")	
+        stop("gene pos: No snps within any gene boundaries provided")	
     }
     ##if gene sum is zero. Stop and return
 
     if(isFALSE( (any( colnames(dt_gen) %in% unique(snp_withingenes$SNP))))){
-        stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
+        stop("gene pos: No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
     }
     ##if nothing matches then Stop and error out
 

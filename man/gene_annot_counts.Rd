@@ -11,7 +11,7 @@ impute_missing=FALSE,impute_method="mean")
 \arguments{
 \item{dt_gen}{a dataframe for genetic data that follows PLINK format (.raw)}
 
-\item{dt_snpgene}{a dataframe that contains SNP and annotated gene with SNP and gene as column name}
+\item{dt_snpgene}{a dataframe that contains SNP and annotated gene with SNP and GENE as column name}
 
 \item{keep_indiv}{an option to specify individuals to retain. Mutation counts will be provided for individuals included in the list only. Default is all individuals. Provide list of individuals in a vector.}
 
