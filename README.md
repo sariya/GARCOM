@@ -97,5 +97,7 @@ GARCOM is ready to serve and obtain desired results for the genetics data. We ho
 
 ## Version
 ```
-Currently v1.2.0
+Currently v1.2.0 on CRAN (master branch)
+Currently v1.3.0 on development branch
+
 ```
