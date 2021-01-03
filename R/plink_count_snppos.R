@@ -24,29 +24,38 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
 #'
 #' @param snp_pos_dt a dataframe for SNP information with SNP BP as column names.
 #'
-#' @param snp_index a vector of integer that specifies SNPs to read.
+#' @param snp_index a vector of integer that specifies SNPs to read. Default all SNPs will be read.
 #'
-#' @param individual_index a vector of integer that specifies individuals to select. 
+#' @param individual_index a vector of integer that specifies individuals to select. Default all individuals will be read.
 #'
 #' @examples 
 #' \dontrun{
-#' plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_filter,individuals_select)
+#' plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_index,individual_select)
 #' }
 #'
 #' @author Sanjeev Sariya
-
+#'
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     plink_rds <-NULL
-    
-if(individual_index !=NULL  & snp_index!=NULL ){
+
+if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE ) ){
+cat("User provided snp and individuals to select\n")
     plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
 
 }
-if(individual_index !=NULL  & snp_index==NULL ){
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
+if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==FALSE ) ){
+cat("User provided snp  to select\n")
+    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index)
+}
 
+if( (is.null(individual_index)==FALSE) & (is.null(snp_index)==TRUE) ){
+cat("User provided individuals to select\n")
+    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
 }    
-if(individual_index ==NULL  & snp_index==NULL ){
+
+
+if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==TRUE) ){
+cat("No user no SNPs selected. Load complete data\n")
     plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile())
 }    
 
@@ -94,18 +103,5 @@ if(individual_index ==NULL  & snp_index==NULL ){
     
 }
 ## function ends
-
-
-#snppos_dt<-data.table::fread("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/test_snppos.txt", header=TRUE)
-#genecoordpass_dt<-data.table::fread("/mnt/mfs/hgrcgrid/shared/GT_ADMIX/SOFTWARES/R_package_development/test_vcffiles/sample_genes.txt", header=TRUE)
-#file_plink<-"/mnt/mfs/statgen/UKBiobank/data/exome_files/ukb23155_c22_b0_v1.bed"
-
-#output_test<-plink_count_snppos(plink_file=file_plink,genecoord_dt=genecoordpass_dt,snp_pos=snppos_dt,snp_index=c(1:4000))
-
-#output_testfiltered<-plink_count_snppos(plink_file=file_plink,genecoord_dt=genecoordpass_dt,snp_pos=snppos_dt,snp_index=c(1:4000),individuals_index=c(1:3000))
-
-#output_testfiltered<-plink_count_snppos(plink_file=file_plink,genecoord_dt=genecoordpass_dt,snp_pos=snppos_dt,snp_index=c(1:4000),individuals_index=c(1:3000))
-
-#output_testfiltered_complete<-plink_count_snppos(plink_file=file_plink,genecoord_dt=genecoordpass_dt,snp_pos=snppos_dt,snp_index=c(1:414980),individuals_index=c(1:3000))
 
 
