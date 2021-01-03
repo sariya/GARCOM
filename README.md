@@ -61,6 +61,7 @@ citation("GARCOM")
 data.table(>=v1.12.8)
 stats
 vcfR(>=v1.12.0)
+bigsnpr(>=v1.4.11)
 ```
 
 ## suggests
