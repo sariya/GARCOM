@@ -1,5 +1,8 @@
 * `NEWS.md` file tracks changes made to the package.
 
+`GARCOM 1.3.0 Date Jan 03 2021`
+- added support for plink format. Development began on 12 23 2020. Only snp coord and gene coord function at the moment. 
+
 `GARCOM 1.2.0 Date Sept 10 2020`
 - Minor addition of features with VCF counts: filter genes
 
