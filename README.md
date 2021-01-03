@@ -49,8 +49,13 @@ vcf_counts_SNP_genecoords(vcf_data,df_snptestpos, df_genecoordstestpos,keep_indi
 vcf_counts_SNP_genecoords(vcf_data,df_snptestpos,df_genecoordstestpos,keep_indiv=c("IID1","IID2"),filter_gene="GENE_1") #returns a matrix of data.table class
 
 ## Read plink file
+plink_count_snppos(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,individual_index=NULL) # load complete data
 
-plink_count_snppos(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,individual_index=NULL)
+plink_count_snppos(plink_file,genecoord_dt,snp_pos_dt,snp_index=c(1:100),individual_index=NULL) # load all invidividuals but only 100 SNPs as they are found in .bim plink file
+
+plink_count_snppos(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,individual_index=c(1:100)) # load first 100 invididuals but as they are found in .fam plink file and all SNPs
+
+plink_count_snppos(plink_file,genecoord_dt,snp_pos_dt,snp_index=c(1:1000),individual_index=c(1:100)) # load first 100 invididuals but as they are found in .fam plink file and first 1000 SNPs as they found in the .bim plink file
 
 ##For more examples refer manual
 ```
