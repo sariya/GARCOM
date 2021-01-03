@@ -86,7 +86,7 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
     }    
     
     ## Loading the data from backing files
-    data_plink <- bigsnpr::snp_attach(plink_rds) ## added on 12 23 2020
+    data_plink <- bigsnpr::snp_attach(plink_rds)
     
     plink_snp_information_dt<- as.data.table(data_plink$map)
     plink_fam_information<-as.data.table(data_plink$fam)
