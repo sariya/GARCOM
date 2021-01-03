@@ -48,6 +48,10 @@ vcf_counts_SNP_genecoords(vcf_data,df_snptestpos, df_genecoordstestpos,keep_indi
 ## Filter individuals and filter genes for a VCF data
 vcf_counts_SNP_genecoords(vcf_data,df_snptestpos,df_genecoordstestpos,keep_indiv=c("IID1","IID2"),filter_gene="GENE_1") #returns a matrix of data.table class
 
+## Read plink file
+
+plink_count_snppos(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,individual_index=NULL)
+
 ##For more examples refer manual
 ```
 ## Citation
