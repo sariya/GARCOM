@@ -12,12 +12,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     data.table (>= 1.12.8),
-    stats,
-<<<<<<< HEAD
     vcfR (>= 1.12.0),
     stats,
-    bigsnpr (>= 1.4.11),
-    vcfR (>= 1.12.0)
+    bigsnpr (>= 1.4.11)
 Suggests:
     testthat
 Depends: 
