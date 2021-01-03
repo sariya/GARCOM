@@ -37,24 +37,24 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
 #'
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     plink_rds <-NULL
-genecoord_dt <- data.table::as.data.table(genecoord_dt)
-snp_pos_dt <-data.table::as.data.table(snp_pos_dt)
-
+    genecoord_dt <- data.table::as.data.table(genecoord_dt)
+    snp_pos_dt <-data.table::as.data.table(snp_pos_dt)
+    
     if(all(garcom_check_column_names(genecoord_dt, c("START","END","GENE")))){
         ## all good with gene data
     }else{
         stop("column names don't match for gene data")
     }
-
+    
     if(all(garcom_check_column_names(snp_pos_dt, c("SNP","BP")))){
         ## all good with SNP data
     }else{
         stop("column names don't match for snp data")
     }
     ##Check ends 
-
+    
     if(FALSE == isTRUE(garcom_check_duplicates(snp_pos_dt,"SNP"))){
-
+        
         stop("duplicate SNP names")
     }
     ##check ends for SNP data.table
@@ -64,27 +64,27 @@ snp_pos_dt <-data.table::as.data.table(snp_pos_dt)
     }
     ##check ends for GENE data.table
 
-if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE ) ){
-cat("User provided snp and individuals to select\n")
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
-
-}
-if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==FALSE ) ){
-cat("User provided snp  to select\n")
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index)
-}
-
-if( (is.null(individual_index)==FALSE) & (is.null(snp_index)==TRUE) ){
-cat("User provided individuals to select\n")
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
-}    
-
-
-if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==TRUE) ){
-cat("No user no SNPs selected. Load complete data\n")
-    plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile())
-}    
-
+    if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE ) ){
+        cat("User provided snp and individuals to select\n")
+        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
+        
+    }
+    if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==FALSE ) ){
+        cat("User provided snp  to select\n")
+        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index)
+    }
+    
+    if( (is.null(individual_index)==FALSE) & (is.null(snp_index)==TRUE) ){
+        cat("User provided individuals to select\n")
+        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
+    }    
+    
+    
+    if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==TRUE) ){
+        cat("No user no SNPs selected. Load complete data\n")
+        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile())
+    }    
+    
     ## Loading the data from backing files
     data_plink <- bigsnpr::snp_attach(plink_rds) ## added on 12 23 2020
     
