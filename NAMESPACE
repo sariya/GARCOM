@@ -2,6 +2,7 @@
 
 export(gene_annot_counts)
 export(gene_pos_counts)
+export(get_plinkSNP_index_geneboundaries)
 export(plink_count_snppos)
 export(vcf_counts_SNP_genecoords)
 export(vcf_counts_annot)

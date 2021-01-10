@@ -5,15 +5,12 @@
 \title{plink gene counts using SNP coords and gene boundaries}
 \usage{
 plink_count_snppos(plink_file,genecoord_dt,
-snp_pos_dt,
 snp_index,individuals_index)
 }
 \arguments{
 \item{plink_file}{plink .bed file with path}
 
 \item{genecoord_dt}{a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
-
-\item{snp_pos_dt}{a dataframe for SNP information with SNP BP as column names.}
 
 \item{snp_index}{a vector of integer that specifies SNPs to read. Default all SNPs will be read.}
 
@@ -27,7 +24,7 @@ PLINK (.bed) file will be read
 }
 \examples{
 \dontrun{
-plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_index,individual_select)
+plink_count_snppos(path_plinkbed_file,data_genecoord,snp_index,individual_select)
 }
 
 }
