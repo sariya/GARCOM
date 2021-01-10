@@ -5,10 +5,10 @@
 #'@details PLINK (.bed) file will be read
 #'
 #' @usage plink_count_snppos(plink_file,genecoord_dt,
-#' snp_pos_dt,
 #' snp_index,individuals_index)
+#'
 
-plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,individual_index=NULL){
+plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_index=NULL){
 
 #' @export
 #'
@@ -22,23 +22,20 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
 #'
 #' @param genecoord_dt a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #'
-#' @param snp_pos_dt a dataframe for SNP information with SNP BP as column names.
-#'
 #' @param snp_index a vector of integer that specifies SNPs to read. Default all SNPs will be read.
 #'
 #' @param individual_index a vector of integer that specifies individuals to select. Default all individuals will be read.
 #'
 #' @examples 
 #' \dontrun{
-#' plink_count_snppos(path_plinkbed_file,genecoord_frame,snp_pos_info,snp_index,individual_select)
+#' plink_count_snppos(path_plinkbed_file,data_genecoord,snp_index,individual_select)
 #' }
 #'
 #' @author Sanjeev Sariya
 #'
     START<-END<-GENE<-BP<-NULL ## bind variable locally to the function
     plink_rds <-NULL
-    genecoord_dt <- data.table::as.data.table(genecoord_dt)
-    snp_pos_dt <-data.table::as.data.table(snp_pos_dt)
+    genecoord_dt <- data.table::as.data.table(genecoord_dt) #save CHR, BP, START END as data.table
     
     if(all(garcom_check_column_names(genecoord_dt,c("START","END","GENE")))){
         ## all good with gene data
@@ -46,17 +43,6 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
         stop("column names don't match for gene data")
     }
     
-    if(all(garcom_check_column_names(snp_pos_dt,c("SNP","BP")))){
-        ## all good with SNP data
-    }else{
-        stop("column names don't match for snp data")
-    }
-    ##Check ends 
-    
-    if(FALSE == isTRUE(garcom_check_duplicates(snp_pos_dt,"SNP"))){
-        
-        stop("duplicate SNP names")
-    }
     ##check ends for SNP data.table
     if(FALSE == isTRUE(garcom_check_duplicates(genecoord_dt,"GENE"))){
 
@@ -64,7 +50,7 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_pos_dt,snp_index=NULL,i
     }
     ##check ends for GENE data.table
 
-    if( (is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE) ){
+    if((is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE) ){
         cat("User provided snp and individuals to select\n")
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
         
