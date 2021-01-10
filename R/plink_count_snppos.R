@@ -65,7 +65,6 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_i
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
     }    
     
-    
     if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==TRUE) ){
         cat("No user no SNPs selected. Load complete data\n")
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile())
@@ -74,7 +73,7 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_i
     ## Loading the data from backing files
     data_plink <- bigsnpr::snp_attach(plink_rds)
     
-    plink_snp_information_dt<- as.data.table(data_plink$map)
+    plink_snp_information_dt<-as.data.table(data_plink$map)
     plink_fam_information<-as.data.table(data_plink$fam)
     
     plink_genotype_dt<- as.data.table(data_plink$genotypes[])

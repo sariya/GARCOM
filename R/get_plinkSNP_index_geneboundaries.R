@@ -1,3 +1,12 @@
+#'@title Provide SNP index using genetic boundaries and PLINK bim file
+#'
+#'@description Function returns a vector of unique integer values for SNP position/index using genetic boundaries and plink bim file
+#'
+#'@details PLINK (.bim) file will be read
+#'
+#' @usage get_plinkSNP_index_geneboundaries(plinkbim_file,genecoord_dt)
+#'
+
 get_plinkSNP_index_geneboundaries<-function(plinkbim_file,genecoord_dt){
 #'
 #' @export
