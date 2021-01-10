@@ -1,5 +1,9 @@
 * `NEWS.md` file tracks changes made to the package.
 
+`GARCOM 1.4.0 Date Jan 10 2021`
+- added support for plink bim format. new function get_plinkSNP_index_geneboundaries added to return SNP index based on BIM file and gene coord. Further, plink_count_snppos has been modified to take into these changes
+
+
 `GARCOM 1.3.0 Date Jan 03 2021`
 - added support for plink format. Development began on 12 23 2020. Only snp coord and gene coord function at the moment. 
 
