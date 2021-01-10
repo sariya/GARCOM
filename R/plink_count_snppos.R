@@ -80,29 +80,29 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_i
     colnames(plink_genotype_dt) <-plink_snp_information_dt$marker.ID
     cat("Genotypes have been loaded from plink file\n")
     
-    snp_withingenes<- snp_pos_dt[genecoord_dt,c("SNP","GENE","START","END"),on=list(BP>=START,BP<=END),nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
+    snp_withingenes<- plink_snp_information_dt[genecoord_dt,c("marker.ID","GENE","START","END"),on=list(physical.pos>=START,physical.pos<=END),nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
     if(nrow(snp_withingenes) == 0){
         stop("No snps within any gene boundaries provided")	
     }
     
     ## we check if the SNPs that are found in plink map data overlap with inner-joined data 
-    if(isFALSE( (any( plink_snp_information_dt$marker.ID %in% unique(snp_withingenes$SNP))))){
+    if(isFALSE( (any( plink_snp_information_dt$marker.ID %in% unique(snp_withingenes$marker.ID))))){
         stop("No SNPs overlapping between genetic data and SNP annotation with Gene boundaries")
     }
     
     ##get index of SNPs and store in a vector to be used while subsetting plink genotype data.table
-    snps_intersect_index<- base::match(intersect( plink_snp_information_dt$marker.ID ,unique(snp_withingenes$SNP)),plink_snp_information_dt$marker.ID) 
+    snps_intersect_index<- base::match(intersect(plink_snp_information_dt$marker.ID,unique(snp_withingenes$marker.ID)),plink_snp_information_dt$marker.ID) 
     
     ## subset plink data
-    plink_genotype_dt_subset<- plink_genotype_dt[,.SD,.SDcols=snps_intersect_index ] ## get columns that intersect 
-    plink_genotype_dt_subset[, rowid := plink_fam_information$sample.ID ] ## assign row names as IIDs
+    plink_genotype_dt_subset<-plink_genotype_dt[,.SD,.SDcols=snps_intersect_index ] ## get columns that intersect 
+    plink_genotype_dt_subset[,rowid := plink_fam_information$sample.ID ] ## assign row names as IIDs
     
-    plink_genotype_dt_subset_transposed<-data.table::transpose(plink_genotype_dt_subset,keep.names = "SNP", make.names="rowid") ## tranpose data and have some fancy settings
+    plink_genotype_dt_subset_transposed<-data.table::transpose(plink_genotype_dt_subset,keep.names="SNP",make.names="rowid") ## tranpose data and have some fancy settings
     
-    subsetsnps_genes_lefted_join <- snp_withingenes[plink_genotype_dt_subset_transposed,on="SNP",nomatch=0] 
-    subsetsnps_genes_lefted_join[,c("START","END","SNP"):=NULL]  
+    subsetsnps_genes_lefted_join <-snp_withingenes[plink_genotype_dt_subset_transposed,on=c("marker.ID"="SNP"),nomatch=0] 
+    subsetsnps_genes_lefted_join[,c("START","END","marker.ID"):=NULL]  
     matrix_withallelecount_withinGene <-subsetsnps_genes_lefted_join[,lapply(.SD,sum,na.rm=TRUE),by=GENE] 
-    matrix_withallelecount_withinGene<-matrix_withallelecount_withinGene[ rowSums(matrix_withallelecount_withinGene[,-c("GENE")]) > 0,]
+    matrix_withallelecount_withinGene<-matrix_withallelecount_withinGene[rowSums(matrix_withallelecount_withinGene[,-c("GENE")]) > 0,]
     
     if(nrow(matrix_withallelecount_withinGene)>0){
         return(matrix_withallelecount_withinGene)
