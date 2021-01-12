@@ -13,7 +13,8 @@ It also accepts [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file fo
 You can install the released version of GARCOM from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("GARCOM")
+install.packages("GARCOM") ## from CRAN
+remotes::install_github('sariya/GARCOM', ref='develop') #install develop version
 ```
 
 ## Example
