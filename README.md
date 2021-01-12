@@ -90,6 +90,15 @@ GARCOM is ready to serve and obtain desired results for the genetics data. We ho
 ## Version
 ```
 Currently v1.2.0 on CRAN (master branch)
-Currently v1.3.0 on development branch
+Currently v1.4.0 on development branch
+```
+
+## Troubleshooting
+```
+1) 
+Downloading GitHub repo sariya/GARCOM@develop
+sh: 1: /bin/gtar: not found
+
+- you have brew, `brew install gnu-tar`
 
 ```
