@@ -101,4 +101,7 @@ sh: 1: /bin/gtar: not found
 
 - you have brew, `brew install gnu-tar`
 
+- on Linux, options(unzip = "/usr/bin/unzip")
+
+
 ```
