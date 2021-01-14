@@ -48,7 +48,7 @@ get_plinkSNP_index_geneboundaries<-function(plinkbim_file,genecoord_dt){
         return (NULL)
     }
     else{
-        return(unique_snpindex)
+        return(index_pergenelist)
     }
      
 }
