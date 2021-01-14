@@ -39,12 +39,12 @@ get_plinkSNP_index_geneboundaries<-function(plinkbim_file,genecoord_dt){
     
     ##snp_withingenes<- bimsnps_dt[genecoord_dt,c("V2","GENE","START","END"),on=list(V4>=START,V4<=END),nomatch=0] # inner join ##https://stackoverflow.com/questions/63290994/foverlaps-data-table-error-ys-key-must-be-identical-to-the-columns-specified
 
-    index_pergenelist<- with(genecoord_dt[bimsnps_dt,.(.I,GENE),on=.(START<=V4,END >= V4),nomatch=0],split(I,GENE))
+    index_pergenelist<- with(genecoord_dt[bimsnps_dt,.(.I,GENE),on=.(START<=V4,END>= V4),nomatch=0],split(I,GENE))
 
     #unique_snpindex<-unique(match(snp_withingenes$V2,bimsnps_dt$V2)) # provide only unique # V2 in the bim file is SNP/rsid
 
     if(length(index_pergenelist)==0){
-        cat("No intersection of SNPs found between Gene and SNP within the BIM file\n")
+        cat("No intersection of SNPs found between Gene and SNP within the BIM file. No index\n")
         return (NULL)
     }
     else{
