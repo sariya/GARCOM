@@ -9,13 +9,17 @@ get_plinkSNP_index_geneboundaries(plinkbim_file,genecoord_dt)
 \arguments{
 \item{genecoord_dt}{a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
 
-\item{plink_file}{plink .bed file with path}
+\item{freq_file_plink}{.frq file generated from the PLINK file. It should contain same number of SNPs as .bim}
+
+\item{threshold_freq}{frequency threshold to keep or exclude SNPs. value between 0 and 0.50 as PLINK default. The number of SNPs must match provided in the plink BIM file. The provided threshold will include value provided. For example, if threshold is 0.01, SNPs filtered will include MAF of 0.01 and above. Default no SNPs are filtered.}
+
+\item{plink_file}{plink .bim file with path}
 }
 \value{
-a vector of integer that represents SNP index that are found within the gene boundaries and SNP bim file based on the interection. Returned values are unique if found, otherwise NULL is returned.
+a data frame that contains SNP index found within the gene boundaries and plink bim file, with SNP, base pair and gene information. NULL is returned if no values are found intersecting.
 }
 \description{
-Function returns a vector of unique integer values for SNP position/index using genetic boundaries and plink bim file
+Function returns data frame for SNP position/index using genetic boundaries and plink bim file
 }
 \details{
 PLINK (.bim) file will be read
