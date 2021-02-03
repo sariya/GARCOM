@@ -17,9 +17,9 @@ get_plinkSNP_index_geneboundaries<-function(plinkbim_file,genecoord_dt,freq_file
 #' 
 #' @param freq_file_plink .frq file generated from the PLINK file. It should contain same number of SNPs as .bim
 #' 
-#' @param threshold_freq_max frequency threshold to keep or exclude SNPs. value between 0 and 0.50 as PLINK default. The number of SNPs must match provided in the plink BIM file. The provided threshold will include value provided. For example, if threshold is 0.01, SNPs filtered will include MAF of 0.01 and above. Default no SNPs are filtered.
+#' @param threshold_freq_max value between 0 and 0.50 as PLINK default. The provided threshold will include value provided. For example, if threshold is 0.10, SNPs filtered will include MAF of 0.1 and below. Default no SNPs are filtered. If not provided with frequency file default threshold_freq_max will be 0.50
 #'
-#' @param threshold_freq_min frequency threshold to keep or exclude SNPs. value between 0 and 0.50 as PLINK default. The number of SNPs must match provided in the plink BIM file. The provided threshold will include value provided. For example, if threshold is 0.01, SNPs filtered will include MAF of 0.01 and above. Default no SNPs are filtered.
+#' @param threshold_freq_min value between 0 and 0.50 as PLINK default. The provided threshold will include value provided. For example, if threshold is 0.01, SNPs filtered will include MAF of 0.01 and above. If not provided with frequency file default threshold_freq_min will be 0
 #'
 #' @param genecoord_dt a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #'

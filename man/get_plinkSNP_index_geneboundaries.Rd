@@ -11,7 +11,9 @@ get_plinkSNP_index_geneboundaries(plinkbim_file,genecoord_dt)
 
 \item{freq_file_plink}{.frq file generated from the PLINK file. It should contain same number of SNPs as .bim}
 
-\item{threshold_freq}{frequency threshold to keep or exclude SNPs. value between 0 and 0.50 as PLINK default. The number of SNPs must match provided in the plink BIM file. The provided threshold will include value provided. For example, if threshold is 0.01, SNPs filtered will include MAF of 0.01 and above. Default no SNPs are filtered.}
+\item{threshold_freq_min}{value between 0 and 0.50 as PLINK default. The provided threshold will include value provided. For example, if threshold is 0.01, SNPs filtered will include MAF of 0.01 and above. If not provided with frequency file default threshold_freq_min will be 0}
+
+\item{threshold_freq_max}{value between 0 and 0.50 as PLINK default. The provided threshold will include value provided. For example, if threshold is 0.10, SNPs filtered will include MAF of 0.1 and below. Default no SNPs are filtered. If not provided with frequency file default threshold_freq_max will be 0.50}
 
 \item{plink_file}{plink .bim file with path}
 }
