@@ -52,22 +52,24 @@ get_plinkSNP_index_geneboundaries<-function(plinkbim_file,genecoord_dt,freq_file
     matched_snps_withingene$index<-chmatch(matched_snps_withingene[,V2],bimsnps_dt[,V2])
     colnames(matched_snps_withingene ) <-c("SNP","BP","GENE","index")
     
-    if( (is.null(freq_file_plink)==FALSE) & (is.null(threshold_freq_max)==FALSE) ){
+    if( (is.null(freq_file_plink)==FALSE)) {
         
-if(is.null(threshold_freq_max)){
-threshold_freq_max=0.50
-} else{
-        threshold_freq_max<-as.numeric(threshold_freq_max)
+        if(is.null(threshold_freq_max)){
+            threshold_freq_max=0.50 # if user didn't provide any threshold then 50% as max
+        } else{
+            threshold_freq_max<-as.numeric(threshold_freq_max)
+        }
 
-}
-
-if(is.null(threshold_freq_min)){
-threshold_freq_min=0
-} else{
-        threshold_freq_min<-as.numeric(threshold_freq_min)
-
-}
-
+        ##check for max ends
+        
+        if(is.null(threshold_freq_min)){
+            threshold_freq_min=0
+        } else{
+            threshold_freq_min<-as.numeric(threshold_freq_min)
+            
+        }
+        ##check for min ends
+        
         if(threshold_freq_max >0.5 ){
             
             cat("Issue with provided frequency value maximum. It can only take until 0.5\n")
@@ -76,7 +78,7 @@ threshold_freq_min=0
         ##if ends for frequency threshold
         
         freq_plink_dt<-data.table::fread(freq_file_plink,header=TRUE) ##read data 
-        freq_plink_dt_filtered<-freq_plink_dt[(MAF>=threshold_freq_min & MAF<=threshold_freq_max ),] ## filter based on the threshold provided
+        freq_plink_dt_filtered<-freq_plink_dt[(MAF>=threshold_freq_min & MAF<=threshold_freq_max),] ## filter based on the threshold provided
         
         filtered_maf_matched<-freq_plink_dt_filtered[matched_snps_withingene,c("SNP","BP","GENE","index"), on=c("SNP"),nomatch=0] ## do a join on MAF and already index SNP, gene BP position
 
