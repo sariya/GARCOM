@@ -8,8 +8,8 @@
 #' snp_index,individuals_index)
 #'
 
-plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_index=NULL){
-
+plink_count_snppos<-function(plink_file,genecoord_dt,SNPindex=NULL,individual_index=NULL){
+#'
 #' @export
 #'
 #' @import data.table
@@ -17,18 +17,18 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_i
 #' @importFrom bigsnpr snp_attach
 #' 
 #' @importFrom bigsnpr snp_readBed2
-
+#'
 #' @param plink_file plink .bed file with path 
 #'
 #' @param genecoord_dt a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names
 #'
-#' @param snp_index a vector of integer that specifies SNPs to read. Default all SNPs will be read.
+#' @param SNPindex SNP index provided by user. Default is NULL. This can be obtained using get_plinkSNP_index_geneboundaries function with plink files. Default all SNPs will be read.
 #'
 #' @param individual_index a vector of integer that specifies individuals to select. Default all individuals will be read.
 #'
 #' @examples 
 #' \dontrun{
-#' plink_count_snppos(path_plinkbed_file,data_genecoord,snp_index,individual_select)
+#' plink_count_snppos(path_plinkbed_file,data_genecoord,SNPindex,individual_select)
 #' }
 #'
 #' @author Sanjeev Sariya
@@ -50,22 +50,22 @@ plink_count_snppos<-function(plink_file,genecoord_dt,snp_index=NULL,individual_i
     }
     ##check ends for GENE data.table
 
-    if((is.null(individual_index)==FALSE ) & (is.null(snp_index)==FALSE) ){
+    if((is.null(individual_index)==FALSE ) & (is.null(SNPindex)==FALSE) ){
         cat("User provided snp and individuals to select\n")
-        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index,ind.row=individual_index)
+        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=SNPindex,ind.row=individual_index)
         
     }
-    if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==FALSE) ){
+    if( (is.null(individual_index)==TRUE) & (is.null(SNPindex)==FALSE) ){
         cat("User provided snp  to select\n")
-        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=snp_index)
+        plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.col=SNPindex)
     }
     
-    if( (is.null(individual_index)==FALSE) & (is.null(snp_index)==TRUE) ){
+    if( (is.null(individual_index)==FALSE) & (is.null(SNPindex)==TRUE) ){
         cat("User provided individuals to select\n")
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile(),ind.row=individual_index)
     }    
     
-    if( (is.null(individual_index)==TRUE) & (is.null(snp_index)==TRUE) ){
+    if( (is.null(individual_index)==TRUE) & (is.null(SNPindex)==TRUE) ){
         cat("No user no SNPs selected. Load complete data\n")
         plink_rds <- bigsnpr::snp_readBed2(plink_file,backingfile=tempfile())
     }    
