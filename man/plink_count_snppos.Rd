@@ -12,7 +12,7 @@ snp_index,individuals_index)
 
 \item{genecoord_dt}{a dataframe for gene boundaries with CHR START END GENE as column names. Where CHR should be integer 1-22. START and END column should be integer. GENE column contains gene names}
 
-\item{snp_index}{a vector of integer that specifies SNPs to read. Default all SNPs will be read.}
+\item{SNPindex}{SNP index provided by user. Default is NULL. This can be obtained using get_plinkSNP_index_geneboundaries function with plink files. Default all SNPs will be read.}
 
 \item{individual_index}{a vector of integer that specifies individuals to select. Default all individuals will be read.}
 }
@@ -24,7 +24,7 @@ PLINK (.bed) file will be read
 }
 \examples{
 \dontrun{
-plink_count_snppos(path_plinkbed_file,data_genecoord,snp_index,individual_select)
+plink_count_snppos(path_plinkbed_file,data_genecoord,SNPindex,individual_select)
 }
 
 }
