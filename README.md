@@ -1,8 +1,6 @@
 
 # GARCOM
 
-<!-- badges: start -->
-<!-- badges: end -->
 
 The goal of GARCOM is to provide mutation counts per individual within genetic boundaries (genes). It accepts different data formats with input file from [plink](https://www.cog-genomics.org/plink/1.9/index) (.raw), gene boundaries, SNP location. 
 It also accepts [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file format. The vcf file is assumed to be pVCF, that is where all samples are merged/combined.  
