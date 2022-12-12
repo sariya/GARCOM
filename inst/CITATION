@@ -1,8 +1,8 @@
 citHeader("To cite GARCOM in publications use:")
 
 citEntry(
-entry = "Unpublished",
-note="manuscript in prep",
+entry = "accepted",
+note="manuscript tentatively accepted at F1000 research",
   title    = "{GARCOM}: A user friendly R package for mutation counts",
 author = c(person(given="Sanjeev",family="Sariya"),person(given="Giuseppe",family="Tosto")),
   year     = 2020,
