@@ -6,7 +6,7 @@
 # GARCOM 1.2.0 (Date Sept 10 2020)
 * Minor addition of features with VCF counts: filter genes
 
-#GARCOM 1.1.0 (Date Sept 09 2020)
+# GARCOM 1.1.0 (Date Sept 09 2020)
 * Minor addition of features with VCF counts: keep_indiv and extract SNPs
 
 # GARCOM 1.0.0 Date Sept 08 2020`
