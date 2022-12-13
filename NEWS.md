@@ -1,4 +1,3 @@
-* `NEWS.md` file tracks changes made to the package.
 
 # GARCOM 1.2.1 
 * Date Dec 12 2022
