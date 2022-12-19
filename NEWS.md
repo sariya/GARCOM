@@ -1,3 +1,6 @@
+# GARCOM 1.2.2
+* Date Dec 19 2022
+* Added about VCF sample
 
 # GARCOM 1.2.1 
 * Date Dec 12 2022
